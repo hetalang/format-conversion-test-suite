@@ -1,0 +1,23 @@
+{
+  "name": "format-conversion-test-suite",
+  "version": "0.1.0",
+  "description": "A reproducible test framework for validating model format-conversion pipelines.",
+  "homepage": "https://github.com/hetalang/format-conversion-test-suite#readme",
+  "bugs": {
+    "url": "https://github.com/hetalang/format-conversion-test-suite/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hetalang/format-conversion-test-suite.git"
+  },
+  "license": "MIT",
+  "author": "Evgeny Metelkin <evgeny.metelkin@gmail.com>",
+  "private": true,
+  "type": "commonjs",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
