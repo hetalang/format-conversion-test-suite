@@ -1,5 +1,5 @@
 {
-  "name": "format-conversion-test-suite",
+  "name": "@hetalang/format-conversion-test-suite",
   "version": "0.1.0",
   "description": "A reproducible test framework for validating model format-conversion pipelines.",
   "homepage": "https://github.com/hetalang/format-conversion-test-suite#readme",
@@ -18,6 +18,13 @@
     "node": ">=24"
   },
   "scripts": {
+    "fetch:sbml": "node scripts/fetch-sbml-test-suite.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "fcts": "./bin/fcts.js"
+  },
+  "dependencies": {
+    "extract-zip": "2.0.1"
   }
 }
