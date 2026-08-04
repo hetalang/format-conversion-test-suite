@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "status": "completed-with-errors",
-  "startedAt": "2026-08-04T20:59:52.722Z",
-  "completedAt": "2026-08-04T21:16:17.429Z",
-  "durationMs": 984705,
+  "startedAt": "2026-08-04T22:10:39.174Z",
+  "completedAt": "2026-08-04T22:30:30.344Z",
+  "durationMs": 1191169,
   "command": {
     "source": "cases/index.json",
     "target": "references/sbml-L3V2-3.5.0/master",
@@ -13,7 +13,9 @@
       "StoichiometryMath",
       "CSymbolDelay",
       "EventWithDelay",
-      "AlgebraicRule",
+      "AlgebraicRule"
+    ],
+    "skipTestTags": [
       "FastReaction"
     ]
   },
