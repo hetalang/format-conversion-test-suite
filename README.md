@@ -34,6 +34,14 @@ the SBML Semantic Test Suite version, archive URL, expected SHA-256 digest, and
 the extracted `semantic` directory (`targetDir`). The digest must be verified
 before an archive is used.
 
+```sh
+npm run fetch:sbml
+```
+
+The archive is checked before extraction and its contents are placed in
+`cases/`. Each run replaces the existing downloaded test suite. The archive's
+`semantic` directory is therefore available as `cases/semantic`.
+
 ### Verify configuration and references
 
 Verify the configured archive URL, reference reports, and reference artifacts:
@@ -46,14 +54,6 @@ The command uses an HTTP `HEAD` request (with a small range-request fallback)
 to confirm that the archive is available without downloading or extracting it.
 It also checks that every configured reference report matches the configured
 test-suite version, checksum, input field, and expected output artifacts.
-
-```sh
-npm run fetch:sbml
-```
-
-The archive is checked before extraction and its contents are placed in
-`cases/`. Each run replaces the existing downloaded test suite. The archive's
-`semantic` directory is therefore available as `cases/semantic`.
 
 ### Create index
 
@@ -82,12 +82,13 @@ JSON and DynMS output files. The optional `--input-field` selects the SBML path
 field from each case: `sbmlL3V2Path` (the default) or `sbmlL2V5Path`. The
 selected field and its SBML format are recorded in `report.json`.
 
-To build all cases but exclude selected component tags from evaluation, use
-`--skip-component-tags`. Matching cases have status `not-evaluated`; their
-artifacts and actual compiler result are still kept in the report.
+To build all cases but exclude selected component or test tags from evaluation,
+use `--skip-component-tags` and `--skip-test-tags`. Matching cases have status
+`not-evaluated`; their artifacts and actual compiler result are still kept in
+the report.
 
 ```sh
-npx fcts report --source=cases/index --input-field=sbmlL3V2Path --target=results/candidate --skip-component-tags=CSymbolDelay,EventWithDelay
+npx fcts report --source=cases/index --input-field=sbmlL2V5Path --target=results/candidate --skip-component-tags=CSymbolDelay,EventWithDelay --skip-test-tags=FastReaction
 ```
 
 Each case is built through a generated `input.heta` stored beside its outputs.

@@ -140,15 +140,26 @@ function createBuildSource(sourcePath, distDirectory, inputField) {
   return lines.join('\n');
 }
 
-async function buildCase(caseEntry, indexDirectory, targetDirectory, repositoryRoot, inputField, notEvaluatedComponentTags) {
+function formatNotEvaluatedTags(notEvaluatedTags) {
+  const groups = [];
+  if (notEvaluatedTags.componentTags.length) {
+    groups.push(`component tags: ${notEvaluatedTags.componentTags.join(', ')}`);
+  }
+  if (notEvaluatedTags.testTags.length) {
+    groups.push(`test tags: ${notEvaluatedTags.testTags.join(', ')}`);
+  }
+  return groups.join('; ');
+}
+
+async function buildCase(caseEntry, indexDirectory, targetDirectory, repositoryRoot, inputField, notEvaluatedTags) {
   const sourceFilePath = caseEntry[inputField];
   const result = {
     caseId: caseEntry.caseId,
     sourcePath: sourceFilePath,
     status: 'failed',
   };
-  const evaluationNote = notEvaluatedComponentTags.length
-    ? ` (not evaluated: ${notEvaluatedComponentTags.join(', ')})`
+  const evaluationNote = formatNotEvaluatedTags(notEvaluatedTags)
+    ? ` (not evaluated: ${formatNotEvaluatedTags(notEvaluatedTags)})`
     : '';
   console.log(`Building case ${caseEntry.caseId}${evaluationNote}...`);
   const sourcePath = path.resolve(indexDirectory, sourceFilePath);
@@ -214,17 +225,18 @@ async function buildCase(caseEntry, indexDirectory, targetDirectory, repositoryR
   return result;
 }
 
-function findNotEvaluatedComponentTags(caseEntry, skippedComponentTags) {
-  if (!Array.isArray(caseEntry.componentTags) || !skippedComponentTags.length) {
+function findMatchingTags(caseEntry, fieldName, skippedTags) {
+  if (!Array.isArray(caseEntry[fieldName]) || !skippedTags.length) {
     return [];
   }
 
-  const skippedTags = new Set(skippedComponentTags);
-  return [...new Set(caseEntry.componentTags.filter((tag) => skippedTags.has(tag)))];
+  const skippedTagSet = new Set(skippedTags);
+  return [...new Set(caseEntry[fieldName].filter((tag) => skippedTagSet.has(tag)))];
 }
 
-function markNotEvaluated(result, componentTags) {
-  if (!componentTags.length) {
+function markNotEvaluated(result, notEvaluatedTags) {
+  const { componentTags, testTags } = notEvaluatedTags;
+  if (!componentTags.length && !testTags.length) {
     return result;
   }
 
@@ -233,7 +245,8 @@ function markNotEvaluated(result, componentTags) {
     // Keep the actual compiler result while excluding this case from evaluation.
     buildStatus: result.status,
     status: 'not-evaluated',
-    notEvaluatedComponentTags: componentTags,
+    ...(componentTags.length ? { notEvaluatedComponentTags: componentTags } : {}),
+    ...(testTags.length ? { notEvaluatedTestTags: testTags } : {}),
   };
 }
 
@@ -264,6 +277,10 @@ async function runSbmlReport(options, repositoryRoot) {
   const skipComponentTags = parseCommaSeparatedValues(
     options['skip-component-tags'],
     '--skip-component-tags',
+  );
+  const skipTestTags = parseCommaSeparatedValues(
+    options['skip-test-tags'],
+    '--skip-test-tags',
   );
   const inputField = options['input-field'] || 'sbmlL3V2Path';
   const input = supportedInputFields[inputField];
@@ -303,10 +320,10 @@ async function runSbmlReport(options, repositoryRoot) {
   const startedAt = new Date().toISOString();
   const startedAtMs = Date.now();
   const results = await runWithConcurrency(cases, concurrency, async (caseEntry) => {
-    const notEvaluatedComponentTags = findNotEvaluatedComponentTags(
-      caseEntry,
-      skipComponentTags,
-    );
+    const notEvaluatedTags = {
+      componentTags: findMatchingTags(caseEntry, 'componentTags', skipComponentTags),
+      testTags: findMatchingTags(caseEntry, 'testTags', skipTestTags),
+    };
 
     try {
       const result = await buildCase(
@@ -315,16 +332,16 @@ async function runSbmlReport(options, repositoryRoot) {
         targetDirectory,
         repositoryRoot,
         inputField,
-        notEvaluatedComponentTags,
+        notEvaluatedTags,
       );
-      return markNotEvaluated(result, notEvaluatedComponentTags);
+      return markNotEvaluated(result, notEvaluatedTags);
     } catch (error) {
       return markNotEvaluated({
         caseId: caseEntry.caseId,
         sourcePath: caseEntry[inputField],
         status: 'failed',
         error: { message: error.message },
-      }, notEvaluatedComponentTags);
+      }, notEvaluatedTags);
     }
   });
   const succeeded = results.filter((result) => result.status === 'success').length;
@@ -348,6 +365,7 @@ async function runSbmlReport(options, repositoryRoot) {
       ...(skip === 0 ? {} : { skip }),
       ...(limit === undefined ? {} : { limit }),
       ...(skipComponentTags.length ? { skipComponentTags } : {}),
+      ...(skipTestTags.length ? { skipTestTags } : {}),
     },
     input: {
       field: inputField,

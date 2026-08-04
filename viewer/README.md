@@ -5,8 +5,9 @@ A dependency-free static page for viewing an FCTS `report.json`.
 The viewer recognizes `success`, `failed`, and `not-evaluated` case statuses.
 Use `not-evaluated` for cases intentionally excluded from assessment; they are
 shown in gray and can be filtered separately.
-When a report was run with `--skip-component-tags`, the selected tags appear in
-the overview and the matching tags appear in each affected case's details.
+When a report was run with `--skip-component-tags` or `--skip-test-tags`, the
+selected tags appear in the overview and the matching tags appear in each
+affected case's details.
 
 ## Local use
 

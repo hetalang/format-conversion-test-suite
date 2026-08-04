@@ -70,7 +70,11 @@ function renderOverview() {
   appendOverviewItem('Not evaluated', countStatus('not-evaluated'), 'neutral-value');
   const skippedComponentTags = report.command?.skipComponentTags;
   if (Array.isArray(skippedComponentTags) && skippedComponentTags.length) {
-    appendOverviewItem('Not evaluated tags', skippedComponentTags.join(', '), 'meta-value');
+    appendOverviewItem('Not evaluated component tags', skippedComponentTags.join(', '), 'meta-value');
+  }
+  const skippedTestTags = report.command?.skipTestTags;
+  if (Array.isArray(skippedTestTags) && skippedTestTags.length) {
+    appendOverviewItem('Not evaluated test tags', skippedTestTags.join(', '), 'meta-value');
   }
   appendOverviewItem('Heta compiler', environment.hetaVersion || 'unknown', 'meta-value');
 }
@@ -88,7 +92,8 @@ function renderCaseDetails(caseResult) {
   };
 
   addDetail('Build status', caseResult.buildStatus);
-  addDetail('Not evaluated tags', caseResult.notEvaluatedComponentTags?.join(', '));
+  addDetail('Not evaluated component tags', caseResult.notEvaluatedComponentTags?.join(', '));
+  addDetail('Not evaluated test tags', caseResult.notEvaluatedTestTags?.join(', '));
   addDetail('Source', caseResult.sourcePath);
   addDetail('Build source', caseResult.buildSourcePath);
   addDetail('Log file', caseResult.logPath);
