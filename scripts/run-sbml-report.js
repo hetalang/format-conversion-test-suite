@@ -16,6 +16,18 @@ function parsePositiveInteger(value, optionName, defaultValue) {
   return Number(value);
 }
 
+function parseNonNegativeInteger(value, optionName, defaultValue) {
+  if (value === undefined) {
+    return defaultValue;
+  }
+
+  if (!/^\d+$/.test(value)) {
+    throw new Error(`${optionName} must be a non-negative integer`);
+  }
+
+  return Number(value);
+}
+
 async function fileExists(filePath) {
   try {
     await fsp.access(filePath);
@@ -96,13 +108,17 @@ async function buildCase(caseEntry, indexDirectory, targetDirectory, repositoryR
   }
 
   const distDirectory = path.join(targetDirectory, caseEntry.caseId);
+  const logPath = path.join(distDirectory, 'build.log');
+  await fsp.mkdir(distDirectory, { recursive: true });
   const sourceArgument = path.relative(repositoryRoot, sourcePath).split(path.sep).join('/');
   const distArgument = path.relative(repositoryRoot, distDirectory).split(path.sep).join('/');
+  const logArgument = path.relative(repositoryRoot, logPath).split(path.sep).join('/');
   const commandArguments = [
     'build',
     `--source=${sourceArgument}`,
     '--type=sbml',
     `--dist-dir=${distArgument}`,
+    `--log-path=${logArgument}`,
     '--export=canonical,dynms',
   ];
   const commandResult = await runProcess(
@@ -112,6 +128,10 @@ async function buildCase(caseEntry, indexDirectory, targetDirectory, repositoryR
   );
   const canonicalPath = path.join(distDirectory, 'canonical', 'output.heta.json');
   const dynmsPath = path.join(distDirectory, 'dynms', 'output.dynms.json');
+
+  if (await fileExists(logPath)) {
+    result.logPath = path.relative(targetDirectory, logPath).split(path.sep).join('/');
+  }
 
   if (commandResult.exitCode === 0 && await fileExists(canonicalPath) && await fileExists(dynmsPath)) {
     result.status = 'success';
@@ -155,6 +175,7 @@ async function runSbmlReport(options, repositoryRoot) {
 
   const concurrency = parsePositiveInteger(options.concurrency, '--concurrency', 1);
   const limit = parsePositiveInteger(options.limit, '--limit', undefined);
+  const skip = parseNonNegativeInteger(options.skip, '--skip', 0);
   const indexPath = await resolveIndexPath(repositoryRoot, options.source);
   const targetDirectory = resolveInsideRepository(repositoryRoot, options.target, '--target');
   const index = JSON.parse(await fsp.readFile(indexPath, 'utf8'));
@@ -165,7 +186,7 @@ async function runSbmlReport(options, repositoryRoot) {
 
   const cases = index.cases
     .filter((caseEntry) => typeof caseEntry.sbmlL3V2Path === 'string')
-    .slice(0, limit);
+    .slice(skip, limit === undefined ? undefined : skip + limit);
 
   if (cases.some((caseEntry) => !/^[A-Za-z0-9_-]+$/.test(caseEntry.caseId))) {
     throw new Error('Invalid caseId in the index');
@@ -208,6 +229,7 @@ async function runSbmlReport(options, repositoryRoot) {
       source: path.relative(repositoryRoot, indexPath).split(path.sep).join('/'),
       target: path.relative(repositoryRoot, targetDirectory).split(path.sep).join('/'),
       concurrency,
+      ...(skip === 0 ? {} : { skip }),
       ...(limit === undefined ? {} : { limit }),
     },
     environment: {
