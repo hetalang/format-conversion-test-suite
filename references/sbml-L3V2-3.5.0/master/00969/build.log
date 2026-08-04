@@ -1,0 +1,14 @@
+Running compilation in directory "Y:\format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "references\sbml-L2V5-3.5.0\master\00969\input.heta"...
+[info]	Reading module of type "sbml" from file "cases\semantic\00969\00969-sbml-l3v2.xml"...
+[error]	Xref component does not exist which is not allowed for the "update" action.
+[info]	Platform hash: bbde940c508cd71e49f3a73c9734fef96b1f020fb37074f82d813e3daa31fb89
+[info]	Setting references in elements, total length 82
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

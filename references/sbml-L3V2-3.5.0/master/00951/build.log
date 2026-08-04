@@ -1,0 +1,28 @@
+Running compilation in directory "Y:\format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "references\sbml-L2V5-3.5.0\master\00951\input.heta"...
+[info]	Reading module of type "sbml" from file "cases\semantic\00951\00951-sbml-l3v2.xml"...
+[error]	P Some of properties do not satisfy requirements for class "Const"
+    1. /num must be number
+    2. /num must be null
+    3. /num must match exactly one schema in oneOf
+[error]	Q Some of properties do not satisfy requirements for class "Const"
+    1. /num must be number
+    2. /num must be null
+    3. /num must match exactly one schema in oneOf
+[error]	R Some of properties do not satisfy requirements for class "Const"
+    1. /num must be number
+    2. /num must be null
+    3. /num must match exactly one schema in oneOf
+[info]	Platform hash: e23dbeef59daff2c7790b7c6d0c65076f11c9cbe9006cc1956e74453187cf2be
+[info]	Setting references in elements, total length 81
+[error]	No required "num" property for "P" of Const.
+[error]	No required "num" property for "Q" of Const.
+[error]	No required "num" property for "R" of Const.
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+
