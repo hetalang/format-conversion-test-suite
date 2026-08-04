@@ -25,5 +25,7 @@ The report host must permit cross-origin browser requests (CORS).
 
 ## Publishing
 
-The `viewer/` directory is ready to publish as a GitHub Pages static site. It
-does not require a build step or server-side code.
+The `viewer/` directory is published to GitHub Pages by
+`.github/workflows/deploy-viewer.yml`. It deploys changes merged into `main`
+and can also be started manually from the Actions tab. Enable GitHub Pages with
+the `GitHub Actions` source in the repository settings before the first deploy.
