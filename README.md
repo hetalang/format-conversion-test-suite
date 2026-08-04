@@ -53,12 +53,25 @@ Build the indexed SBML L3V2 cases and write converter outputs with a JSON
 report:
 
 ```sh
-npx fcts report --source=cases/index --target=results/candidate --concurrency=1 --skip=0 --limit=10
+npx fcts report --source=cases/index --input-field=sbmlL3V2Path --target=results/candidate --concurrency=1 --skip=0 --limit=10
 ```
 
 The target directory is replaced for each run. `report.json` records every
 case's build status and, for successful cases, the relative paths to canonical
-JSON and DynMS output files.
+JSON and DynMS output files. The optional `--input-field` selects the SBML path
+field from each case: `sbmlL3V2Path` (the default) or `sbmlL2V5Path`. The
+selected field and its SBML format are recorded in `report.json`.
+
+Each case is built through a generated `input.heta` stored beside its outputs.
+For L2V5, this wrapper defines the standard `volume`, `area`, `length`,
+`substance`, and `time` units before including the SBML source. L3V2 uses the
+same wrapper flow without adding those L2-specific definitions.
+
+For an SBML L2V5 run, use:
+
+```sh
+npx fcts report --source=cases/index --input-field=sbmlL2V5Path --target=results/candidate-l2v5 --concurrency=1
+```
 
 ## Report viewer
 

@@ -4,6 +4,29 @@ const os = require('node:os');
 const path = require('node:path');
 const spawn = require('cross-spawn');
 
+const sbmlL2DefaultUnits = [
+  '#defineUnit volume { units: litre };',
+  '#defineUnit area { units: metre^2 };',
+  '#defineUnit length { units: metre };',
+  '#defineUnit substance { units: mole };',
+  '#defineUnit time { units: second };',
+];
+
+const supportedInputFields = {
+  sbmlL2V5Path: {
+    format: 'SBML Level 2 Version 5',
+    sourceType: 'sbml',
+    buildType: 'heta',
+    definesDefaultUnits: true,
+  },
+  sbmlL3V2Path: {
+    format: 'SBML Level 3 Version 2',
+    sourceType: 'sbml',
+    buildType: 'heta',
+    definesDefaultUnits: false,
+  },
+};
+
 function parsePositiveInteger(value, optionName, defaultValue) {
   if (value === undefined) {
     return defaultValue;
@@ -92,14 +115,27 @@ function runProcess(command, argumentsList, cwd) {
   });
 }
 
-async function buildCase(caseEntry, indexDirectory, targetDirectory, repositoryRoot) {
+function createBuildSource(sourcePath, distDirectory, inputField) {
+  const includePath = path.relative(distDirectory, sourcePath).split(path.sep).join('/');
+  const lines = [];
+
+  if (inputField === 'sbmlL2V5Path') {
+    lines.push(...sbmlL2DefaultUnits, '');
+  }
+
+  lines.push(`#include { source: ${includePath}, type: sbml };`, '');
+  return lines.join('\n');
+}
+
+async function buildCase(caseEntry, indexDirectory, targetDirectory, repositoryRoot, inputField) {
+  const sourceFilePath = caseEntry[inputField];
   const result = {
     caseId: caseEntry.caseId,
-    sourcePath: caseEntry.sbmlL3V2Path,
+    sourcePath: sourceFilePath,
     status: 'failed',
   };
   console.log(`Building case ${caseEntry.caseId}...`);
-  const sourcePath = path.resolve(indexDirectory, caseEntry.sbmlL3V2Path);
+  const sourcePath = path.resolve(indexDirectory, sourceFilePath);
   const relativeSourcePath = path.relative(indexDirectory, sourcePath);
 
   if (relativeSourcePath.startsWith('..') || path.isAbsolute(relativeSourcePath)) {
@@ -108,15 +144,25 @@ async function buildCase(caseEntry, indexDirectory, targetDirectory, repositoryR
   }
 
   const distDirectory = path.join(targetDirectory, caseEntry.caseId);
+  const buildSourcePath = path.join(distDirectory, 'input.heta');
   const logPath = path.join(distDirectory, 'build.log');
   await fsp.mkdir(distDirectory, { recursive: true });
-  const sourceArgument = path.relative(repositoryRoot, sourcePath).split(path.sep).join('/');
+  await fsp.writeFile(
+    buildSourcePath,
+    createBuildSource(sourcePath, distDirectory, inputField),
+  );
+  result.buildSourcePath = path
+    .relative(targetDirectory, buildSourcePath)
+    .split(path.sep)
+    .join('/');
+
+  const sourceArgument = path.relative(repositoryRoot, buildSourcePath).split(path.sep).join('/');
   const distArgument = path.relative(repositoryRoot, distDirectory).split(path.sep).join('/');
   const logArgument = path.relative(repositoryRoot, logPath).split(path.sep).join('/');
   const commandArguments = [
     'build',
     `--source=${sourceArgument}`,
-    '--type=sbml',
+    '--type=heta',
     `--dist-dir=${distArgument}`,
     `--log-path=${logArgument}`,
     '--export=canonical,dynms',
@@ -176,6 +222,13 @@ async function runSbmlReport(options, repositoryRoot) {
   const concurrency = parsePositiveInteger(options.concurrency, '--concurrency', 1);
   const limit = parsePositiveInteger(options.limit, '--limit', undefined);
   const skip = parseNonNegativeInteger(options.skip, '--skip', 0);
+  const inputField = options['input-field'] || 'sbmlL3V2Path';
+  const input = supportedInputFields[inputField];
+
+  if (!input) {
+    throw new Error(`Unsupported --input-field: ${inputField}`);
+  }
+
   const indexPath = await resolveIndexPath(repositoryRoot, options.source);
   const targetDirectory = resolveInsideRepository(repositoryRoot, options.target, '--target');
   const index = JSON.parse(await fsp.readFile(indexPath, 'utf8'));
@@ -185,7 +238,7 @@ async function runSbmlReport(options, repositoryRoot) {
   }
 
   const cases = index.cases
-    .filter((caseEntry) => typeof caseEntry.sbmlL3V2Path === 'string')
+    .filter((caseEntry) => typeof caseEntry[inputField] === 'string')
     .slice(skip, limit === undefined ? undefined : skip + limit);
 
   if (cases.some((caseEntry) => !/^[A-Za-z0-9_-]+$/.test(caseEntry.caseId))) {
@@ -208,11 +261,17 @@ async function runSbmlReport(options, repositoryRoot) {
   const startedAtMs = Date.now();
   const results = await runWithConcurrency(cases, concurrency, async (caseEntry) => {
     try {
-      return await buildCase(caseEntry, path.dirname(indexPath), targetDirectory, repositoryRoot);
+      return await buildCase(
+        caseEntry,
+        path.dirname(indexPath),
+        targetDirectory,
+        repositoryRoot,
+        inputField,
+      );
     } catch (error) {
       return {
         caseId: caseEntry.caseId,
-        sourcePath: caseEntry.sbmlL3V2Path,
+        sourcePath: caseEntry[inputField],
         status: 'failed',
         error: { message: error.message },
       };
@@ -228,9 +287,14 @@ async function runSbmlReport(options, repositoryRoot) {
     command: {
       source: path.relative(repositoryRoot, indexPath).split(path.sep).join('/'),
       target: path.relative(repositoryRoot, targetDirectory).split(path.sep).join('/'),
+      inputField,
       concurrency,
       ...(skip === 0 ? {} : { skip }),
       ...(limit === undefined ? {} : { limit }),
+    },
+    input: {
+      field: inputField,
+      ...input,
     },
     environment: {
       hetaVersion: hetaVersionResult.stdout.trim(),

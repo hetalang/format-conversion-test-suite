@@ -81,12 +81,17 @@ function renderCaseDetails(caseResult) {
   };
 
   addDetail('Source', caseResult.sourcePath);
+  addDetail('Build source', caseResult.buildSourcePath);
   addDetail('Log file', caseResult.logPath);
   addDetail('Error', caseResult.error?.message);
   addDetail('Exit code', caseResult.error?.exitCode);
   elements.details.append(list);
 
-  const artifacts = { ...(caseResult.outputs || {}), ...(caseResult.logPath ? { log: caseResult.logPath } : {}) };
+  const artifacts = {
+    ...(caseResult.buildSourcePath ? { input: caseResult.buildSourcePath } : {}),
+    ...(caseResult.outputs || {}),
+    ...(caseResult.logPath ? { log: caseResult.logPath } : {}),
+  };
   if (Object.keys(artifacts).length) {
     const outputHeading = createElement('h3', {}, 'Artifacts');
     const outputList = createElement('ul');
