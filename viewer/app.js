@@ -68,6 +68,10 @@ function renderOverview() {
   appendOverviewItem('Successful', countStatus('success'), 'success-value');
   appendOverviewItem('Failed', countStatus('failed'), 'failure-value');
   appendOverviewItem('Not evaluated', countStatus('not-evaluated'), 'neutral-value');
+  const skippedComponentTags = report.command?.skipComponentTags;
+  if (Array.isArray(skippedComponentTags) && skippedComponentTags.length) {
+    appendOverviewItem('Not evaluated tags', skippedComponentTags.join(', '), 'meta-value');
+  }
   appendOverviewItem('Heta compiler', environment.hetaVersion || 'unknown', 'meta-value');
 }
 
@@ -83,6 +87,8 @@ function renderCaseDetails(caseResult) {
     list.append(createElement('dd', {}, String(value)));
   };
 
+  addDetail('Build status', caseResult.buildStatus);
+  addDetail('Not evaluated tags', caseResult.notEvaluatedComponentTags?.join(', '));
   addDetail('Source', caseResult.sourcePath);
   addDetail('Build source', caseResult.buildSourcePath);
   addDetail('Log file', caseResult.logPath);

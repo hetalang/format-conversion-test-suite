@@ -18,7 +18,7 @@ function parseOptions(argumentsList) {
 }
 
 function printUsage() {
-  console.log('Usage: fcts report --source=<index> --target=<directory> [--input-field=<field>] [--concurrency=<number>] [--skip=<number>] [--limit=<number>]');
+  console.log('Usage: fcts report --source=<index> --target=<directory> [--input-field=<field>] [--concurrency=<number>] [--skip=<number>] [--limit=<number>] [--skip-component-tags=<tag,...>]');
 }
 
 async function main() {

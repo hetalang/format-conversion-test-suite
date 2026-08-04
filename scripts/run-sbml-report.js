@@ -51,6 +51,19 @@ function parseNonNegativeInteger(value, optionName, defaultValue) {
   return Number(value);
 }
 
+function parseCommaSeparatedValues(value, optionName) {
+  if (value === undefined) {
+    return [];
+  }
+
+  const values = value.split(',').map((item) => item.trim());
+  if (!values.length || values.some((item) => !item)) {
+    throw new Error(`${optionName} must be a comma-separated list of non-empty values`);
+  }
+
+  return [...new Set(values)];
+}
+
 async function fileExists(filePath) {
   try {
     await fsp.access(filePath);
@@ -127,14 +140,17 @@ function createBuildSource(sourcePath, distDirectory, inputField) {
   return lines.join('\n');
 }
 
-async function buildCase(caseEntry, indexDirectory, targetDirectory, repositoryRoot, inputField) {
+async function buildCase(caseEntry, indexDirectory, targetDirectory, repositoryRoot, inputField, notEvaluatedComponentTags) {
   const sourceFilePath = caseEntry[inputField];
   const result = {
     caseId: caseEntry.caseId,
     sourcePath: sourceFilePath,
     status: 'failed',
   };
-  console.log(`Building case ${caseEntry.caseId}...`);
+  const evaluationNote = notEvaluatedComponentTags.length
+    ? ` (not evaluated: ${notEvaluatedComponentTags.join(', ')})`
+    : '';
+  console.log(`Building case ${caseEntry.caseId}${evaluationNote}...`);
   const sourcePath = path.resolve(indexDirectory, sourceFilePath);
   const relativeSourcePath = path.relative(indexDirectory, sourcePath);
 
@@ -198,6 +214,29 @@ async function buildCase(caseEntry, indexDirectory, targetDirectory, repositoryR
   return result;
 }
 
+function findNotEvaluatedComponentTags(caseEntry, skippedComponentTags) {
+  if (!Array.isArray(caseEntry.componentTags) || !skippedComponentTags.length) {
+    return [];
+  }
+
+  const skippedTags = new Set(skippedComponentTags);
+  return [...new Set(caseEntry.componentTags.filter((tag) => skippedTags.has(tag)))];
+}
+
+function markNotEvaluated(result, componentTags) {
+  if (!componentTags.length) {
+    return result;
+  }
+
+  return {
+    ...result,
+    // Keep the actual compiler result while excluding this case from evaluation.
+    buildStatus: result.status,
+    status: 'not-evaluated',
+    notEvaluatedComponentTags: componentTags,
+  };
+}
+
 async function runWithConcurrency(items, concurrency, callback) {
   const results = new Array(items.length);
   let nextIndex = 0;
@@ -222,6 +261,10 @@ async function runSbmlReport(options, repositoryRoot) {
   const concurrency = parsePositiveInteger(options.concurrency, '--concurrency', 1);
   const limit = parsePositiveInteger(options.limit, '--limit', undefined);
   const skip = parseNonNegativeInteger(options.skip, '--skip', 0);
+  const skipComponentTags = parseCommaSeparatedValues(
+    options['skip-component-tags'],
+    '--skip-component-tags',
+  );
   const inputField = options['input-field'] || 'sbmlL3V2Path';
   const input = supportedInputFields[inputField];
 
@@ -260,27 +303,40 @@ async function runSbmlReport(options, repositoryRoot) {
   const startedAt = new Date().toISOString();
   const startedAtMs = Date.now();
   const results = await runWithConcurrency(cases, concurrency, async (caseEntry) => {
+    const notEvaluatedComponentTags = findNotEvaluatedComponentTags(
+      caseEntry,
+      skipComponentTags,
+    );
+
     try {
-      return await buildCase(
+      const result = await buildCase(
         caseEntry,
         path.dirname(indexPath),
         targetDirectory,
         repositoryRoot,
         inputField,
+        notEvaluatedComponentTags,
       );
+      return markNotEvaluated(result, notEvaluatedComponentTags);
     } catch (error) {
-      return {
+      return markNotEvaluated({
         caseId: caseEntry.caseId,
         sourcePath: caseEntry[inputField],
         status: 'failed',
         error: { message: error.message },
-      };
+      }, notEvaluatedComponentTags);
     }
   });
   const succeeded = results.filter((result) => result.status === 'success').length;
+  const failed = results.filter((result) => result.status === 'failed').length;
+  const notEvaluated = results.filter((result) => result.status === 'not-evaluated').length;
   const report = {
     schemaVersion: 1,
-    status: succeeded === results.length ? 'success' : 'completed-with-errors',
+    status: failed > 0
+      ? 'completed-with-errors'
+      : notEvaluated > 0
+        ? 'completed-with-not-evaluated'
+        : 'success',
     startedAt,
     completedAt: new Date().toISOString(),
     durationMs: Date.now() - startedAtMs,
@@ -291,6 +347,7 @@ async function runSbmlReport(options, repositoryRoot) {
       concurrency,
       ...(skip === 0 ? {} : { skip }),
       ...(limit === undefined ? {} : { limit }),
+      ...(skipComponentTags.length ? { skipComponentTags } : {}),
     },
     input: {
       field: inputField,
@@ -305,7 +362,8 @@ async function runSbmlReport(options, repositoryRoot) {
     summary: {
       requested: cases.length,
       succeeded,
-      failed: results.length - succeeded,
+      failed,
+      notEvaluated,
     },
     cases: results,
   };

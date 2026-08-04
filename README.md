@@ -62,6 +62,14 @@ JSON and DynMS output files. The optional `--input-field` selects the SBML path
 field from each case: `sbmlL3V2Path` (the default) or `sbmlL2V5Path`. The
 selected field and its SBML format are recorded in `report.json`.
 
+To build all cases but exclude selected component tags from evaluation, use
+`--skip-component-tags`. Matching cases have status `not-evaluated`; their
+artifacts and actual compiler result are still kept in the report.
+
+```sh
+npx fcts report --source=cases/index --input-field=sbmlL3V2Path --target=results/candidate --skip-component-tags=CSymbolDelay,EventWithDelay
+```
+
 Each case is built through a generated `input.heta` stored beside its outputs.
 For L2V5, this wrapper defines the standard `volume`, `area`, `length`,
 `substance`, and `time` units before including the SBML source. L3V2 uses the
