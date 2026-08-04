@@ -1,18 +1,20 @@
 {
   "schemaVersion": 1,
   "status": "completed-with-errors",
-  "startedAt": "2026-08-04T17:42:28.734Z",
-  "completedAt": "2026-08-04T18:16:01.590Z",
-  "durationMs": 2012855,
+  "startedAt": "2026-08-04T20:59:52.722Z",
+  "completedAt": "2026-08-04T21:16:17.429Z",
+  "durationMs": 984705,
   "command": {
     "source": "cases/index.json",
     "target": "references/sbml-L3V2-3.5.0/master",
     "inputField": "sbmlL3V2Path",
     "concurrency": 4,
     "skipComponentTags": [
+      "StoichiometryMath",
       "CSymbolDelay",
       "EventWithDelay",
-      "AlgebraicRule"
+      "AlgebraicRule",
+      "FastReaction"
     ]
   },
   "input": {
