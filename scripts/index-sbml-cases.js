@@ -30,6 +30,31 @@ function resolveTargetDir(targetDir) {
   return targetPath;
 }
 
+async function readModelTags(semanticPath, caseId) {
+  const modelPath = path.join(semanticPath, caseId, `${caseId}-model.m`);
+
+  try {
+    const content = await fs.readFile(modelPath, 'utf8');
+    const readTags = (fieldName) => {
+      const match = new RegExp(`^\\s*${fieldName}:\\s*(.*)$`, 'mi').exec(content);
+
+      return match && match[1].trim()
+        ? match[1].split(',').map((tag) => tag.trim()).filter(Boolean)
+        : [];
+    };
+
+    return {
+      componentTags: readTags('componentTags'),
+      testTags: readTags('testTags'),
+    };
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      return { componentTags: [], testTags: [] };
+    }
+    throw error;
+  }
+}
+
 async function main() {
   const settings = await readOptions();
   const semanticPath = resolveTargetDir(settings.targetDir);
@@ -60,7 +85,7 @@ async function main() {
       withFileTypes: true,
     });
 
-    const caseIndex = { caseId };
+    const caseIndex = { caseId, ...(await readModelTags(semanticPath, caseId)) };
 
     for (const file of files.sort((left, right) => left.name.localeCompare(right.name))) {
       const relativeFilePath = path
