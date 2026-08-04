@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "status": "completed-with-errors",
-  "startedAt": "2026-08-04T20:31:46.572Z",
-  "completedAt": "2026-08-04T20:57:57.071Z",
-  "durationMs": 1570498,
+  "startedAt": "2026-08-04T21:48:25.877Z",
+  "completedAt": "2026-08-04T22:03:33.833Z",
+  "durationMs": 907955,
   "command": {
     "source": "cases/index.json",
     "target": "references/sbml-L2V5-3.5.0/master",
@@ -13,7 +13,9 @@
       "StoichiometryMath",
       "CSymbolDelay",
       "EventWithDelay",
-      "AlgebraicRule",
+      "AlgebraicRule"
+    ],
+    "skipTestTags": [
       "FastReaction"
     ]
   },
@@ -36,8 +38,8 @@
   "summary": {
     "requested": 970,
     "succeeded": 715,
-    "failed": 17,
-    "notEvaluated": 238
+    "failed": 9,
+    "notEvaluated": 246
   },
   "cases": [
     {
@@ -10432,7 +10434,7 @@
     {
       "caseId": "00870",
       "sourcePath": "semantic/00870/00870-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00870/input.heta",
       "logPath": "00870/build.log",
       "error": {
@@ -10441,12 +10443,16 @@
         "signal": null,
         "stdout": "Running compilation in directory \"Y:\\format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n\u001b[34m[info] \u001b[39mHeta compiler v0.12.1 is initialized for the platform \"undefined\"\n\u001b[34m[info] \u001b[39mReading module of type \"heta\" from file \"references\\sbml-L2V5-3.5.0\\master\\00870\\input.heta\"...\n\u001b[34m[info] \u001b[39mReading module of type \"sbml\" from file \"cases\\semantic\\00870\\00870-sbml-l2v5.xml\"...\n\u001b[31m[error] \u001b[39m\"fast\" reactions \"fasterReaction\" is not supported in SBML module. when converting module \"cases\\semantic\\00870\\00870-sbml-l2v5.xml\"\n\u001b[34m[info] \u001b[39mPlatform hash: 41c7aad13149755c18f5199b1963ca9664398780bc64038dbb644468e3d4892f\n\u001b[34m[info] \u001b[39mSetting references in elements, total length 83\n\u001b[34m[info] \u001b[39mChecking for circular references in Records.\n\u001b[33m[warn] \u001b[39mUnits checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n",
         "stderr": ""
-      }
+      },
+      "buildStatus": "failed",
+      "notEvaluatedTestTags": [
+        "FastReaction"
+      ]
     },
     {
       "caseId": "00871",
       "sourcePath": "semantic/00871/00871-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00871/input.heta",
       "logPath": "00871/build.log",
       "error": {
@@ -10455,12 +10461,16 @@
         "signal": null,
         "stdout": "Running compilation in directory \"Y:\\format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n\u001b[34m[info] \u001b[39mHeta compiler v0.12.1 is initialized for the platform \"undefined\"\n\u001b[34m[info] \u001b[39mReading module of type \"heta\" from file \"references\\sbml-L2V5-3.5.0\\master\\00871\\input.heta\"...\n\u001b[34m[info] \u001b[39mReading module of type \"sbml\" from file \"cases\\semantic\\00871\\00871-sbml-l2v5.xml\"...\n\u001b[31m[error] \u001b[39m\"fast\" reactions \"reaction1\" is not supported in SBML module. when converting module \"cases\\semantic\\00871\\00871-sbml-l2v5.xml\"\n\u001b[34m[info] \u001b[39mPlatform hash: 41c7aad13149755c18f5199b1963ca9664398780bc64038dbb644468e3d4892f\n\u001b[34m[info] \u001b[39mSetting references in elements, total length 83\n\u001b[34m[info] \u001b[39mChecking for circular references in Records.\n\u001b[33m[warn] \u001b[39mUnits checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n",
         "stderr": ""
-      }
+      },
+      "buildStatus": "failed",
+      "notEvaluatedTestTags": [
+        "FastReaction"
+      ]
     },
     {
       "caseId": "00872",
       "sourcePath": "semantic/00872/00872-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00872/input.heta",
       "logPath": "00872/build.log",
       "error": {
@@ -10469,12 +10479,16 @@
         "signal": null,
         "stdout": "Running compilation in directory \"Y:\\format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n\u001b[34m[info] \u001b[39mHeta compiler v0.12.1 is initialized for the platform \"undefined\"\n\u001b[34m[info] \u001b[39mReading module of type \"heta\" from file \"references\\sbml-L2V5-3.5.0\\master\\00872\\input.heta\"...\n\u001b[34m[info] \u001b[39mReading module of type \"sbml\" from file \"cases\\semantic\\00872\\00872-sbml-l2v5.xml\"...\n\u001b[31m[error] \u001b[39m\"fast\" reactions \"reaction1\" is not supported in SBML module. when converting module \"cases\\semantic\\00872\\00872-sbml-l2v5.xml\"\n\u001b[34m[info] \u001b[39mPlatform hash: 41c7aad13149755c18f5199b1963ca9664398780bc64038dbb644468e3d4892f\n\u001b[34m[info] \u001b[39mSetting references in elements, total length 83\n\u001b[34m[info] \u001b[39mChecking for circular references in Records.\n\u001b[33m[warn] \u001b[39mUnits checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n",
         "stderr": ""
-      }
+      },
+      "buildStatus": "failed",
+      "notEvaluatedTestTags": [
+        "FastReaction"
+      ]
     },
     {
       "caseId": "00873",
       "sourcePath": "semantic/00873/00873-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00873/input.heta",
       "logPath": "00873/build.log",
       "error": {
@@ -10483,12 +10497,16 @@
         "signal": null,
         "stdout": "Running compilation in directory \"Y:\\format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n\u001b[34m[info] \u001b[39mHeta compiler v0.12.1 is initialized for the platform \"undefined\"\n\u001b[34m[info] \u001b[39mReading module of type \"heta\" from file \"references\\sbml-L2V5-3.5.0\\master\\00873\\input.heta\"...\n\u001b[34m[info] \u001b[39mReading module of type \"sbml\" from file \"cases\\semantic\\00873\\00873-sbml-l2v5.xml\"...\n\u001b[31m[error] \u001b[39m\"fast\" reactions \"reaction1\" is not supported in SBML module. when converting module \"cases\\semantic\\00873\\00873-sbml-l2v5.xml\"\n\u001b[34m[info] \u001b[39mPlatform hash: 41c7aad13149755c18f5199b1963ca9664398780bc64038dbb644468e3d4892f\n\u001b[34m[info] \u001b[39mSetting references in elements, total length 83\n\u001b[34m[info] \u001b[39mChecking for circular references in Records.\n\u001b[33m[warn] \u001b[39mUnits checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n",
         "stderr": ""
-      }
+      },
+      "buildStatus": "failed",
+      "notEvaluatedTestTags": [
+        "FastReaction"
+      ]
     },
     {
       "caseId": "00874",
       "sourcePath": "semantic/00874/00874-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00874/input.heta",
       "logPath": "00874/build.log",
       "error": {
@@ -10497,12 +10515,16 @@
         "signal": null,
         "stdout": "Running compilation in directory \"Y:\\format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n\u001b[34m[info] \u001b[39mHeta compiler v0.12.1 is initialized for the platform \"undefined\"\n\u001b[34m[info] \u001b[39mReading module of type \"heta\" from file \"references\\sbml-L2V5-3.5.0\\master\\00874\\input.heta\"...\n\u001b[34m[info] \u001b[39mReading module of type \"sbml\" from file \"cases\\semantic\\00874\\00874-sbml-l2v5.xml\"...\n\u001b[31m[error] \u001b[39m\"fast\" reactions \"reaction1\" is not supported in SBML module. when converting module \"cases\\semantic\\00874\\00874-sbml-l2v5.xml\"\n\u001b[34m[info] \u001b[39mPlatform hash: 41c7aad13149755c18f5199b1963ca9664398780bc64038dbb644468e3d4892f\n\u001b[34m[info] \u001b[39mSetting references in elements, total length 83\n\u001b[34m[info] \u001b[39mChecking for circular references in Records.\n\u001b[33m[warn] \u001b[39mUnits checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n",
         "stderr": ""
-      }
+      },
+      "buildStatus": "failed",
+      "notEvaluatedTestTags": [
+        "FastReaction"
+      ]
     },
     {
       "caseId": "00875",
       "sourcePath": "semantic/00875/00875-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00875/input.heta",
       "logPath": "00875/build.log",
       "error": {
@@ -10511,7 +10533,11 @@
         "signal": null,
         "stdout": "Running compilation in directory \"Y:\\format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n\u001b[34m[info] \u001b[39mHeta compiler v0.12.1 is initialized for the platform \"undefined\"\n\u001b[34m[info] \u001b[39mReading module of type \"heta\" from file \"references\\sbml-L2V5-3.5.0\\master\\00875\\input.heta\"...\n\u001b[34m[info] \u001b[39mReading module of type \"sbml\" from file \"cases\\semantic\\00875\\00875-sbml-l2v5.xml\"...\n\u001b[31m[error] \u001b[39m\"fast\" reactions \"reaction1\" is not supported in SBML module. when converting module \"cases\\semantic\\00875\\00875-sbml-l2v5.xml\"\n\u001b[34m[info] \u001b[39mPlatform hash: 41c7aad13149755c18f5199b1963ca9664398780bc64038dbb644468e3d4892f\n\u001b[34m[info] \u001b[39mSetting references in elements, total length 83\n\u001b[34m[info] \u001b[39mChecking for circular references in Records.\n\u001b[33m[warn] \u001b[39mUnits checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n",
         "stderr": ""
-      }
+      },
+      "buildStatus": "failed",
+      "notEvaluatedTestTags": [
+        "FastReaction"
+      ]
     },
     {
       "caseId": "00876",
@@ -11557,7 +11583,7 @@
     {
       "caseId": "00986",
       "sourcePath": "semantic/00986/00986-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00986/input.heta",
       "logPath": "00986/build.log",
       "error": {
@@ -11566,12 +11592,16 @@
         "signal": null,
         "stdout": "Running compilation in directory \"Y:\\format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n\u001b[34m[info] \u001b[39mHeta compiler v0.12.1 is initialized for the platform \"undefined\"\n\u001b[34m[info] \u001b[39mReading module of type \"heta\" from file \"references\\sbml-L2V5-3.5.0\\master\\00986\\input.heta\"...\n\u001b[34m[info] \u001b[39mReading module of type \"sbml\" from file \"cases\\semantic\\00986\\00986-sbml-l2v5.xml\"...\n\u001b[31m[error] \u001b[39m\"fast\" reactions \"fast\" is not supported in SBML module. when converting module \"cases\\semantic\\00986\\00986-sbml-l2v5.xml\"\n\u001b[34m[info] \u001b[39mPlatform hash: 41c7aad13149755c18f5199b1963ca9664398780bc64038dbb644468e3d4892f\n\u001b[34m[info] \u001b[39mSetting references in elements, total length 83\n\u001b[34m[info] \u001b[39mChecking for circular references in Records.\n\u001b[33m[warn] \u001b[39mUnits checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n",
         "stderr": ""
-      }
+      },
+      "buildStatus": "failed",
+      "notEvaluatedTestTags": [
+        "FastReaction"
+      ]
     },
     {
       "caseId": "00987",
       "sourcePath": "semantic/00987/00987-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00987/input.heta",
       "logPath": "00987/build.log",
       "error": {
@@ -11580,7 +11610,11 @@
         "signal": null,
         "stdout": "Running compilation in directory \"Y:\\format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n\u001b[34m[info] \u001b[39mHeta compiler v0.12.1 is initialized for the platform \"undefined\"\n\u001b[34m[info] \u001b[39mReading module of type \"heta\" from file \"references\\sbml-L2V5-3.5.0\\master\\00987\\input.heta\"...\n\u001b[34m[info] \u001b[39mReading module of type \"sbml\" from file \"cases\\semantic\\00987\\00987-sbml-l2v5.xml\"...\n\u001b[31m[error] \u001b[39m\"fast\" reactions \"fast\" is not supported in SBML module. when converting module \"cases\\semantic\\00987\\00987-sbml-l2v5.xml\"\n\u001b[34m[info] \u001b[39mPlatform hash: 41c7aad13149755c18f5199b1963ca9664398780bc64038dbb644468e3d4892f\n\u001b[34m[info] \u001b[39mSetting references in elements, total length 83\n\u001b[34m[info] \u001b[39mChecking for circular references in Records.\n\u001b[33m[warn] \u001b[39mUnits checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n",
         "stderr": ""
-      }
+      },
+      "buildStatus": "failed",
+      "notEvaluatedTestTags": [
+        "FastReaction"
+      ]
     },
     {
       "caseId": "00988",
@@ -11598,6 +11632,9 @@
       "buildStatus": "failed",
       "notEvaluatedComponentTags": [
         "EventWithDelay"
+      ],
+      "notEvaluatedTestTags": [
+        "FastReaction"
       ]
     },
     {

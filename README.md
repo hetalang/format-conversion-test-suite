@@ -24,6 +24,19 @@ reproducibility. It does not validate numerical simulations.
 - Compare normalized generated files with approved reference outputs.
 - Support long-term regression testing of model converters.
 
+## Report viewer
+
+<https://hetalang.github.io/format-conversion-test-suite/>
+
+The dependency-free static report viewer is in [`viewer/`](viewer/). It loads a
+local report through a file picker or a public report URL.
+See [`viewer/README.md`](viewer/README.md) for usage.
+
+For references use:
+- [SBML L3V2 Reference Report](https://hetalang.github.io/format-conversion-test-suite?ref=https://raw.githubusercontent.com/hetalang/format-conversion-test-suite/refs/heads/main/references/sbml-L3V2-3.5.0/master/report.json)
+- [SBML L2V5 Reference Report](https://hetalang.github.io/format-conversion-test-suite?ref=https://raw.githubusercontent.com/hetalang/format-conversion-test-suite/refs/heads/main/references/sbml-L2V5-3.5.0/master/report.json)
+
+
 ## Cases preparation
 
 ### Download SBML Semantic Test Suite
@@ -101,16 +114,6 @@ For an SBML L2V5 run, use:
 ```sh
 npx fcts report --source=cases/index --input-field=sbmlL2V5Path --target=results/candidate-l2v5 --concurrency=1
 ```
-
-## Report viewer
-
-The dependency-free static report viewer is in [`viewer/`](viewer/). It loads a
-local report through a file picker or a public report URL through the `ref`
-query parameter. See [`viewer/README.md`](viewer/README.md) for usage and
-GitHub Pages publishing notes.
-
-For historical context on the removed predecessor, see
-[`docs/legacy-cases-visualization.md`](docs/legacy-cases-visualization.md).
 
 ## License
 
