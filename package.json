@@ -19,6 +19,7 @@
   },
   "scripts": {
     "fetch:sbml": "node scripts/fetch-sbml-test-suite.js",
+    "index:sbml": "node scripts/index-sbml-cases.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {

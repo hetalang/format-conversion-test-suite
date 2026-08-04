@@ -8,7 +8,6 @@ const extract = require('extract-zip');
 
 const repositoryRoot = path.resolve(__dirname, '..');
 const optionsPath = path.join(repositoryRoot, 'config', 'options.json');
-const casesPath = path.join(repositoryRoot, 'cases');
 
 async function readOptions() {
   const options = JSON.parse(await fsp.readFile(optionsPath, 'utf8'));
@@ -20,12 +19,24 @@ async function readOptions() {
     typeof settings.archiveUrl !== 'string' ||
     !/^https:\/\/.+/.test(settings.archiveUrl) ||
     typeof settings.archiveSha256 !== 'string' ||
-    !/^[a-f0-9]{64}$/i.test(settings.archiveSha256)
+    !/^[a-f0-9]{64}$/i.test(settings.archiveSha256) ||
+    typeof settings.targetDir !== 'string'
   ) {
     throw new Error(`Invalid SBML Test Suite configuration in ${optionsPath}`);
   }
 
   return settings;
+}
+
+function resolveTargetDir(targetDir) {
+  const targetPath = path.resolve(repositoryRoot, targetDir);
+  const relativePath = path.relative(repositoryRoot, targetPath);
+
+  if (!relativePath || relativePath.startsWith('..') || path.isAbsolute(relativePath)) {
+    throw new Error('sbmlTestSuite.targetDir must be a subdirectory of the repository');
+  }
+
+  return targetPath;
 }
 
 async function downloadArchive(url, archivePath) {
@@ -53,10 +64,12 @@ async function downloadArchive(url, archivePath) {
 
 async function main() {
   const settings = await readOptions();
-  const archivePath = path.join(casesPath, 'semantic-tests.zip');
+  const targetPath = resolveTargetDir(settings.targetDir);
+  const extractionPath = path.dirname(targetPath);
+  const archivePath = path.join(extractionPath, 'semantic-tests.zip');
 
-  await fsp.rm(casesPath, { recursive: true, force: true });
-  await fsp.mkdir(casesPath, { recursive: true });
+  await fsp.rm(targetPath, { recursive: true, force: true });
+  await fsp.mkdir(extractionPath, { recursive: true });
 
   try {
     console.log(`Downloading SBML Semantic Test Suite ${settings.version}...`);
@@ -69,8 +82,9 @@ async function main() {
     }
 
     console.log('Extracting archive...');
-    await extract(archivePath, { dir: casesPath });
-    console.log(`SBML Semantic Test Suite ${settings.version} is available at ${casesPath}`);
+    await extract(archivePath, { dir: extractionPath });
+    await fsp.access(targetPath);
+    console.log(`SBML Semantic Test Suite ${settings.version} is available at ${targetPath}`);
   } finally {
     await fsp.rm(archivePath, { force: true });
   }

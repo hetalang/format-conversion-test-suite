@@ -2,6 +2,7 @@
   "sbmlTestSuite": {
     "version": "3.5.0",
     "archiveUrl": "https://github.com/sbmlteam/sbml-test-suite/releases/download/3.5.0/semantic_tests_v3.5.0.zip",
-    "archiveSha256": "523bed258b384f761da211c233c5b4a7f28cd6cc2197ff709c6e253a6eacea77"
+    "archiveSha256": "523bed258b384f761da211c233c5b4a7f28cd6cc2197ff709c6e253a6eacea77",
+    "targetDir": "cases/semantic"
   }
 }

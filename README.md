@@ -23,8 +23,9 @@ reproducibility. It does not validate numerical simulations.
 
 Repository-wide settings are stored in
 [`config/options.json`](config/options.json). The initial configuration records
-the SBML Semantic Test Suite version, archive URL, and expected SHA-256 digest.
-The digest must be verified before an archive is used.
+the SBML Semantic Test Suite version, archive URL, expected SHA-256 digest, and
+the extracted `semantic` directory (`targetDir`). The digest must be verified
+before an archive is used.
 
 To download and prepare the configured SBML cases, run:
 
@@ -35,6 +36,16 @@ npm run fetch:sbml
 The archive is checked before extraction and its contents are placed in
 `cases/`. Each run replaces the existing downloaded test suite. The archive's
 `semantic` directory is therefore available as `cases/semantic`.
+
+To create an index of the downloaded cases, including all SBML Level 3 Version
+2 files, run:
+
+```sh
+npm run index:sbml
+```
+
+This command writes a reproducible `cases/index.json` with one record per case,
+relative paths to available SBML L2V5 and L3V2 files, and summary counts.
 
 ## License
 
