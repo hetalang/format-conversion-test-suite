@@ -53,7 +53,7 @@ Build the indexed SBML L3V2 cases and write converter outputs with a JSON
 report:
 
 ```sh
-fcts report --source=cases/index --target=results/master --concurrency=1 --skip=0 --limit=10
+fcts report --source=cases/index --target=results/candidate --concurrency=1 --skip=0 --limit=10
 ```
 
 The target directory is replaced for each run. `report.json` records every

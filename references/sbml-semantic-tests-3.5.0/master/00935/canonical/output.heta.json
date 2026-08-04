@@ -1,0 +1,74 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-04T09:21:18.524Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "e87834a5045fc0087f29419155e32888973def88e8ff94ec3be9aca1c7affe90",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "A",
+    "trigger": "t >= 0.99 and S1 < 0.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "B",
+    "trigger": "t >= 0.99 and S1 < 0.5"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "C"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "C1",
+    "trigger": "t >= 0.99 and S1 < 0.5"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "A": "1",
+      "B": "2",
+      "C1": "3",
+      "start_": "0 / C"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "A": "0",
+      "B": "1",
+      "C1": "2",
+      "start_": "1 / C"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S2"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  }
+]

@@ -1,0 +1,129 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-04T09:22:09.382Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "315802cfbb6bba8288586a7ba316c24b15907dad340bcfb76baf6e106fbca2f4",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S1"
+      }
+    ],
+    "assignments": {
+      "ode_": "k1"
+    },
+    "class": "Reaction",
+    "id": "_J0"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 3,
+        "target": "S2"
+      },
+      {
+        "stoichiometry": -2,
+        "target": "S1"
+      }
+    ],
+    "assignments": {
+      "ode_": "(k2 * S1) / S2"
+    },
+    "class": "Reaction",
+    "id": "_J1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "S2"
+      }
+    ],
+    "assignments": {
+      "ode_": "k3 * S2"
+    },
+    "class": "Reaction",
+    "id": "_J2"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "aux": {
+      "sboTerm": "SBO:0000410"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "default_compartment"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k1",
+    "num": 1
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k2",
+    "num": 3
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k3",
+    "num": 1.4
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "modelconv",
+    "num": 4
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "default_compartment",
+    "id": "S1"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "S1conv",
+    "num": 3
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0.001"
+    },
+    "class": "Species",
+    "compartment": "default_compartment",
+    "id": "S2"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  }
+]

@@ -1,0 +1,68 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-04T09:22:19.008Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "fbbdc828e6aaafcb7e9cd37e872c3d09e3f8f3e6556cba95df87a6995f5751d6",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E0",
+    "trigger": "p1 >= 1"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E1",
+    "trigger": "p1 >= 1"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E2",
+    "trigger": "p1 >= 1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E2": "0",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "p1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E0": "1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "p2"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E1": "1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "p3"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  }
+]

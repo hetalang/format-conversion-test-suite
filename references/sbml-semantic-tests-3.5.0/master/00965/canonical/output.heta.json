@@ -1,0 +1,129 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-04T09:22:01.818Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "56482dd0238fa0d88f891ff57d0aafb752d0c6ecd43505b67c16d33819915564",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "error_check": "1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "error"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "error_check",
+    "trigger": "maxrun > 300"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "maxrun_check1": "Qrun",
+      "maxrun_check2": "Rrun",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "maxrun"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "maxrun_check1",
+    "trigger": "Qrun > maxrun"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "maxrun_check2",
+    "trigger": "Rrun > maxrun"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "Qinc": "Q + 0.01",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "Q"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "Qinc",
+    "trigger": "(t - reset) >= 0.01"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "Qinc": "Qrun + 1",
+      "Rinc": "0",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "Qrun"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "Rinc": "R + 0.01",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "R"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "Qinc": "t",
+      "Rinc": "t",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "reset"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "Rinc",
+    "trigger": "(t - reset) >= 0.01"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "Qinc": "0",
+      "Rinc": "Rrun + 1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "Rrun"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "Q + R",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "S"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  }
+]
