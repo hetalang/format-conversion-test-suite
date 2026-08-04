@@ -7,9 +7,18 @@
   },
   "references": [
     {
-      "id": "sbml-3.5.0-heta-0.12.1-master",
+      "id": "sbml-L3V2-3.5.0-master",
       "type": "sbmlSemanticTestSuite",
-      "targetDir": "references/sbml-semantic-tests-3.5.0/master",
+      "targetDir": "references/sbml-L3V2-3.5.0/master",
+      "exports": [
+        "canonical",
+        "dynms"
+      ]
+    },
+    {
+      "id": "sbml-L2V5-3.5.0-master",
+      "type": "sbmlSemanticTestSuite",
+      "targetDir": "references/sbml-L2V5-3.5.0/master",
       "exports": [
         "canonical",
         "dynms"
