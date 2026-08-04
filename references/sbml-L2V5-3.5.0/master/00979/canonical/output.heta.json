@@ -1,0 +1,126 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-04T14:40:20.377Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "9af5972362cd6e14e867ca03cfd7ec71da304b0db19cd5aa8a1a268f35e3f61e",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "_E0",
+    "trigger": "t >= 0.98"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "_E1",
+    "trigger": "t >= 0.99"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "_E1": "3",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "p"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "_E1": "p + 1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "q"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "_E0": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "x"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "_E0": "y + x",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "y"
+  },
+  {
+    "action": "defineUnit",
+    "id": "area",
+    "units": [
+      {
+        "exponent": 2,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "length",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "substance",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "time",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "volume",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1
+      }
+    ]
+  }
+]

@@ -1,0 +1,21 @@
+Running compilation in directory "Y:\format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results\candidate\00958\input.heta"...
+[info]	Reading module of type "sbml" from file "cases\semantic\00958\00958-sbml-l2v5.xml"...
+[info]	Platform hash: 3d1178ddd8f76dd0bcf93801d69274ae4cf23d411b08dbe3506b0573309b8de6
+[info]	Setting references in elements, total length 111
+[error]	FunctionDef "sinh" is not found as expected here: P17 { math: undefined };
+[error]	FunctionDef "cosh" is not found as expected here: P18 { math: undefined };
+[error]	FunctionDef "asinh" is not found as expected here: P22 { math: undefined };
+[error]	FunctionDef "acosh" is not found as expected here: P23 { math: undefined };
+[error]	FunctionDef "atanh" is not found as expected here: P24 { math: undefined };
+[error]	FunctionDef "asech" is not found as expected here: P25 { math: undefined };
+[error]	FunctionDef "acsch" is not found as expected here: P26 { math: undefined };
+[error]	FunctionDef "acoth" is not found as expected here: P27 { math: undefined };
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

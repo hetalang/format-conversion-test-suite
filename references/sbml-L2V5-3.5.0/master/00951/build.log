@@ -1,0 +1,25 @@
+Running compilation in directory "Y:\format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results\candidate\00951\input.heta"...
+[info]	Reading module of type "sbml" from file "cases\semantic\00951\00951-sbml-l2v5.xml"...
+[error]	P Some of properties do not satisfy requirements for class "Record"
+    1. /assignments/start_ must be string
+    2. /assignments/start_ should be a string, number or null.
+[error]	Q Some of properties do not satisfy requirements for class "Record"
+    1. /assignments/start_ must be string
+    2. /assignments/start_ should be a string, number or null.
+[error]	R Some of properties do not satisfy requirements for class "Record"
+    1. /assignments/start_ must be string
+    2. /assignments/start_ should be a string, number or null.
+[info]	Platform hash: 4dff33f0836aa1a1ca5926095dada0dde708313b7f0fe727eee3078991b8a387
+[info]	Setting references in elements, total length 86
+[error]	Record "P" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "Q" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[error]	Record "R" is not initialized. You must set "start_" or "ode_" for the record or use abstract namespace.
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+
