@@ -11,7 +11,7 @@ const optionsPath = path.join(repositoryRoot, 'config', 'options.json');
 
 async function readOptions() {
   const options = JSON.parse(await fsp.readFile(optionsPath, 'utf8'));
-  const settings = options.sbmlTestSuite;
+  const settings = options.sbmlSemanticTestSuite;
 
   if (
     !settings ||
@@ -33,7 +33,7 @@ function resolveTargetDir(targetDir) {
   const relativePath = path.relative(repositoryRoot, targetPath);
 
   if (!relativePath || relativePath.startsWith('..') || path.isAbsolute(relativePath)) {
-    throw new Error('sbmlTestSuite.targetDir must be a subdirectory of the repository');
+    throw new Error('sbmlSemanticTestSuite.targetDir must be a subdirectory of the repository');
   }
 
   return targetPath;
