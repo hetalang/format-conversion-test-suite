@@ -2,6 +2,10 @@
 
 A dependency-free static page for viewing an FCTS `report.json`.
 
+The viewer recognizes `success`, `failed`, and `not-evaluated` case statuses.
+Use `not-evaluated` for cases intentionally excluded from assessment; they are
+shown in gray and can be filtered separately.
+
 ## Local use
 
 Open `index.html` in a browser and choose a local `report.json` file. This mode

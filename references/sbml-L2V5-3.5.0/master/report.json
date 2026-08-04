@@ -29,7 +29,8 @@
   "summary": {
     "requested": 970,
     "succeeded": 715,
-    "failed": 255
+    "failed": 128,
+    "notEvaluated": 127
   },
   "cases": [
     {
@@ -755,7 +756,7 @@
     {
       "caseId": "00071",
       "sourcePath": "semantic/00071/00071-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00071/input.heta",
       "logPath": "00071/build.log",
       "error": {
@@ -769,7 +770,7 @@
     {
       "caseId": "00072",
       "sourcePath": "semantic/00072/00072-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00072/input.heta",
       "logPath": "00072/build.log",
       "error": {
@@ -783,7 +784,7 @@
     {
       "caseId": "00073",
       "sourcePath": "semantic/00073/00073-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00073/input.heta",
       "logPath": "00073/build.log",
       "error": {
@@ -4155,7 +4156,7 @@
     {
       "caseId": "00405",
       "sourcePath": "semantic/00405/00405-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00405/input.heta",
       "logPath": "00405/build.log",
       "error": {
@@ -4169,7 +4170,7 @@
     {
       "caseId": "00406",
       "sourcePath": "semantic/00406/00406-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00406/input.heta",
       "logPath": "00406/build.log",
       "error": {
@@ -4183,7 +4184,7 @@
     {
       "caseId": "00407",
       "sourcePath": "semantic/00407/00407-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00407/input.heta",
       "logPath": "00407/build.log",
       "error": {
@@ -4197,7 +4198,7 @@
     {
       "caseId": "00408",
       "sourcePath": "semantic/00408/00408-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00408/input.heta",
       "logPath": "00408/build.log",
       "error": {
@@ -4211,7 +4212,7 @@
     {
       "caseId": "00409",
       "sourcePath": "semantic/00409/00409-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00409/input.heta",
       "logPath": "00409/build.log",
       "error": {
@@ -4225,7 +4226,7 @@
     {
       "caseId": "00410",
       "sourcePath": "semantic/00410/00410-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00410/input.heta",
       "logPath": "00410/build.log",
       "error": {
@@ -4239,7 +4240,7 @@
     {
       "caseId": "00411",
       "sourcePath": "semantic/00411/00411-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00411/input.heta",
       "logPath": "00411/build.log",
       "error": {
@@ -4253,7 +4254,7 @@
     {
       "caseId": "00412",
       "sourcePath": "semantic/00412/00412-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00412/input.heta",
       "logPath": "00412/build.log",
       "error": {
@@ -4267,7 +4268,7 @@
     {
       "caseId": "00413",
       "sourcePath": "semantic/00413/00413-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00413/input.heta",
       "logPath": "00413/build.log",
       "error": {
@@ -4281,7 +4282,7 @@
     {
       "caseId": "00414",
       "sourcePath": "semantic/00414/00414-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00414/input.heta",
       "logPath": "00414/build.log",
       "error": {
@@ -4295,7 +4296,7 @@
     {
       "caseId": "00415",
       "sourcePath": "semantic/00415/00415-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00415/input.heta",
       "logPath": "00415/build.log",
       "error": {
@@ -4309,7 +4310,7 @@
     {
       "caseId": "00416",
       "sourcePath": "semantic/00416/00416-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00416/input.heta",
       "logPath": "00416/build.log",
       "error": {
@@ -4323,7 +4324,7 @@
     {
       "caseId": "00417",
       "sourcePath": "semantic/00417/00417-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00417/input.heta",
       "logPath": "00417/build.log",
       "error": {
@@ -4337,7 +4338,7 @@
     {
       "caseId": "00418",
       "sourcePath": "semantic/00418/00418-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00418/input.heta",
       "logPath": "00418/build.log",
       "error": {
@@ -4351,7 +4352,7 @@
     {
       "caseId": "00419",
       "sourcePath": "semantic/00419/00419-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00419/input.heta",
       "logPath": "00419/build.log",
       "error": {
@@ -4365,7 +4366,7 @@
     {
       "caseId": "00420",
       "sourcePath": "semantic/00420/00420-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00420/input.heta",
       "logPath": "00420/build.log",
       "error": {
@@ -4379,7 +4380,7 @@
     {
       "caseId": "00421",
       "sourcePath": "semantic/00421/00421-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00421/input.heta",
       "logPath": "00421/build.log",
       "error": {
@@ -4393,7 +4394,7 @@
     {
       "caseId": "00422",
       "sourcePath": "semantic/00422/00422-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00422/input.heta",
       "logPath": "00422/build.log",
       "error": {
@@ -4407,7 +4408,7 @@
     {
       "caseId": "00423",
       "sourcePath": "semantic/00423/00423-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00423/input.heta",
       "logPath": "00423/build.log",
       "error": {
@@ -4421,7 +4422,7 @@
     {
       "caseId": "00424",
       "sourcePath": "semantic/00424/00424-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00424/input.heta",
       "logPath": "00424/build.log",
       "error": {
@@ -4435,7 +4436,7 @@
     {
       "caseId": "00425",
       "sourcePath": "semantic/00425/00425-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00425/input.heta",
       "logPath": "00425/build.log",
       "error": {
@@ -4449,7 +4450,7 @@
     {
       "caseId": "00426",
       "sourcePath": "semantic/00426/00426-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00426/input.heta",
       "logPath": "00426/build.log",
       "error": {
@@ -4463,7 +4464,7 @@
     {
       "caseId": "00427",
       "sourcePath": "semantic/00427/00427-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00427/input.heta",
       "logPath": "00427/build.log",
       "error": {
@@ -4477,7 +4478,7 @@
     {
       "caseId": "00428",
       "sourcePath": "semantic/00428/00428-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00428/input.heta",
       "logPath": "00428/build.log",
       "error": {
@@ -4491,7 +4492,7 @@
     {
       "caseId": "00429",
       "sourcePath": "semantic/00429/00429-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00429/input.heta",
       "logPath": "00429/build.log",
       "error": {
@@ -4505,7 +4506,7 @@
     {
       "caseId": "00430",
       "sourcePath": "semantic/00430/00430-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00430/input.heta",
       "logPath": "00430/build.log",
       "error": {
@@ -4519,7 +4520,7 @@
     {
       "caseId": "00431",
       "sourcePath": "semantic/00431/00431-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00431/input.heta",
       "logPath": "00431/build.log",
       "error": {
@@ -4533,7 +4534,7 @@
     {
       "caseId": "00432",
       "sourcePath": "semantic/00432/00432-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00432/input.heta",
       "logPath": "00432/build.log",
       "error": {
@@ -4547,7 +4548,7 @@
     {
       "caseId": "00433",
       "sourcePath": "semantic/00433/00433-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00433/input.heta",
       "logPath": "00433/build.log",
       "error": {
@@ -4561,7 +4562,7 @@
     {
       "caseId": "00434",
       "sourcePath": "semantic/00434/00434-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00434/input.heta",
       "logPath": "00434/build.log",
       "error": {
@@ -4575,7 +4576,7 @@
     {
       "caseId": "00435",
       "sourcePath": "semantic/00435/00435-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00435/input.heta",
       "logPath": "00435/build.log",
       "error": {
@@ -4589,7 +4590,7 @@
     {
       "caseId": "00436",
       "sourcePath": "semantic/00436/00436-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00436/input.heta",
       "logPath": "00436/build.log",
       "error": {
@@ -4603,7 +4604,7 @@
     {
       "caseId": "00437",
       "sourcePath": "semantic/00437/00437-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00437/input.heta",
       "logPath": "00437/build.log",
       "error": {
@@ -4617,7 +4618,7 @@
     {
       "caseId": "00438",
       "sourcePath": "semantic/00438/00438-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00438/input.heta",
       "logPath": "00438/build.log",
       "error": {
@@ -4631,7 +4632,7 @@
     {
       "caseId": "00439",
       "sourcePath": "semantic/00439/00439-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00439/input.heta",
       "logPath": "00439/build.log",
       "error": {
@@ -4645,7 +4646,7 @@
     {
       "caseId": "00440",
       "sourcePath": "semantic/00440/00440-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00440/input.heta",
       "logPath": "00440/build.log",
       "error": {
@@ -4659,7 +4660,7 @@
     {
       "caseId": "00441",
       "sourcePath": "semantic/00441/00441-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00441/input.heta",
       "logPath": "00441/build.log",
       "error": {
@@ -4673,7 +4674,7 @@
     {
       "caseId": "00442",
       "sourcePath": "semantic/00442/00442-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00442/input.heta",
       "logPath": "00442/build.log",
       "error": {
@@ -4687,7 +4688,7 @@
     {
       "caseId": "00443",
       "sourcePath": "semantic/00443/00443-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00443/input.heta",
       "logPath": "00443/build.log",
       "error": {
@@ -4701,7 +4702,7 @@
     {
       "caseId": "00444",
       "sourcePath": "semantic/00444/00444-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00444/input.heta",
       "logPath": "00444/build.log",
       "error": {
@@ -4715,7 +4716,7 @@
     {
       "caseId": "00445",
       "sourcePath": "semantic/00445/00445-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00445/input.heta",
       "logPath": "00445/build.log",
       "error": {
@@ -4729,7 +4730,7 @@
     {
       "caseId": "00446",
       "sourcePath": "semantic/00446/00446-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00446/input.heta",
       "logPath": "00446/build.log",
       "error": {
@@ -4743,7 +4744,7 @@
     {
       "caseId": "00447",
       "sourcePath": "semantic/00447/00447-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00447/input.heta",
       "logPath": "00447/build.log",
       "error": {
@@ -4757,7 +4758,7 @@
     {
       "caseId": "00448",
       "sourcePath": "semantic/00448/00448-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00448/input.heta",
       "logPath": "00448/build.log",
       "error": {
@@ -4771,7 +4772,7 @@
     {
       "caseId": "00449",
       "sourcePath": "semantic/00449/00449-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00449/input.heta",
       "logPath": "00449/build.log",
       "error": {
@@ -4785,7 +4786,7 @@
     {
       "caseId": "00450",
       "sourcePath": "semantic/00450/00450-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00450/input.heta",
       "logPath": "00450/build.log",
       "error": {
@@ -4799,7 +4800,7 @@
     {
       "caseId": "00451",
       "sourcePath": "semantic/00451/00451-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00451/input.heta",
       "logPath": "00451/build.log",
       "error": {
@@ -4813,7 +4814,7 @@
     {
       "caseId": "00452",
       "sourcePath": "semantic/00452/00452-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00452/input.heta",
       "logPath": "00452/build.log",
       "error": {
@@ -4827,7 +4828,7 @@
     {
       "caseId": "00453",
       "sourcePath": "semantic/00453/00453-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00453/input.heta",
       "logPath": "00453/build.log",
       "error": {
@@ -4841,7 +4842,7 @@
     {
       "caseId": "00454",
       "sourcePath": "semantic/00454/00454-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00454/input.heta",
       "logPath": "00454/build.log",
       "error": {
@@ -4855,7 +4856,7 @@
     {
       "caseId": "00455",
       "sourcePath": "semantic/00455/00455-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00455/input.heta",
       "logPath": "00455/build.log",
       "error": {
@@ -4869,7 +4870,7 @@
     {
       "caseId": "00456",
       "sourcePath": "semantic/00456/00456-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00456/input.heta",
       "logPath": "00456/build.log",
       "error": {
@@ -4883,7 +4884,7 @@
     {
       "caseId": "00457",
       "sourcePath": "semantic/00457/00457-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00457/input.heta",
       "logPath": "00457/build.log",
       "error": {
@@ -4897,7 +4898,7 @@
     {
       "caseId": "00458",
       "sourcePath": "semantic/00458/00458-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00458/input.heta",
       "logPath": "00458/build.log",
       "error": {
@@ -4911,7 +4912,7 @@
     {
       "caseId": "00459",
       "sourcePath": "semantic/00459/00459-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00459/input.heta",
       "logPath": "00459/build.log",
       "error": {
@@ -4925,7 +4926,7 @@
     {
       "caseId": "00460",
       "sourcePath": "semantic/00460/00460-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00460/input.heta",
       "logPath": "00460/build.log",
       "error": {
@@ -4939,7 +4940,7 @@
     {
       "caseId": "00461",
       "sourcePath": "semantic/00461/00461-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00461/input.heta",
       "logPath": "00461/build.log",
       "error": {
@@ -6781,7 +6782,7 @@
     {
       "caseId": "00622",
       "sourcePath": "semantic/00622/00622-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00622/input.heta",
       "logPath": "00622/build.log",
       "error": {
@@ -6795,7 +6796,7 @@
     {
       "caseId": "00623",
       "sourcePath": "semantic/00623/00623-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00623/input.heta",
       "logPath": "00623/build.log",
       "error": {
@@ -6809,7 +6810,7 @@
     {
       "caseId": "00624",
       "sourcePath": "semantic/00624/00624-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00624/input.heta",
       "logPath": "00624/build.log",
       "error": {
@@ -6955,7 +6956,7 @@
     {
       "caseId": "00637",
       "sourcePath": "semantic/00637/00637-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00637/input.heta",
       "logPath": "00637/build.log",
       "error": {
@@ -6969,7 +6970,7 @@
     {
       "caseId": "00638",
       "sourcePath": "semantic/00638/00638-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00638/input.heta",
       "logPath": "00638/build.log",
       "error": {
@@ -6983,7 +6984,7 @@
     {
       "caseId": "00639",
       "sourcePath": "semantic/00639/00639-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00639/input.heta",
       "logPath": "00639/build.log",
       "error": {
@@ -7087,7 +7088,7 @@
     {
       "caseId": "00649",
       "sourcePath": "semantic/00649/00649-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00649/input.heta",
       "logPath": "00649/build.log",
       "error": {
@@ -7101,7 +7102,7 @@
     {
       "caseId": "00650",
       "sourcePath": "semantic/00650/00650-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00650/input.heta",
       "logPath": "00650/build.log",
       "error": {
@@ -7115,7 +7116,7 @@
     {
       "caseId": "00651",
       "sourcePath": "semantic/00651/00651-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00651/input.heta",
       "logPath": "00651/build.log",
       "error": {
@@ -7159,7 +7160,7 @@
     {
       "caseId": "00655",
       "sourcePath": "semantic/00655/00655-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00655/input.heta",
       "logPath": "00655/build.log",
       "error": {
@@ -7173,7 +7174,7 @@
     {
       "caseId": "00656",
       "sourcePath": "semantic/00656/00656-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00656/input.heta",
       "logPath": "00656/build.log",
       "error": {
@@ -7187,7 +7188,7 @@
     {
       "caseId": "00657",
       "sourcePath": "semantic/00657/00657-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00657/input.heta",
       "logPath": "00657/build.log",
       "error": {
@@ -7285,7 +7286,7 @@
     {
       "caseId": "00664",
       "sourcePath": "semantic/00664/00664-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00664/input.heta",
       "logPath": "00664/build.log",
       "error": {
@@ -7299,7 +7300,7 @@
     {
       "caseId": "00665",
       "sourcePath": "semantic/00665/00665-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00665/input.heta",
       "logPath": "00665/build.log",
       "error": {
@@ -7313,7 +7314,7 @@
     {
       "caseId": "00666",
       "sourcePath": "semantic/00666/00666-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00666/input.heta",
       "logPath": "00666/build.log",
       "error": {
@@ -7489,7 +7490,7 @@
     {
       "caseId": "00682",
       "sourcePath": "semantic/00682/00682-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00682/input.heta",
       "logPath": "00682/build.log",
       "error": {
@@ -7503,7 +7504,7 @@
     {
       "caseId": "00683",
       "sourcePath": "semantic/00683/00683-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00683/input.heta",
       "logPath": "00683/build.log",
       "error": {
@@ -7517,7 +7518,7 @@
     {
       "caseId": "00684",
       "sourcePath": "semantic/00684/00684-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00684/input.heta",
       "logPath": "00684/build.log",
       "error": {
@@ -7585,7 +7586,7 @@
     {
       "caseId": "00690",
       "sourcePath": "semantic/00690/00690-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00690/input.heta",
       "logPath": "00690/build.log",
       "error": {
@@ -7707,7 +7708,7 @@
     {
       "caseId": "00701",
       "sourcePath": "semantic/00701/00701-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00701/input.heta",
       "logPath": "00701/build.log",
       "error": {
@@ -7721,7 +7722,7 @@
     {
       "caseId": "00702",
       "sourcePath": "semantic/00702/00702-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00702/input.heta",
       "logPath": "00702/build.log",
       "error": {
@@ -7789,7 +7790,7 @@
     {
       "caseId": "00708",
       "sourcePath": "semantic/00708/00708-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00708/input.heta",
       "logPath": "00708/build.log",
       "error": {
@@ -7953,7 +7954,7 @@
     {
       "caseId": "00724",
       "sourcePath": "semantic/00724/00724-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00724/input.heta",
       "logPath": "00724/build.log",
       "error": {
@@ -8051,7 +8052,7 @@
     {
       "caseId": "00731",
       "sourcePath": "semantic/00731/00731-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00731/input.heta",
       "logPath": "00731/build.log",
       "error": {
@@ -8115,7 +8116,7 @@
     {
       "caseId": "00737",
       "sourcePath": "semantic/00737/00737-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00737/input.heta",
       "logPath": "00737/build.log",
       "error": {
@@ -8323,7 +8324,7 @@
     {
       "caseId": "00757",
       "sourcePath": "semantic/00757/00757-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00757/input.heta",
       "logPath": "00757/build.log",
       "error": {
@@ -8337,7 +8338,7 @@
     {
       "caseId": "00758",
       "sourcePath": "semantic/00758/00758-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00758/input.heta",
       "logPath": "00758/build.log",
       "error": {
@@ -8351,7 +8352,7 @@
     {
       "caseId": "00759",
       "sourcePath": "semantic/00759/00759-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00759/input.heta",
       "logPath": "00759/build.log",
       "error": {
@@ -8407,7 +8408,7 @@
     {
       "caseId": "00763",
       "sourcePath": "semantic/00763/00763-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00763/input.heta",
       "logPath": "00763/build.log",
       "error": {
@@ -8421,7 +8422,7 @@
     {
       "caseId": "00764",
       "sourcePath": "semantic/00764/00764-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00764/input.heta",
       "logPath": "00764/build.log",
       "error": {
@@ -8435,7 +8436,7 @@
     {
       "caseId": "00765",
       "sourcePath": "semantic/00765/00765-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00765/input.heta",
       "logPath": "00765/build.log",
       "error": {
@@ -8449,7 +8450,7 @@
     {
       "caseId": "00766",
       "sourcePath": "semantic/00766/00766-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00766/input.heta",
       "logPath": "00766/build.log",
       "error": {
@@ -8463,7 +8464,7 @@
     {
       "caseId": "00767",
       "sourcePath": "semantic/00767/00767-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00767/input.heta",
       "logPath": "00767/build.log",
       "error": {
@@ -8477,7 +8478,7 @@
     {
       "caseId": "00768",
       "sourcePath": "semantic/00768/00768-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00768/input.heta",
       "logPath": "00768/build.log",
       "error": {
@@ -8491,7 +8492,7 @@
     {
       "caseId": "00769",
       "sourcePath": "semantic/00769/00769-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00769/input.heta",
       "logPath": "00769/build.log",
       "error": {
@@ -8505,7 +8506,7 @@
     {
       "caseId": "00770",
       "sourcePath": "semantic/00770/00770-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00770/input.heta",
       "logPath": "00770/build.log",
       "error": {
@@ -8519,7 +8520,7 @@
     {
       "caseId": "00771",
       "sourcePath": "semantic/00771/00771-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00771/input.heta",
       "logPath": "00771/build.log",
       "error": {
@@ -8533,7 +8534,7 @@
     {
       "caseId": "00772",
       "sourcePath": "semantic/00772/00772-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00772/input.heta",
       "logPath": "00772/build.log",
       "error": {
@@ -8547,7 +8548,7 @@
     {
       "caseId": "00773",
       "sourcePath": "semantic/00773/00773-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00773/input.heta",
       "logPath": "00773/build.log",
       "error": {
@@ -8561,7 +8562,7 @@
     {
       "caseId": "00774",
       "sourcePath": "semantic/00774/00774-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00774/input.heta",
       "logPath": "00774/build.log",
       "error": {
@@ -8575,7 +8576,7 @@
     {
       "caseId": "00775",
       "sourcePath": "semantic/00775/00775-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00775/input.heta",
       "logPath": "00775/build.log",
       "error": {
@@ -8589,7 +8590,7 @@
     {
       "caseId": "00776",
       "sourcePath": "semantic/00776/00776-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00776/input.heta",
       "logPath": "00776/build.log",
       "error": {
@@ -8603,7 +8604,7 @@
     {
       "caseId": "00777",
       "sourcePath": "semantic/00777/00777-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00777/input.heta",
       "logPath": "00777/build.log",
       "error": {
@@ -8617,7 +8618,7 @@
     {
       "caseId": "00778",
       "sourcePath": "semantic/00778/00778-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00778/input.heta",
       "logPath": "00778/build.log",
       "error": {
@@ -8631,7 +8632,7 @@
     {
       "caseId": "00779",
       "sourcePath": "semantic/00779/00779-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00779/input.heta",
       "logPath": "00779/build.log",
       "error": {
@@ -8645,7 +8646,7 @@
     {
       "caseId": "00780",
       "sourcePath": "semantic/00780/00780-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00780/input.heta",
       "logPath": "00780/build.log",
       "error": {
@@ -9345,7 +9346,7 @@
     {
       "caseId": "00848",
       "sourcePath": "semantic/00848/00848-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00848/input.heta",
       "logPath": "00848/build.log",
       "error": {
@@ -9359,7 +9360,7 @@
     {
       "caseId": "00849",
       "sourcePath": "semantic/00849/00849-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00849/input.heta",
       "logPath": "00849/build.log",
       "error": {
@@ -9373,7 +9374,7 @@
     {
       "caseId": "00850",
       "sourcePath": "semantic/00850/00850-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00850/input.heta",
       "logPath": "00850/build.log",
       "error": {
@@ -9765,7 +9766,7 @@
     {
       "caseId": "00886",
       "sourcePath": "semantic/00886/00886-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00886/input.heta",
       "logPath": "00886/build.log",
       "error": {
@@ -9779,7 +9780,7 @@
     {
       "caseId": "00887",
       "sourcePath": "semantic/00887/00887-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00887/input.heta",
       "logPath": "00887/build.log",
       "error": {
@@ -10205,7 +10206,7 @@
     {
       "caseId": "00933",
       "sourcePath": "semantic/00933/00933-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00933/input.heta",
       "logPath": "00933/build.log",
       "error": {
@@ -10219,7 +10220,7 @@
     {
       "caseId": "00936",
       "sourcePath": "semantic/00936/00936-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00936/input.heta",
       "logPath": "00936/build.log",
       "error": {
@@ -10233,7 +10234,7 @@
     {
       "caseId": "00937",
       "sourcePath": "semantic/00937/00937-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00937/input.heta",
       "logPath": "00937/build.log",
       "error": {
@@ -10247,7 +10248,7 @@
     {
       "caseId": "00938",
       "sourcePath": "semantic/00938/00938-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00938/input.heta",
       "logPath": "00938/build.log",
       "error": {
@@ -10261,7 +10262,7 @@
     {
       "caseId": "00939",
       "sourcePath": "semantic/00939/00939-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00939/input.heta",
       "logPath": "00939/build.log",
       "error": {
@@ -10275,7 +10276,7 @@
     {
       "caseId": "00940",
       "sourcePath": "semantic/00940/00940-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00940/input.heta",
       "logPath": "00940/build.log",
       "error": {
@@ -10289,7 +10290,7 @@
     {
       "caseId": "00941",
       "sourcePath": "semantic/00941/00941-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00941/input.heta",
       "logPath": "00941/build.log",
       "error": {
@@ -10303,7 +10304,7 @@
     {
       "caseId": "00942",
       "sourcePath": "semantic/00942/00942-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00942/input.heta",
       "logPath": "00942/build.log",
       "error": {
@@ -10317,7 +10318,7 @@
     {
       "caseId": "00943",
       "sourcePath": "semantic/00943/00943-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00943/input.heta",
       "logPath": "00943/build.log",
       "error": {
@@ -10525,7 +10526,7 @@
     {
       "caseId": "00980",
       "sourcePath": "semantic/00980/00980-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00980/input.heta",
       "logPath": "00980/build.log",
       "error": {
@@ -10539,7 +10540,7 @@
     {
       "caseId": "00981",
       "sourcePath": "semantic/00981/00981-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00981/input.heta",
       "logPath": "00981/build.log",
       "error": {
@@ -10553,7 +10554,7 @@
     {
       "caseId": "00982",
       "sourcePath": "semantic/00982/00982-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00982/input.heta",
       "logPath": "00982/build.log",
       "error": {
@@ -10567,7 +10568,7 @@
     {
       "caseId": "00983",
       "sourcePath": "semantic/00983/00983-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00983/input.heta",
       "logPath": "00983/build.log",
       "error": {
@@ -10581,7 +10582,7 @@
     {
       "caseId": "00984",
       "sourcePath": "semantic/00984/00984-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00984/input.heta",
       "logPath": "00984/build.log",
       "error": {
@@ -10595,7 +10596,7 @@
     {
       "caseId": "00985",
       "sourcePath": "semantic/00985/00985-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00985/input.heta",
       "logPath": "00985/build.log",
       "error": {
@@ -10637,7 +10638,7 @@
     {
       "caseId": "00988",
       "sourcePath": "semantic/00988/00988-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00988/input.heta",
       "logPath": "00988/build.log",
       "error": {

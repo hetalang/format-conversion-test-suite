@@ -37,7 +37,8 @@ function showError(message) {
 }
 
 function statusName(caseResult) {
-  return ['success', 'failed'].includes(caseResult.status) ? caseResult.status : 'unknown';
+  const knownStatuses = ['success', 'failed', 'not-evaluated'];
+  return knownStatuses.includes(caseResult.status) ? caseResult.status : 'unknown';
 }
 
 function resolveArtifactPath(artifactPath) {
@@ -58,13 +59,15 @@ function appendOverviewItem(label, value, extraClass = '') {
 
 function renderOverview() {
   const { report } = state;
-  const summary = report.summary || {};
   const environment = report.environment || {};
+  const cases = report.cases || [];
+  const countStatus = (status) => cases.filter((caseResult) => statusName(caseResult) === status).length;
   elements.overview.replaceChildren();
 
   appendOverviewItem('Report status', report.status || 'unknown', 'meta-value');
-  appendOverviewItem('Successful', summary.succeeded ?? 0, 'success-value');
-  appendOverviewItem('Failed', summary.failed ?? 0, 'failure-value');
+  appendOverviewItem('Successful', countStatus('success'), 'success-value');
+  appendOverviewItem('Failed', countStatus('failed'), 'failure-value');
+  appendOverviewItem('Not evaluated', countStatus('not-evaluated'), 'neutral-value');
   appendOverviewItem('Heta compiler', environment.hetaVersion || 'unknown', 'meta-value');
 }
 
