@@ -1,5 +1,12 @@
 # Format Conversion Test Suite
 
+The repository is designed to test Heta format conversion on the
+[SBML Semantic Test Suite](https://github.com/sbmlteam/sbml-test-suite).
+
+[![Heta project](https://img.shields.io/badge/%CD%B1-Heta_project-blue)](https://hetalang.github.io/)
+[![GitHub issues](https://img.shields.io/github/issues/hetalang/format-conversion-test-suite.svg)](https://github.com/hetalang/format-conversion-test-suite/issues/)
+[![GitHub license](https://img.shields.io/github/license/hetalang/format-conversion-test-suite.svg)](https://github.com/hetalang/format-conversion-test-suite/blob/master/LICENSE)
+
 A reproducible test framework for validating model format-conversion pipelines.
 
 The initial workflow is:
@@ -26,6 +33,19 @@ Repository-wide settings are stored in
 the SBML Semantic Test Suite version, archive URL, expected SHA-256 digest, and
 the extracted `semantic` directory (`targetDir`). The digest must be verified
 before an archive is used.
+
+### Verify configuration and references
+
+Verify the configured archive URL, reference reports, and reference artifacts:
+
+```sh
+npm run verify:config
+```
+
+The command uses an HTTP `HEAD` request (with a small range-request fallback)
+to confirm that the archive is available without downloading or extracting it.
+It also checks that every configured reference report matches the configured
+test-suite version, checksum, input field, and expected output artifacts.
 
 ```sh
 npm run fetch:sbml

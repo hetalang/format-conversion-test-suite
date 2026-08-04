@@ -4,4 +4,4 @@
 #defineUnit substance { units: mole };
 #defineUnit time { units: second };
 
-#include { source: ../../../cases/semantic/00819/00819-sbml-l2v5.xml, type: sbml };
+#include { source: ../../../../cases/semantic/00819/00819-sbml-l2v5.xml, type: sbml };
