@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FCTS Report Viewer</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">FORMAT CONVERSION TEST SUITE</p>
+        <h1>Report viewer</h1>
+        <p class="subtitle">Explore conversion results case by case.</p>
+      </div>
+      <div id="report-status" class="report-status">No report loaded</div>
+    </header>
+
+    <main>
+      <section class="loader panel" aria-labelledby="load-heading">
+        <div>
+          <h2 id="load-heading">Open a report</h2>
+          <p>Choose a local <code>report.json</code> or load a public URL.</p>
+        </div>
+        <div class="load-controls">
+          <label class="file-button">
+            <span>Choose local file</span>
+            <input id="report-file" type="file" accept="application/json,.json">
+          </label>
+          <label class="url-field" for="report-url">
+            <span>Report URL</span>
+            <input id="report-url" type="url" placeholder="https://example.org/report.json">
+          </label>
+          <button id="load-url" type="button">Load URL</button>
+        </div>
+        <p class="hint">A URL can also be supplied as <code>?ref=https://…/report.json</code>.</p>
+      </section>
+
+      <p id="error-message" class="error-message" hidden></p>
+
+      <section id="report-content" hidden>
+        <section id="overview" class="overview" aria-label="Report overview"></section>
+
+        <section class="cases panel" aria-labelledby="cases-heading">
+          <div class="cases-header">
+            <div>
+              <h2 id="cases-heading">Cases</h2>
+              <p id="case-count">0 cases</p>
+            </div>
+            <div class="filters" aria-label="Case filters">
+              <input id="case-search" type="search" placeholder="Find case ID">
+              <select id="status-filter">
+                <option value="all">All statuses</option>
+                <option value="success">Success</option>
+                <option value="failed">Failed</option>
+              </select>
+            </div>
+          </div>
+          <div id="case-grid" class="case-grid" aria-live="polite"></div>
+        </section>
+      </section>
+    </main>
+
+    <dialog id="case-dialog" aria-labelledby="case-dialog-title">
+      <div class="dialog-header">
+        <div>
+          <p class="eyebrow">CASE</p>
+          <h2 id="case-dialog-title"></h2>
+        </div>
+        <button id="close-dialog" class="close-button" type="button" aria-label="Close details">×</button>
+      </div>
+      <div id="case-details"></div>
+    </dialog>
+  </body>
+</html>

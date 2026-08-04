@@ -60,6 +60,16 @@ The target directory is replaced for each run. `report.json` records every
 case's build status and, for successful cases, the relative paths to canonical
 JSON and DynMS output files.
 
+## Report viewer
+
+The dependency-free static report viewer is in [`viewer/`](viewer/). It loads a
+local report through a file picker or a public report URL through the `ref`
+query parameter. See [`viewer/README.md`](viewer/README.md) for usage and
+GitHub Pages publishing notes.
+
+For historical context on the removed predecessor, see
+[`docs/legacy-cases-visualization.md`](docs/legacy-cases-visualization.md).
+
 ## License
 
 See [LICENSE](LICENSE).
