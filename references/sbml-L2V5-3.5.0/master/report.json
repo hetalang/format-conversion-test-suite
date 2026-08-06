@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "status": "completed-with-errors",
-  "startedAt": "2026-08-04T21:48:25.877Z",
-  "completedAt": "2026-08-04T22:03:33.833Z",
-  "durationMs": 907955,
+  "startedAt": "2026-08-06T13:04:56.260Z",
+  "completedAt": "2026-08-06T13:29:30.623Z",
+  "durationMs": 1474363,
   "command": {
     "source": "cases/index.json",
     "target": "references/sbml-L2V5-3.5.0/master",
@@ -37,8 +37,8 @@
   },
   "summary": {
     "requested": 970,
-    "succeeded": 715,
-    "failed": 9,
+    "succeeded": 720,
+    "failed": 4,
     "notEvaluated": 246
   },
   "cases": [
@@ -3689,15 +3689,11 @@
     {
       "caseId": "00355",
       "sourcePath": "semantic/00355/00355-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "00355/input.heta",
-      "logPath": "00355/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "signal": null,
-        "stdout": "Running compilation in directory \"Y:\\format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n\u001b[34m[info] \u001b[39mHeta compiler v0.12.1 is initialized for the platform \"undefined\"\n\u001b[34m[info] \u001b[39mReading module of type \"heta\" from file \"references\\sbml-L2V5-3.5.0\\master\\00355\\input.heta\"...\n\u001b[34m[info] \u001b[39mReading module of type \"sbml\" from file \"cases\\semantic\\00355\\00355-sbml-l2v5.xml\"...\n\u001b[31m[error] \u001b[39mFunction math \"lessthan\" should be a numeric expression.\n\u001b[31m[error] \u001b[39mDSwitcher trigger \"undefined::event1\" should be a boolean expression.\n\u001b[34m[info] \u001b[39mPlatform hash: 6d9a8a6ade4bb14646d18203b79d530b2fa9da979c2f0341dcd451bc0c670701\n\u001b[34m[info] \u001b[39mSetting references in elements, total length 92\n\u001b[31m[error] \u001b[39mNo required \"trigger\" property for \"event1\" of DSwitcher.\n\u001b[34m[info] \u001b[39mChecking for circular references in Records.\n\u001b[33m[warn] \u001b[39mUnits checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n",
-        "stderr": ""
+      "outputs": {
+        "canonical": "00355/canonical/output.heta.json",
+        "dynms": "00355/dynms/output.dynms.json"
       }
     },
     {
@@ -3713,43 +3709,31 @@
     {
       "caseId": "00357",
       "sourcePath": "semantic/00357/00357-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "00357/input.heta",
-      "logPath": "00357/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "signal": null,
-        "stdout": "Running compilation in directory \"Y:\\format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n\u001b[34m[info] \u001b[39mHeta compiler v0.12.1 is initialized for the platform \"undefined\"\n\u001b[34m[info] \u001b[39mReading module of type \"heta\" from file \"references\\sbml-L2V5-3.5.0\\master\\00357\\input.heta\"...\n\u001b[34m[info] \u001b[39mReading module of type \"sbml\" from file \"cases\\semantic\\00357\\00357-sbml-l2v5.xml\"...\n\u001b[31m[error] \u001b[39mFunction math \"lessthan\" should be a numeric expression.\n\u001b[31m[error] \u001b[39mDSwitcher trigger \"undefined::event1\" should be a boolean expression.\n\u001b[34m[info] \u001b[39mPlatform hash: 799879a698cc403db61c058315a6da95e3deab924ab596b2b6d90a31e73bbd08\n\u001b[34m[info] \u001b[39mSetting references in elements, total length 95\n\u001b[31m[error] \u001b[39mNo required \"trigger\" property for \"event1\" of DSwitcher.\n\u001b[34m[info] \u001b[39mChecking for circular references in Records.\n\u001b[33m[warn] \u001b[39mUnits checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n",
-        "stderr": ""
+      "outputs": {
+        "canonical": "00357/canonical/output.heta.json",
+        "dynms": "00357/dynms/output.dynms.json"
       }
     },
     {
       "caseId": "00358",
       "sourcePath": "semantic/00358/00358-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "00358/input.heta",
-      "logPath": "00358/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "signal": null,
-        "stdout": "Running compilation in directory \"Y:\\format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n\u001b[34m[info] \u001b[39mHeta compiler v0.12.1 is initialized for the platform \"undefined\"\n\u001b[34m[info] \u001b[39mReading module of type \"heta\" from file \"references\\sbml-L2V5-3.5.0\\master\\00358\\input.heta\"...\n\u001b[34m[info] \u001b[39mReading module of type \"sbml\" from file \"cases\\semantic\\00358\\00358-sbml-l2v5.xml\"...\n\u001b[31m[error] \u001b[39mFunction math \"lessthan\" should be a numeric expression.\n\u001b[31m[error] \u001b[39mDSwitcher trigger \"undefined::event1\" should be a boolean expression.\n\u001b[34m[info] \u001b[39mPlatform hash: fe94c13dba4be096ae4a67998b2613943eef30560f493e7b479b8647f7c6ab4a\n\u001b[34m[info] \u001b[39mSetting references in elements, total length 92\n\u001b[31m[error] \u001b[39mNo required \"trigger\" property for \"event1\" of DSwitcher.\n\u001b[34m[info] \u001b[39mChecking for circular references in Records.\n\u001b[33m[warn] \u001b[39mUnits checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n",
-        "stderr": ""
+      "outputs": {
+        "canonical": "00358/canonical/output.heta.json",
+        "dynms": "00358/dynms/output.dynms.json"
       }
     },
     {
       "caseId": "00359",
       "sourcePath": "semantic/00359/00359-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "00359/input.heta",
-      "logPath": "00359/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "signal": null,
-        "stdout": "Running compilation in directory \"Y:\\format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n\u001b[34m[info] \u001b[39mHeta compiler v0.12.1 is initialized for the platform \"undefined\"\n\u001b[34m[info] \u001b[39mReading module of type \"heta\" from file \"references\\sbml-L2V5-3.5.0\\master\\00359\\input.heta\"...\n\u001b[34m[info] \u001b[39mReading module of type \"sbml\" from file \"cases\\semantic\\00359\\00359-sbml-l2v5.xml\"...\n\u001b[31m[error] \u001b[39mFunction math \"lessthan\" should be a numeric expression.\n\u001b[31m[error] \u001b[39mDSwitcher trigger \"undefined::event1\" should be a boolean expression.\n\u001b[34m[info] \u001b[39mPlatform hash: 140086cc76e52900e4a6cfc58f66aab842e8c952c3aa4d67b7b6c4b43ab6ebe0\n\u001b[34m[info] \u001b[39mSetting references in elements, total length 94\n\u001b[31m[error] \u001b[39mNo required \"trigger\" property for \"event1\" of DSwitcher.\n\u001b[34m[info] \u001b[39mChecking for circular references in Records.\n\u001b[33m[warn] \u001b[39mUnits checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n",
-        "stderr": ""
+      "outputs": {
+        "canonical": "00359/canonical/output.heta.json",
+        "dynms": "00359/dynms/output.dynms.json"
       }
     },
     {
@@ -9008,15 +8992,11 @@
     {
       "caseId": "00753",
       "sourcePath": "semantic/00753/00753-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "00753/input.heta",
-      "logPath": "00753/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "signal": null,
-        "stdout": "Running compilation in directory \"Y:\\format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n\u001b[34m[info] \u001b[39mHeta compiler v0.12.1 is initialized for the platform \"undefined\"\n\u001b[34m[info] \u001b[39mReading module of type \"heta\" from file \"references\\sbml-L2V5-3.5.0\\master\\00753\\input.heta\"...\n\u001b[34m[info] \u001b[39mReading module of type \"sbml\" from file \"cases\\semantic\\00753\\00753-sbml-l2v5.xml\"...\n\u001b[31m[error] \u001b[39mFunction math \"lessthan\" should be a numeric expression.\n\u001b[31m[error] \u001b[39mDSwitcher trigger \"undefined::event1\" should be a boolean expression.\n\u001b[34m[info] \u001b[39mPlatform hash: 799ceaa75bb5e16502d9da1b1b1c7b8c4f4ada443f8a827c9ab157d4dad2659c\n\u001b[34m[info] \u001b[39mSetting references in elements, total length 96\n\u001b[31m[error] \u001b[39mNo required \"trigger\" property for \"event1\" of DSwitcher.\n\u001b[34m[info] \u001b[39mChecking for circular references in Records.\n\u001b[33m[warn] \u001b[39mUnits checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n",
-        "stderr": ""
+      "outputs": {
+        "canonical": "00753/canonical/output.heta.json",
+        "dynms": "00753/dynms/output.dynms.json"
       }
     },
     {
