@@ -1,22 +1,23 @@
 {
   "schemaVersion": 1,
   "status": "completed-with-errors",
-  "startedAt": "2026-08-04T22:10:39.174Z",
-  "completedAt": "2026-08-04T22:30:30.344Z",
-  "durationMs": 1191169,
+  "startedAt": "2026-08-06T09:48:34.616Z",
+  "completedAt": "2026-08-06T10:10:06.025Z",
+  "durationMs": 1291408,
   "command": {
     "source": "cases/index.json",
     "target": "references/sbml-L3V2-3.5.0/master",
     "inputField": "sbmlL3V2Path",
     "concurrency": 4,
     "skipComponentTags": [
-      "StoichiometryMath",
       "CSymbolDelay",
       "EventWithDelay",
       "AlgebraicRule"
     ],
     "skipTestTags": [
-      "FastReaction"
+      "AssignedVariableStoichiometry",
+      "AssignedConstantStoichiometry",
+      "SpeciesReferenceInMath"
     ]
   },
   "input": {
@@ -37,9 +38,9 @@
   },
   "summary": {
     "requested": 942,
-    "succeeded": 735,
-    "failed": 14,
-    "notEvaluated": 193
+    "succeeded": 740,
+    "failed": 4,
+    "notEvaluated": 198
   },
   "cases": [
     {
@@ -3561,15 +3562,11 @@
     {
       "caseId": "00355",
       "sourcePath": "semantic/00355/00355-sbml-l3v2.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "00355/input.heta",
-      "logPath": "00355/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "signal": null,
-        "stdout": "Running compilation in directory \"Y:\\format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n\u001b[34m[info] \u001b[39mHeta compiler v0.12.1 is initialized for the platform \"undefined\"\n\u001b[34m[info] \u001b[39mReading module of type \"heta\" from file \"references\\sbml-L3V2-3.5.0\\master\\00355\\input.heta\"...\n\u001b[34m[info] \u001b[39mReading module of type \"sbml\" from file \"cases\\semantic\\00355\\00355-sbml-l3v2.xml\"...\n\u001b[31m[error] \u001b[39mFunction math \"lessthan\" should be a numeric expression.\n\u001b[31m[error] \u001b[39mDSwitcher trigger \"undefined::event1\" should be a boolean expression.\n\u001b[34m[info] \u001b[39mPlatform hash: d07fc86d0af85dc432f691d101e3fde9a2461f31aef59588313f19ef11e1f122\n\u001b[34m[info] \u001b[39mSetting references in elements, total length 87\n\u001b[31m[error] \u001b[39mNo required \"trigger\" property for \"event1\" of DSwitcher.\n\u001b[34m[info] \u001b[39mChecking for circular references in Records.\n\u001b[33m[warn] \u001b[39mUnits checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n",
-        "stderr": ""
+      "outputs": {
+        "canonical": "00355/canonical/output.heta.json",
+        "dynms": "00355/dynms/output.dynms.json"
       }
     },
     {
@@ -3585,43 +3582,31 @@
     {
       "caseId": "00357",
       "sourcePath": "semantic/00357/00357-sbml-l3v2.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "00357/input.heta",
-      "logPath": "00357/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "signal": null,
-        "stdout": "Running compilation in directory \"Y:\\format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n\u001b[34m[info] \u001b[39mHeta compiler v0.12.1 is initialized for the platform \"undefined\"\n\u001b[34m[info] \u001b[39mReading module of type \"heta\" from file \"references\\sbml-L3V2-3.5.0\\master\\00357\\input.heta\"...\n\u001b[34m[info] \u001b[39mReading module of type \"sbml\" from file \"cases\\semantic\\00357\\00357-sbml-l3v2.xml\"...\n\u001b[31m[error] \u001b[39mFunction math \"lessthan\" should be a numeric expression.\n\u001b[31m[error] \u001b[39mDSwitcher trigger \"undefined::event1\" should be a boolean expression.\n\u001b[34m[info] \u001b[39mPlatform hash: bdac655976a80d76a649cc2ab16ac5ee609a5daed7a4ba6dcf8023f33ecee333\n\u001b[34m[info] \u001b[39mSetting references in elements, total length 90\n\u001b[31m[error] \u001b[39mNo required \"trigger\" property for \"event1\" of DSwitcher.\n\u001b[34m[info] \u001b[39mChecking for circular references in Records.\n\u001b[33m[warn] \u001b[39mUnits checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n",
-        "stderr": ""
+      "outputs": {
+        "canonical": "00357/canonical/output.heta.json",
+        "dynms": "00357/dynms/output.dynms.json"
       }
     },
     {
       "caseId": "00358",
       "sourcePath": "semantic/00358/00358-sbml-l3v2.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "00358/input.heta",
-      "logPath": "00358/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "signal": null,
-        "stdout": "Running compilation in directory \"Y:\\format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n\u001b[34m[info] \u001b[39mHeta compiler v0.12.1 is initialized for the platform \"undefined\"\n\u001b[34m[info] \u001b[39mReading module of type \"heta\" from file \"references\\sbml-L3V2-3.5.0\\master\\00358\\input.heta\"...\n\u001b[34m[info] \u001b[39mReading module of type \"sbml\" from file \"cases\\semantic\\00358\\00358-sbml-l3v2.xml\"...\n\u001b[31m[error] \u001b[39mFunction math \"lessthan\" should be a numeric expression.\n\u001b[31m[error] \u001b[39mDSwitcher trigger \"undefined::event1\" should be a boolean expression.\n\u001b[34m[info] \u001b[39mPlatform hash: 37cfbe77d00b8e31cf559f921c68e4025d124189e6183eeaba806bab3cfa03b2\n\u001b[34m[info] \u001b[39mSetting references in elements, total length 87\n\u001b[31m[error] \u001b[39mNo required \"trigger\" property for \"event1\" of DSwitcher.\n\u001b[34m[info] \u001b[39mChecking for circular references in Records.\n\u001b[33m[warn] \u001b[39mUnits checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n",
-        "stderr": ""
+      "outputs": {
+        "canonical": "00358/canonical/output.heta.json",
+        "dynms": "00358/dynms/output.dynms.json"
       }
     },
     {
       "caseId": "00359",
       "sourcePath": "semantic/00359/00359-sbml-l3v2.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "00359/input.heta",
-      "logPath": "00359/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "signal": null,
-        "stdout": "Running compilation in directory \"Y:\\format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n\u001b[34m[info] \u001b[39mHeta compiler v0.12.1 is initialized for the platform \"undefined\"\n\u001b[34m[info] \u001b[39mReading module of type \"heta\" from file \"references\\sbml-L3V2-3.5.0\\master\\00359\\input.heta\"...\n\u001b[34m[info] \u001b[39mReading module of type \"sbml\" from file \"cases\\semantic\\00359\\00359-sbml-l3v2.xml\"...\n\u001b[31m[error] \u001b[39mFunction math \"lessthan\" should be a numeric expression.\n\u001b[31m[error] \u001b[39mDSwitcher trigger \"undefined::event1\" should be a boolean expression.\n\u001b[34m[info] \u001b[39mPlatform hash: 6860469537c1cf7e31c6ffc30b9c3105b144251fb08dc001635634e2a291b305\n\u001b[34m[info] \u001b[39mSetting references in elements, total length 89\n\u001b[31m[error] \u001b[39mNo required \"trigger\" property for \"event1\" of DSwitcher.\n\u001b[34m[info] \u001b[39mChecking for circular references in Records.\n\u001b[33m[warn] \u001b[39mUnits checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n",
-        "stderr": ""
+      "outputs": {
+        "canonical": "00359/canonical/output.heta.json",
+        "dynms": "00359/dynms/output.dynms.json"
       }
     },
     {
@@ -8412,15 +8397,11 @@
     {
       "caseId": "00753",
       "sourcePath": "semantic/00753/00753-sbml-l3v2.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "00753/input.heta",
-      "logPath": "00753/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "signal": null,
-        "stdout": "Running compilation in directory \"Y:\\format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n\u001b[34m[info] \u001b[39mHeta compiler v0.12.1 is initialized for the platform \"undefined\"\n\u001b[34m[info] \u001b[39mReading module of type \"heta\" from file \"references\\sbml-L3V2-3.5.0\\master\\00753\\input.heta\"...\n\u001b[34m[info] \u001b[39mReading module of type \"sbml\" from file \"cases\\semantic\\00753\\00753-sbml-l3v2.xml\"...\n\u001b[31m[error] \u001b[39mFunction math \"lessthan\" should be a numeric expression.\n\u001b[31m[error] \u001b[39mDSwitcher trigger \"undefined::event1\" should be a boolean expression.\n\u001b[34m[info] \u001b[39mPlatform hash: 6acd10f6a9f119e03df5d61333e81dc58319209246f2996961e63d2d8f5a2f56\n\u001b[34m[info] \u001b[39mSetting references in elements, total length 91\n\u001b[31m[error] \u001b[39mNo required \"trigger\" property for \"event1\" of DSwitcher.\n\u001b[34m[info] \u001b[39mChecking for circular references in Records.\n\u001b[33m[warn] \u001b[39mUnits checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n",
-        "stderr": ""
+      "outputs": {
+        "canonical": "00753/canonical/output.heta.json",
+        "dynms": "00753/dynms/output.dynms.json"
       }
     },
     {
@@ -10794,7 +10775,7 @@
     {
       "caseId": "00969",
       "sourcePath": "semantic/00969/00969-sbml-l3v2.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00969/input.heta",
       "logPath": "00969/build.log",
       "error": {
@@ -10803,12 +10784,16 @@
         "signal": null,
         "stdout": "Running compilation in directory \"Y:\\format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n\u001b[34m[info] \u001b[39mHeta compiler v0.12.1 is initialized for the platform \"undefined\"\n\u001b[34m[info] \u001b[39mReading module of type \"heta\" from file \"references\\sbml-L3V2-3.5.0\\master\\00969\\input.heta\"...\n\u001b[34m[info] \u001b[39mReading module of type \"sbml\" from file \"cases\\semantic\\00969\\00969-sbml-l3v2.xml\"...\n\u001b[31m[error] \u001b[39mXref component does not exist which is not allowed for the \"update\" action.\n\u001b[34m[info] \u001b[39mPlatform hash: bbde940c508cd71e49f3a73c9734fef96b1f020fb37074f82d813e3daa31fb89\n\u001b[34m[info] \u001b[39mSetting references in elements, total length 82\n\u001b[34m[info] \u001b[39mChecking for circular references in Records.\n\u001b[33m[warn] \u001b[39mUnits checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n",
         "stderr": ""
-      }
+      },
+      "buildStatus": "failed",
+      "notEvaluatedTestTags": [
+        "AssignedConstantStoichiometry"
+      ]
     },
     {
       "caseId": "00970",
       "sourcePath": "semantic/00970/00970-sbml-l3v2.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00970/input.heta",
       "logPath": "00970/build.log",
       "error": {
@@ -10817,12 +10802,16 @@
         "signal": null,
         "stdout": "Running compilation in directory \"Y:\\format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n\u001b[34m[info] \u001b[39mHeta compiler v0.12.1 is initialized for the platform \"undefined\"\n\u001b[34m[info] \u001b[39mReading module of type \"heta\" from file \"references\\sbml-L3V2-3.5.0\\master\\00970\\input.heta\"...\n\u001b[34m[info] \u001b[39mReading module of type \"sbml\" from file \"cases\\semantic\\00970\\00970-sbml-l3v2.xml\"...\n\u001b[31m[error] \u001b[39mXref component does not exist which is not allowed for the \"update\" action.\n\u001b[34m[info] \u001b[39mPlatform hash: e5b0c4e3425c8d6a12bf11beac5a797c4597d18fcd5318c7412e5f7b4693ac13\n\u001b[34m[info] \u001b[39mSetting references in elements, total length 82\n\u001b[34m[info] \u001b[39mChecking for circular references in Records.\n\u001b[33m[warn] \u001b[39mUnits checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n",
         "stderr": ""
-      }
+      },
+      "buildStatus": "failed",
+      "notEvaluatedTestTags": [
+        "AssignedConstantStoichiometry"
+      ]
     },
     {
       "caseId": "00971",
       "sourcePath": "semantic/00971/00971-sbml-l3v2.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00971/input.heta",
       "logPath": "00971/build.log",
       "error": {
@@ -10831,12 +10820,16 @@
         "signal": null,
         "stdout": "Running compilation in directory \"Y:\\format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n\u001b[34m[info] \u001b[39mHeta compiler v0.12.1 is initialized for the platform \"undefined\"\n\u001b[34m[info] \u001b[39mReading module of type \"heta\" from file \"references\\sbml-L3V2-3.5.0\\master\\00971\\input.heta\"...\n\u001b[34m[info] \u001b[39mReading module of type \"sbml\" from file \"cases\\semantic\\00971\\00971-sbml-l3v2.xml\"...\n\u001b[31m[error] \u001b[39mXref component does not exist which is not allowed for the \"update\" action.\n\u001b[34m[info] \u001b[39mPlatform hash: e5b0c4e3425c8d6a12bf11beac5a797c4597d18fcd5318c7412e5f7b4693ac13\n\u001b[34m[info] \u001b[39mSetting references in elements, total length 82\n\u001b[34m[info] \u001b[39mChecking for circular references in Records.\n\u001b[33m[warn] \u001b[39mUnits checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n",
         "stderr": ""
-      }
+      },
+      "buildStatus": "failed",
+      "notEvaluatedTestTags": [
+        "AssignedConstantStoichiometry"
+      ]
     },
     {
       "caseId": "00972",
       "sourcePath": "semantic/00972/00972-sbml-l3v2.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00972/input.heta",
       "logPath": "00972/build.log",
       "error": {
@@ -10845,12 +10838,16 @@
         "signal": null,
         "stdout": "Running compilation in directory \"Y:\\format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n\u001b[34m[info] \u001b[39mHeta compiler v0.12.1 is initialized for the platform \"undefined\"\n\u001b[34m[info] \u001b[39mReading module of type \"heta\" from file \"references\\sbml-L3V2-3.5.0\\master\\00972\\input.heta\"...\n\u001b[34m[info] \u001b[39mReading module of type \"sbml\" from file \"cases\\semantic\\00972\\00972-sbml-l3v2.xml\"...\n\u001b[31m[error] \u001b[39mXref component does not exist which is not allowed for the \"update\" action.\n\u001b[34m[info] \u001b[39mPlatform hash: 70ce413dbaedb876ea88a51f08c46ba2d772c3b80b73ad17b188bfda615c94c5\n\u001b[34m[info] \u001b[39mSetting references in elements, total length 83\n\u001b[34m[info] \u001b[39mChecking for circular references in Records.\n\u001b[33m[warn] \u001b[39mUnits checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n",
         "stderr": ""
-      }
+      },
+      "buildStatus": "failed",
+      "notEvaluatedTestTags": [
+        "AssignedVariableStoichiometry"
+      ]
     },
     {
       "caseId": "00974",
       "sourcePath": "semantic/00974/00974-sbml-l3v2.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00974/input.heta",
       "logPath": "00974/build.log",
       "error": {
@@ -10859,7 +10856,11 @@
         "signal": null,
         "stdout": "Running compilation in directory \"Y:\\format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n\u001b[34m[info] \u001b[39mHeta compiler v0.12.1 is initialized for the platform \"undefined\"\n\u001b[34m[info] \u001b[39mReading module of type \"heta\" from file \"references\\sbml-L3V2-3.5.0\\master\\00974\\input.heta\"...\n\u001b[34m[info] \u001b[39mReading module of type \"sbml\" from file \"cases\\semantic\\00974\\00974-sbml-l3v2.xml\"...\n\u001b[34m[info] \u001b[39mPlatform hash: a67c416c346d310670d6fd574540e28023776a8ed8e9dfc1c8cf5917beac7cca\n\u001b[34m[info] \u001b[39mSetting references in elements, total length 86\n\u001b[31m[error] \u001b[39mComponent \"Xref\" is not found in space \"nameless\" as expected in expression: Z [ode_]= Xref;\n\u001b[31m[error] \u001b[39mComponent \"Xref\" is not found in space \"nameless\" as expected in expression: Q [start_]= Xref;\n\u001b[31m[error] \u001b[39mComponent \"Xref\" is not found in space \"nameless\" as expected in expression: Y_proc [ode_]= Xref;\n\u001b[34m[info] \u001b[39mChecking for circular references in Records.\n\u001b[33m[warn] \u001b[39mUnits checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n",
         "stderr": ""
-      }
+      },
+      "buildStatus": "failed",
+      "notEvaluatedTestTags": [
+        "SpeciesReferenceInMath"
+      ]
     },
     {
       "caseId": "00975",

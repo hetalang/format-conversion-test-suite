@@ -36,7 +36,9 @@ async function readModelTags(semanticPath, caseId) {
   try {
     const content = await fs.readFile(modelPath, 'utf8');
     const readTags = (fieldName) => {
-      const match = new RegExp(`^\\s*${fieldName}:\\s*(.*)$`, 'mi').exec(content);
+      // Only horizontal whitespace is allowed after the colon. Using \s here
+      // would consume a newline when a tag field is intentionally empty.
+      const match = new RegExp(`^[ \\t]*${fieldName}:[ \\t]*(.*)$`, 'mi').exec(content);
 
       return match && match[1].trim()
         ? match[1].split(',').map((tag) => tag.trim()).filter(Boolean)
