@@ -76,7 +76,9 @@ function renderOverview() {
   if (Array.isArray(skippedTestTags) && skippedTestTags.length) {
     appendOverviewItem('Not evaluated test tags', skippedTestTags.join(', '), 'meta-value');
   }
-  appendOverviewItem('Heta compiler', environment.hetaVersion || 'unknown', 'meta-value');
+  if (environment.hetaVersion) {
+    appendOverviewItem('Heta compiler', environment.hetaVersion, 'meta-value');
+  }
 }
 
 function renderCaseDetails(caseResult) {

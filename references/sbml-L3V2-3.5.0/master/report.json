@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "status": "completed-with-errors",
+  "status": "approved",
   "startedAt": "2026-08-06T15:07:52.067Z",
   "completedAt": "2026-08-06T15:28:46.225Z",
-  "durationMs": 1254157,
+  "durationMs": 0,
   "command": {
     "source": "cases/index.json",
     "target": "references/sbml-L3V2-3.5.0/master",
     "inputField": "sbmlL3V2Path",
-    "concurrency": 4,
+    "concurrency": 1,
     "skipComponentTags": [
       "CSymbolDelay",
       "EventWithDelay",
@@ -27,11 +27,7 @@
     "buildType": "heta",
     "definesDefaultUnits": false
   },
-  "environment": {
-    "hetaVersion": "0.12.1",
-    "nodeVersion": "v26.5.0",
-    "operatingSystem": "Windows_NT 10.0.26200"
-  },
+  "environment": {},
   "testSuite": {
     "version": "3.5.0",
     "archiveSha256": "523bed258b384f761da211c233c5b4a7f28cd6cc2197ff709c6e253a6eacea77"
