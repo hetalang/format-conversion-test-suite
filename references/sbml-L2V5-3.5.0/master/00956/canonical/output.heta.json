@@ -5,10 +5,10 @@
       "name": "heta-compiler",
       "version": "0.12.1"
     },
-    "created": "2026-08-06T13:28:57.119Z",
+    "created": "2026-08-06T15:06:40.089Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "2255647b3f798d9c37675e6eae1fc86da1ecd3426c3c6ddf37ab4f68d51f8a18",
+    "hashSum": "81802cdc9c1e0121e3506df611d7f8b2ee02c6be571d0149f0a43a5783936b2f",
     "hashAlgorithm": "sha256"
   },
   {
@@ -21,6 +21,7 @@
     "assignments": {
       "start_": "3.7"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P1"
   },
@@ -29,6 +30,7 @@
     "assignments": {
       "start_": "ceil(0.5)"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P10"
   },
@@ -37,6 +39,7 @@
     "assignments": {
       "start_": "ceil(3.55)"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P11"
   },
@@ -45,6 +48,7 @@
     "assignments": {
       "start_": "ceil((-4.6))"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P12"
   },
@@ -53,6 +57,7 @@
     "assignments": {
       "start_": "cos(9.1)"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P13"
   },
@@ -61,6 +66,7 @@
     "assignments": {
       "start_": "cos((-0.22))"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P14"
   },
@@ -69,6 +75,7 @@
     "assignments": {
       "start_": "exp(0)"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P15"
   },
@@ -77,6 +84,7 @@
     "assignments": {
       "start_": "exp(1)"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P16"
   },
@@ -85,6 +93,7 @@
     "assignments": {
       "start_": "exp(0.77)"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P17"
   },
@@ -93,6 +102,7 @@
     "assignments": {
       "start_": "floor((-4.6))"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P18"
   },
@@ -101,6 +111,7 @@
     "assignments": {
       "start_": "floor(9.1)"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P19"
   },
@@ -109,6 +120,7 @@
     "assignments": {
       "start_": "abs((-1))"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P2"
   },
@@ -117,6 +129,7 @@
     "assignments": {
       "start_": "ln(0.2)"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P20"
   },
@@ -125,6 +138,7 @@
     "assignments": {
       "start_": "ln(1)"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P21"
   },
@@ -133,6 +147,7 @@
     "assignments": {
       "start_": "logbase(0.2, 10)"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P22"
   },
@@ -141,6 +156,7 @@
     "assignments": {
       "start_": "logbase(1, 10)"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P23"
   },
@@ -149,6 +165,7 @@
     "assignments": {
       "start_": "pow(1, 2)"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P24"
   },
@@ -157,6 +174,7 @@
     "assignments": {
       "start_": "pow(2, 2)"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P25"
   },
@@ -165,6 +183,7 @@
     "assignments": {
       "start_": "pow(1.4, 5.1)"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P26"
   },
@@ -173,6 +192,7 @@
     "assignments": {
       "start_": "pow(4, 2)"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P27"
   },
@@ -181,6 +201,7 @@
     "assignments": {
       "start_": "pow(3.1, 2)"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P28"
   },
@@ -189,6 +210,7 @@
     "assignments": {
       "start_": "pow(4, 1 / 2)"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P29"
   },
@@ -197,6 +219,7 @@
     "assignments": {
       "start_": "abs(1)"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P3"
   },
@@ -205,6 +228,7 @@
     "assignments": {
       "start_": "pow(7.4, 1 / 2)"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P30"
   },
@@ -213,6 +237,7 @@
     "assignments": {
       "start_": "sin(2.1)"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P31"
   },
@@ -221,6 +246,7 @@
     "assignments": {
       "start_": "sin(0)"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P32"
   },
@@ -229,6 +255,7 @@
     "assignments": {
       "start_": "sin((-5.9))"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P33"
   },
@@ -237,6 +264,7 @@
     "assignments": {
       "start_": "tan(0)"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P34"
   },
@@ -245,6 +273,7 @@
     "assignments": {
       "start_": "tan(1.11)"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P35"
   },
@@ -253,6 +282,7 @@
     "assignments": {
       "start_": "tan((-6))"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P36"
   },
@@ -261,6 +291,7 @@
     "assignments": {
       "start_": "1 + 2"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P37"
   },
@@ -269,6 +300,7 @@
     "assignments": {
       "start_": "1 - 2"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P38"
   },
@@ -277,6 +309,7 @@
     "assignments": {
       "start_": "5 / 2"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P39"
   },
@@ -285,6 +318,7 @@
     "assignments": {
       "start_": "acos((-1))"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P4"
   },
@@ -293,6 +327,7 @@
     "assignments": {
       "start_": "8 * 3"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P40"
   },
@@ -301,6 +336,7 @@
     "assignments": {
       "start_": "acos(0.5)"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P5"
   },
@@ -309,6 +345,7 @@
     "assignments": {
       "start_": "asin(1)"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P6"
   },
@@ -317,6 +354,7 @@
     "assignments": {
       "start_": "asin((-0.5))"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P7"
   },
@@ -325,6 +363,7 @@
     "assignments": {
       "start_": "atan(2.8)"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P8"
   },
@@ -333,6 +372,7 @@
     "assignments": {
       "start_": "atan((-7.09))"
     },
+    "boundary": true,
     "class": "Record",
     "id": "P9"
   },

@@ -5,10 +5,10 @@
       "name": "heta-compiler",
       "version": "0.12.1"
     },
-    "created": "2026-08-06T13:23:38.847Z",
+    "created": "2026-08-06T15:01:23.210Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "afb182c9ef8aa8430b4304710e9e42b10fb2334d018e513f29e648f5abc4a9df",
+    "hashSum": "14ec5b80cf4d110622d1091509e709b5e93f3c1230a9b1020d1776505cfe1869",
     "hashAlgorithm": "sha256"
   },
   {
@@ -35,11 +35,9 @@
   },
   {
     "action": "upsert",
-    "assignments": {
-      "start_": "0.75"
-    },
-    "class": "Record",
+    "class": "Const",
     "id": "k1",
+    "num": 0.75,
     "title": "k1"
   },
   {
@@ -50,11 +48,9 @@
   },
   {
     "action": "upsert",
-    "assignments": {
-      "start_": "0.25"
-    },
-    "class": "Record",
+    "class": "Const",
     "id": "k2",
+    "num": 0.25,
     "title": "k2"
   },
   {

@@ -5,12 +5,23 @@
     "name": "heta-compiler",
     "version": "0.12.1"
   },
-  "created": "2026-08-06T13:11:35.447Z",
+  "created": "2026-08-06T14:55:15.078Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
-      "constants": [],
+      "constants": [
+        {
+          "id": "k1",
+          "value": 0.6,
+          "title": "k1"
+        },
+        {
+          "id": "k2",
+          "value": 0.13,
+          "title": "k2"
+        }
+      ],
       "dynamic": [
         {
           "id": "S1",
@@ -60,16 +71,6 @@
           "id": "S4",
           "initial": 0.5,
           "title": "S4"
-        },
-        {
-          "id": "k1",
-          "initial": 0.6,
-          "title": "k1"
-        },
-        {
-          "id": "k2",
-          "initial": 0.13,
-          "title": "k2"
         }
       ],
       "assignments": [

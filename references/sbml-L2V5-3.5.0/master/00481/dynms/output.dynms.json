@@ -5,12 +5,28 @@
     "name": "heta-compiler",
     "version": "0.12.1"
   },
-  "created": "2026-08-06T13:17:25.730Z",
+  "created": "2026-08-06T14:58:02.671Z",
   "license": "UNLICENSED",
   "models": [
     {
       "id": "nameless",
-      "constants": [],
+      "constants": [
+        {
+          "id": "k1",
+          "value": 0.75,
+          "title": "k1"
+        },
+        {
+          "id": "k2",
+          "value": 0.25,
+          "title": "k2"
+        },
+        {
+          "id": "p1",
+          "value": 0.5,
+          "title": "p1"
+        }
+      ],
       "dynamic": [
         {
           "id": "S1_amt_",
@@ -23,11 +39,11 @@
                 [
                   "Multiply",
                   2,
-                  0.5
+                  "p1"
                 ]
               ],
               2,
-              0.5
+              "p1"
             ],
             "format": "math-json"
           },
@@ -55,11 +71,11 @@
                 [
                   "Multiply",
                   2,
-                  0.5
+                  "p1"
                 ]
               ],
               2,
-              0.5
+              "p1"
             ],
             "format": "math-json"
           },
@@ -87,11 +103,11 @@
                 [
                   "Multiply",
                   2,
-                  0.5
+                  "p1"
                 ]
               ],
               2,
-              0.5
+              "p1"
             ],
             "format": "math-json"
           },
@@ -116,26 +132,11 @@
             "expr": [
               "Multiply",
               2,
-              0.5
+              "p1"
             ],
             "format": "math-json"
           },
           "title": "C"
-        },
-        {
-          "id": "k1",
-          "initial": 0.75,
-          "title": "k1"
-        },
-        {
-          "id": "k2",
-          "initial": 0.25,
-          "title": "k2"
-        },
-        {
-          "id": "p1",
-          "initial": 0.5,
-          "title": "p1"
         }
       ],
       "assignments": [
