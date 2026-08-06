@@ -1,0 +1,75 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.2"
+    },
+    "created": "2026-08-06T15:28:16.261Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "2c4b8fb457afd82a6c85f7aa8f59a70a2eddab1f05e37885f16fde749d2c09a6",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "6.02214076e+23"
+    },
+    "boundary": true,
+    "class": "Record",
+    "id": "P1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "6.02214076e+23"
+    },
+    "boundary": true,
+    "class": "Record",
+    "id": "P2"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "6.02214076e+23"
+    },
+    "boundary": true,
+    "class": "Record",
+    "id": "P3"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "6.02214076e+23"
+    },
+    "boundary": true,
+    "class": "Record",
+    "id": "P4"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "6.02214076e+23 - (6.0221e+23)"
+    },
+    "boundary": true,
+    "class": "Record",
+    "id": "P5"
+  },
+  {
+    "action": "upsert",
+    "id": "t",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  }
+]

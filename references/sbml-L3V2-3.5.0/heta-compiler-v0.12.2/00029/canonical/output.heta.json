@@ -1,0 +1,70 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.2"
+    },
+    "created": "2026-08-06T15:09:08.567Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "724fb2582518a6299cc866d698a9804fb53aa94b068d831ec3686e28f594839e",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "compartment",
+    "title": "compartment",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "7",
+      "start_": "7 / compartment"
+    },
+    "class": "Species",
+    "compartment": "compartment",
+    "id": "S1",
+    "title": "S1",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "litre",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "id": "t",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  }
+]

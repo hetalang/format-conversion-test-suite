@@ -1,0 +1,228 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.2"
+    },
+    "created": "2026-08-06T14:53:05.153Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "e156d37316963b8548e867d0c8f7d52145478c17097a647818f75ad698ba520a",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "compartment",
+    "title": "compartment",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "volume",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k",
+    "num": 2,
+    "title": "k"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S2"
+      },
+      {
+        "stoichiometry": -1,
+        "target": "S1"
+      }
+    ],
+    "assignments": {
+      "ode_": "compartment * k * S1"
+    },
+    "class": "Reaction",
+    "id": "reaction1",
+    "reversible": false,
+    "title": "reaction1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S3"
+      },
+      {
+        "stoichiometry": -1,
+        "target": "S2"
+      }
+    ],
+    "assignments": {
+      "ode_": "compartment * multiply(S1__reaction2_local, S2)"
+    },
+    "class": "Reaction",
+    "id": "reaction2",
+    "modifiers": [
+      {
+        "target": "S1"
+      }
+    ],
+    "reversible": false,
+    "title": "reaction2"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0.003 / compartment"
+    },
+    "class": "Species",
+    "compartment": "compartment",
+    "id": "S1",
+    "title": "S1",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "substance",
+        "multiplier": 1
+      },
+      {
+        "exponent": -1,
+        "kind": "volume",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "S1__reaction2_local",
+    "num": 1
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0 / compartment"
+    },
+    "class": "Species",
+    "compartment": "compartment",
+    "id": "S2",
+    "title": "S2",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "substance",
+        "multiplier": 1
+      },
+      {
+        "exponent": -1,
+        "kind": "volume",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0 / compartment"
+    },
+    "class": "Species",
+    "compartment": "compartment",
+    "id": "S3",
+    "title": "S3",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "substance",
+        "multiplier": 1
+      },
+      {
+        "exponent": -1,
+        "kind": "volume",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "multiply",
+    "math": "x * y"
+  },
+  {
+    "action": "defineUnit",
+    "id": "area",
+    "units": [
+      {
+        "exponent": 2,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "length",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "substance",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "time",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "volume",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1
+      }
+    ]
+  }
+]

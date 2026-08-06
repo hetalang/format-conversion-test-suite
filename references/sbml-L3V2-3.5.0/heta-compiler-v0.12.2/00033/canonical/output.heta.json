@@ -1,0 +1,137 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.2"
+    },
+    "created": "2026-08-06T15:09:12.681Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "0aff76b09e3eac837578f7643617c5bff5e0840ef8547bb44eb598e1d4689351",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "compartment",
+    "title": "compartment",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "k1",
+    "title": "k1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "k1"
+      }
+    ],
+    "assignments": {
+      "ode_": "0.5"
+    },
+    "aux": {
+      "metaid": "rule1"
+    },
+    "class": "Process",
+    "id": "k1_proc"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S2"
+      },
+      {
+        "stoichiometry": -1,
+        "target": "S1"
+      }
+    ],
+    "assignments": {
+      "ode_": "compartment * k1 * S1"
+    },
+    "class": "Reaction",
+    "id": "reaction1",
+    "reversible": false,
+    "title": "reaction1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0.15 / compartment"
+    },
+    "class": "Species",
+    "compartment": "compartment",
+    "id": "S1",
+    "title": "S1",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "litre",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0 / compartment"
+    },
+    "class": "Species",
+    "compartment": "compartment",
+    "id": "S2",
+    "title": "S2",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "litre",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "id": "t",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  }
+]

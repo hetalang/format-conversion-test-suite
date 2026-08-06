@@ -1,0 +1,137 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.2"
+    },
+    "created": "2026-08-06T15:04:46.996Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "5943c3714ec43e56904bd067129c72fc59cb7ddd6d7d80b16c72b9267ec56f08",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1.5e-4"
+    },
+    "class": "Record",
+    "id": "k1",
+    "title": "k1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "k1"
+      }
+    ],
+    "assignments": {
+      "ode_": "(-1) * k1 * k3 * t"
+    },
+    "aux": {
+      "metaid": "rule1"
+    },
+    "class": "Process",
+    "id": "k1_proc"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "k2",
+    "title": "k2"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "k2"
+      }
+    ],
+    "assignments": {
+      "ode_": "k1 * k3 * t"
+    },
+    "aux": {
+      "metaid": "rule2"
+    },
+    "class": "Process",
+    "id": "k2_proc"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k3",
+    "num": 1,
+    "title": "k3"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "defineUnit",
+    "id": "area",
+    "units": [
+      {
+        "exponent": 2,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "length",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "substance",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "time",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "volume",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1
+      }
+    ]
+  }
+]

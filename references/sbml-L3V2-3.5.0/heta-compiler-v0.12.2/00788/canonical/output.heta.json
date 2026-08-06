@@ -1,0 +1,120 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.2"
+    },
+    "created": "2026-08-06T15:25:42.190Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "92c22855b95092e6d13138eb3c20b1d857a63077e02454e6d2aa41a3469a6740",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "6.6"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "C",
+    "title": "C",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "0.75"
+    },
+    "class": "Record",
+    "id": "k1",
+    "title": "k1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S2"
+      },
+      {
+        "stoichiometry": -1,
+        "target": "S1"
+      }
+    ],
+    "assignments": {
+      "ode_": "C * k1 * S1"
+    },
+    "class": "Reaction",
+    "id": "reaction1",
+    "reversible": false,
+    "title": "reaction1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0.133333333333333 * k1"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S1",
+    "title": "S1",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "litre",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0.15"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S2",
+    "title": "S2",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "litre",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "id": "t",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  }
+]

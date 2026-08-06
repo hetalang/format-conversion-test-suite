@@ -1,0 +1,27 @@
+Running compilation in directory "Y:\format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "references\sbml-L2V5-3.5.0\master\00959\input.heta"...
+[info]	Reading module of type "sbml" from file "cases\semantic\00959\00959-sbml-l2v5.xml"...
+[info]	Platform hash: 72e891d6371a359f7839ec7f7e10aba775edef2412fc096994e988da4913cc08
+[info]	Setting references in elements, total length 109
+[error]	FunctionDef "sinh" is not found as expected here: P7 { math: undefined };
+[error]	FunctionDef "sinh" is not found as expected here: P8 { math: undefined };
+[error]	FunctionDef "cosh" is not found as expected here: P9 { math: undefined };
+[error]	FunctionDef "cosh" is not found as expected here: P10 { math: undefined };
+[error]	FunctionDef "asinh" is not found as expected here: P17 { math: undefined };
+[error]	FunctionDef "asinh" is not found as expected here: P18 { math: undefined };
+[error]	FunctionDef "acosh" is not found as expected here: P19 { math: undefined };
+[error]	FunctionDef "atanh" is not found as expected here: P20 { math: undefined };
+[error]	FunctionDef "atanh" is not found as expected here: P21 { math: undefined };
+[error]	FunctionDef "asech" is not found as expected here: P22 { math: undefined };
+[error]	FunctionDef "acsch" is not found as expected here: P23 { math: undefined };
+[error]	FunctionDef "acsch" is not found as expected here: P24 { math: undefined };
+[error]	FunctionDef "acoth" is not found as expected here: P25 { math: undefined };
+[error]	FunctionDef "acoth" is not found as expected here: P26 { math: undefined };
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

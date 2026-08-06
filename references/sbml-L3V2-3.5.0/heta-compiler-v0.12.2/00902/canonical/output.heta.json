@@ -1,0 +1,63 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.2"
+    },
+    "created": "2026-08-06T15:27:14.361Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "3c1467c3e6728679fa5bb8caa48e4a6809719c28d18e2fcd5490be4f4cfa4823",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0.015"
+    },
+    "class": "Compartment",
+    "id": "c",
+    "title": "c",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "c"
+      }
+    ],
+    "assignments": {
+      "ode_": "0.5 * c"
+    },
+    "aux": {
+      "metaid": "rule1"
+    },
+    "class": "Process",
+    "id": "c_proc"
+  },
+  {
+    "action": "upsert",
+    "id": "t",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  }
+]

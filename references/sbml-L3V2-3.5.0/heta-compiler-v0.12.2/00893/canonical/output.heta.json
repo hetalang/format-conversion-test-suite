@@ -1,0 +1,115 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.2"
+    },
+    "created": "2026-08-06T15:27:07.831Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "9f6e61e054061c995cb2bbf292389c339f8d564a26060db23ebd839a45f6d8d6",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k1",
+    "num": 0.5,
+    "title": "k1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0.0015"
+    },
+    "class": "Record",
+    "id": "P1",
+    "title": "P1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P1"
+      }
+    ],
+    "assignments": {
+      "ode_": "(-1) * P1 * P3"
+    },
+    "aux": {
+      "metaid": "rule2"
+    },
+    "class": "Process",
+    "id": "P1_proc"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "P2",
+    "title": "P2"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P2"
+      }
+    ],
+    "assignments": {
+      "ode_": "P1 * P3"
+    },
+    "aux": {
+      "metaid": "rule3"
+    },
+    "class": "Process",
+    "id": "P2_proc"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0.001"
+    },
+    "class": "Record",
+    "id": "P3",
+    "title": "P3"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "P3"
+      }
+    ],
+    "assignments": {
+      "ode_": "k1 * t"
+    },
+    "aux": {
+      "metaid": "rule1"
+    },
+    "class": "Process",
+    "id": "P3_proc"
+  },
+  {
+    "action": "upsert",
+    "id": "t",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  }
+]

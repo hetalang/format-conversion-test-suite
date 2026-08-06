@@ -1,0 +1,276 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.2"
+    },
+    "created": "2026-08-06T14:59:29.136Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "2812a8ef6458d7ad5ac194b85f6770cd57a17ebd2ba50f5e2f462f78f4dcf11e",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "C",
+    "title": "C",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "volume",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k1",
+    "num": 1000,
+    "title": "k1"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k2",
+    "num": 0.9,
+    "title": "k2"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k3",
+    "num": 0.7,
+    "title": "k3"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S3"
+      },
+      {
+        "stoichiometry": -1,
+        "target": "S1"
+      },
+      {
+        "stoichiometry": -1,
+        "target": "S2"
+      }
+    ],
+    "assignments": {
+      "ode_": "C * k1 * S1 * S2"
+    },
+    "class": "Reaction",
+    "id": "reaction1",
+    "reversible": false,
+    "title": "reaction1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S1"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "S2"
+      },
+      {
+        "stoichiometry": -1,
+        "target": "S3"
+      }
+    ],
+    "assignments": {
+      "ode_": "C * k2 * S3"
+    },
+    "class": "Reaction",
+    "id": "reaction2",
+    "reversible": false,
+    "title": "reaction2"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S1"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "S4"
+      },
+      {
+        "stoichiometry": -1,
+        "target": "S3"
+      }
+    ],
+    "assignments": {
+      "ode_": "C * k3 * S3"
+    },
+    "class": "Reaction",
+    "id": "reaction3",
+    "reversible": false,
+    "title": "reaction3"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0.002"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S1",
+    "title": "S1",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "substance",
+        "multiplier": 1
+      },
+      {
+        "exponent": -1,
+        "kind": "volume",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0.002"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S2",
+    "title": "S2",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "substance",
+        "multiplier": 1
+      },
+      {
+        "exponent": -1,
+        "kind": "volume",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S3",
+    "title": "S3",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "substance",
+        "multiplier": 1
+      },
+      {
+        "exponent": -1,
+        "kind": "volume",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S4",
+    "title": "S4",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "substance",
+        "multiplier": 1
+      },
+      {
+        "exponent": -1,
+        "kind": "volume",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "defineUnit",
+    "id": "area",
+    "units": [
+      {
+        "exponent": 2,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "length",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "substance",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "time",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "volume",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1
+      }
+    ]
+  }
+]

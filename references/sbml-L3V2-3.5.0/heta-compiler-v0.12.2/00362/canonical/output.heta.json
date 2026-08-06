@@ -1,0 +1,164 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.2"
+    },
+    "created": "2026-08-06T15:18:11.638Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "f87e7ae9cb2bfb84000a10aea6714be6a1804c08934bb6c70f78568b7ffb3481",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "C",
+    "title": "C"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "event1",
+    "title": "event1",
+    "trigger": "S1 < 0.7"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k1",
+    "num": 0.8,
+    "title": "k1"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k2",
+    "num": 0.2,
+    "title": "k2"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S3"
+      },
+      {
+        "stoichiometry": -1,
+        "target": "S1"
+      },
+      {
+        "stoichiometry": -1,
+        "target": "S2"
+      }
+    ],
+    "assignments": {
+      "ode_": "k1 * S1 * S2"
+    },
+    "class": "Reaction",
+    "id": "reaction1",
+    "reversible": false,
+    "title": "reaction1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S1"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "S2"
+      },
+      {
+        "stoichiometry": -1,
+        "target": "S3"
+      }
+    ],
+    "assignments": {
+      "ode_": "k2 * S3"
+    },
+    "class": "Reaction",
+    "id": "reaction2",
+    "reversible": false,
+    "title": "reaction2"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S1",
+    "isAmount": true,
+    "title": "S1",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "event1": "1.25",
+      "start_": "2"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S2",
+    "isAmount": true,
+    "title": "S2",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S3",
+    "isAmount": true,
+    "title": "S3",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "id": "t",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  }
+]

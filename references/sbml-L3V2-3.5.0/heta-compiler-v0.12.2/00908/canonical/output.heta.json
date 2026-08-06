@@ -1,0 +1,96 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.2"
+    },
+    "created": "2026-08-06T15:27:18.701Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "7ffc206d100abae330cb77a166f45d4de90c33ad05b9aa37d5be9809fad3b01a",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1.5"
+    },
+    "class": "Compartment",
+    "id": "C1",
+    "title": "C1",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "C1"
+      }
+    ],
+    "assignments": {
+      "ode_": "0.15 * C2 - (0.2 * C1)"
+    },
+    "aux": {
+      "metaid": "rule1"
+    },
+    "class": "Process",
+    "id": "C1_proc"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0.75"
+    },
+    "class": "Compartment",
+    "id": "C2",
+    "title": "C2",
+    "units": [
+      {
+        "exponent": 2,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "C2"
+      }
+    ],
+    "assignments": {
+      "ode_": "0.3 * C1 - (0.1 * C2)"
+    },
+    "aux": {
+      "metaid": "rule2"
+    },
+    "class": "Process",
+    "id": "C2_proc"
+  },
+  {
+    "action": "upsert",
+    "id": "t",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  }
+]

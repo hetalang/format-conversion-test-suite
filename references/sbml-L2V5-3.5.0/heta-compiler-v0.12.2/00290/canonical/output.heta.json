@@ -1,0 +1,265 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.2"
+    },
+    "created": "2026-08-06T14:55:45.723Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "b32cb90137e26da17c32a57f8ce22f32fbcb702a818cb5fee38b67326e1ed1c2",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "compartment",
+    "title": "compartment",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "volume",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "compartment1",
+    "title": "compartment1",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "volume",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k1",
+    "num": 0.75,
+    "title": "k1"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k2",
+    "num": 0.25,
+    "title": "k2"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k3",
+    "num": 0.25,
+    "title": "k3"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 2,
+        "target": "S2"
+      },
+      {
+        "stoichiometry": -1,
+        "target": "S1"
+      },
+      {
+        "stoichiometry": -1,
+        "target": "S2"
+      }
+    ],
+    "assignments": {
+      "ode_": "compartment * k1 * S1 * S2"
+    },
+    "class": "Reaction",
+    "id": "reaction1",
+    "reversible": false,
+    "title": "reaction1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S3"
+      },
+      {
+        "stoichiometry": -1,
+        "target": "S2"
+      }
+    ],
+    "assignments": {
+      "ode_": "compartment1 * k2 * (S2 + (-1) * S3)"
+    },
+    "class": "Reaction",
+    "id": "reaction2",
+    "reversible": false,
+    "title": "reaction2"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1 / compartment"
+    },
+    "class": "Species",
+    "compartment": "compartment",
+    "id": "S1",
+    "title": "S1",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "substance",
+        "multiplier": 1
+      },
+      {
+        "exponent": -1,
+        "kind": "volume",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1 / compartment"
+    },
+    "class": "Species",
+    "compartment": "compartment",
+    "id": "S2",
+    "title": "S2",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "substance",
+        "multiplier": 1
+      },
+      {
+        "exponent": -1,
+        "kind": "volume",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0 / compartment1"
+    },
+    "class": "Species",
+    "compartment": "compartment1",
+    "id": "S3",
+    "title": "S3",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "substance",
+        "multiplier": 1
+      },
+      {
+        "exponent": -1,
+        "kind": "volume",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "k3 * S3"
+    },
+    "class": "Species",
+    "compartment": "compartment1",
+    "id": "S4",
+    "title": "S4",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "substance",
+        "multiplier": 1
+      },
+      {
+        "exponent": -1,
+        "kind": "volume",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "defineUnit",
+    "id": "area",
+    "units": [
+      {
+        "exponent": 2,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "length",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "substance",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "time",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "volume",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1
+      }
+    ]
+  }
+]

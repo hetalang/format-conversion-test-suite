@@ -1,0 +1,139 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.2"
+    },
+    "created": "2026-08-06T15:28:33.622Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "fa34c89d0c5bc24a49bcc9cd3e2c1170f9933999bea11e3c8d8d18579cadd11a",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "_E0",
+    "trigger": "t >= 0.99"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "_E1",
+    "trigger": "t >= 0.99"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "_E10",
+    "trigger": "multitrig > 1"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "_E11",
+    "trigger": "multitrig > 1"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "_E2",
+    "trigger": "t >= 0.99"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "_E3",
+    "trigger": "t >= 0.99"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "_E4",
+    "trigger": "t >= 0.99"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "_E5",
+    "trigger": "t >= 0.99"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "_E6",
+    "trigger": "t >= 0.99"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "_E7",
+    "trigger": "t >= 0.99"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "_E8",
+    "trigger": "t >= 0.99"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "_E9",
+    "trigger": "multitrig > 1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "_E0": "2",
+      "_E1": "0",
+      "_E2": "2",
+      "_E3": "0",
+      "_E4": "2",
+      "_E5": "0",
+      "_E6": "2",
+      "_E7": "0",
+      "_E8": "2",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "multitrig"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "_E9": "x + 1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "x"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "_E10": "y + 1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "y"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "_E11": "z + 3",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "z"
+  }
+]

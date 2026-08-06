@@ -1,0 +1,105 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.2"
+    },
+    "created": "2026-08-06T15:11:34.449Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "11615795ac4fa825c8c7cb928c4bbaab7ab98b862879842859340e5ae651c2ab",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k1",
+    "num": 0.75,
+    "title": "k1"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k2",
+    "num": 50,
+    "title": "k2"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "S1",
+    "title": "S1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S1"
+      }
+    ],
+    "assignments": {
+      "ode_": "(-1) * k2 * S1"
+    },
+    "aux": {
+      "metaid": "rule2"
+    },
+    "class": "Process",
+    "id": "S1_proc"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1.5e-15"
+    },
+    "class": "Record",
+    "id": "S2",
+    "title": "S2"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S2"
+      }
+    ],
+    "assignments": {
+      "ode_": "k2 * S1"
+    },
+    "aux": {
+      "metaid": "rule3"
+    },
+    "class": "Process",
+    "id": "S2_proc"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "k1 * S2"
+    },
+    "class": "Record",
+    "id": "S3",
+    "title": "S3"
+  },
+  {
+    "action": "upsert",
+    "id": "t",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  }
+]

@@ -1,0 +1,63 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.2"
+    },
+    "created": "2026-08-06T15:28:24.276Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "d2c1513dcc4eb5d212be504dd05fb9d1117d0cdef40cbeccfa2665e2e001cd25",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "Qinc": "Q + 0.01",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "Q"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "Qinc",
+    "trigger": "(t - reset) >= 0.01"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "Rinc": "R + 0.01",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "R"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "Qinc": "t",
+      "Rinc": "t",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "reset"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "Rinc",
+    "trigger": "(t - reset) >= 0.01"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  }
+]

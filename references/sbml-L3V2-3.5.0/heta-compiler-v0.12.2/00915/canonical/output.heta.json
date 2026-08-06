@@ -1,0 +1,72 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.2"
+    },
+    "created": "2026-08-06T15:27:25.173Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "c8534cbee68b997e9613f45c62043087dc7e11429f38b8a3f5123f8bab944357",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0.5"
+    },
+    "class": "Compartment",
+    "id": "c",
+    "title": "c",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "c"
+      }
+    ],
+    "assignments": {
+      "ode_": "multiply(c, 0.15)"
+    },
+    "aux": {
+      "metaid": "rule1"
+    },
+    "class": "Process",
+    "id": "c_proc"
+  },
+  {
+    "action": "upsert",
+    "id": "t",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "multiply",
+    "math": "x * y"
+  }
+]

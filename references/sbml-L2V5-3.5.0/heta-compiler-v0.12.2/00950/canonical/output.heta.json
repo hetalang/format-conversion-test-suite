@@ -1,0 +1,105 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.2"
+    },
+    "created": "2026-08-06T15:06:32.062Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "c75f87b4a47d014420c0ecbcfd2e9db0854783d2df6feb0e80f1e6f386c17b34",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "Infinity"
+    },
+    "boundary": true,
+    "class": "Record",
+    "id": "P"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "(-Infinity)"
+    },
+    "boundary": true,
+    "class": "Record",
+    "id": "Q"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "NaN"
+    },
+    "boundary": true,
+    "class": "Record",
+    "id": "R"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "defineUnit",
+    "id": "area",
+    "units": [
+      {
+        "exponent": 2,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "length",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "substance",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "time",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "volume",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1
+      }
+    ]
+  }
+]

@@ -1,0 +1,187 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.2"
+    },
+    "created": "2026-08-06T14:57:08.395Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "cf1908a10766154faceb45d2c27b55b5f2e65ff6c5b05c6d400d86369322f85f",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "event1",
+    "title": "event1",
+    "trigger": "S1 < 0.75"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k1",
+    "num": 0.75,
+    "title": "k1"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k2",
+    "num": 0.55,
+    "title": "k2"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k3",
+    "num": 0.25,
+    "title": "k3"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "event1": "S2",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "S1",
+    "title": "S1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S1"
+      }
+    ],
+    "assignments": {
+      "ode_": "k3 * S3 + (-1) * k1 * S1"
+    },
+    "aux": {
+      "metaid": "rule1"
+    },
+    "class": "Process",
+    "id": "S1_proc"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "event1": "S3",
+      "start_": "2"
+    },
+    "class": "Record",
+    "id": "S2",
+    "title": "S2"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S2"
+      }
+    ],
+    "assignments": {
+      "ode_": "k1 * S1 + (-1) * k2 * S2"
+    },
+    "aux": {
+      "metaid": "rule2"
+    },
+    "class": "Process",
+    "id": "S2_proc"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "event1": "S1",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "S3",
+    "title": "S3"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S3"
+      }
+    ],
+    "assignments": {
+      "ode_": "k2 * S2 + (-1) * k3 * S3"
+    },
+    "aux": {
+      "metaid": "rule3"
+    },
+    "class": "Process",
+    "id": "S3_proc"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "defineUnit",
+    "id": "area",
+    "units": [
+      {
+        "exponent": 2,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "length",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "substance",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "time",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "volume",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1
+      }
+    ]
+  }
+]

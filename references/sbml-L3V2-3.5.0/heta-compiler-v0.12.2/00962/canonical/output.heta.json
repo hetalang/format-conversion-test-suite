@@ -1,0 +1,102 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.2"
+    },
+    "created": "2026-08-06T15:28:19.175Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "34c2b5511bbfb1bfb845d6044305202d9147f68316f108e19c84a83b83d6f84e",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "error_check": "1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "error"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "error_check",
+    "trigger": "t >= 99 and maxdiff < 0.2"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "maxcheck",
+    "trigger": "abs(Q - R) > maxdiff"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "maxcheck": "abs(Q - R)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "maxdiff"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "Qinc": "Q + 0.01",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "Q"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "Qinc",
+    "trigger": "(t - reset) >= 0.01"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "Rinc": "R + 0.01",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "R"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "Qinc": "t",
+      "Rinc": "t",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "reset"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "Rinc",
+    "trigger": "(t - reset) >= 0.01"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "Q + R",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "S"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  }
+]

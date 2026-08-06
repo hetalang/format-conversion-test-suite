@@ -1,0 +1,110 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.2"
+    },
+    "created": "2026-08-06T15:28:19.539Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "71546fcf03f47630c494b34713fd22636abc40fb4a5915d5d12bc1045e1c5e94",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "Qinc": "Q + 0.01",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "Q"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "Qinc2": "Q2 + 0.01",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "Q2"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "Qinc",
+    "trigger": "(t - reset) >= 0.01"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "Qinc2",
+    "trigger": "(t - reset2) >= 0.01"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "Rinc": "R + 0.01",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "R"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "Rinc2": "R2 + 0.01",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "R2"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "Qinc": "t",
+      "Rinc": "t",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "reset"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "Qinc2": "t",
+      "Rinc2": "t",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "reset2"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "Rinc",
+    "trigger": "(t - reset) >= 0.01"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "Rinc2",
+    "trigger": "(t - reset2) >= 0.01"
+  },
+  {
+    "action": "upsert",
+    "id": "t",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  }
+]
