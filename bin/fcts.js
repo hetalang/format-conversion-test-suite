@@ -9,10 +9,16 @@ function parseOptions(argumentsList) {
 
   for (const argument of argumentsList) {
     const match = /^--([^=]+)=(.*)$/.exec(argument);
-    if (!match) {
+    if (match) {
+      options[match[1]] = match[2];
+      continue;
+    }
+
+    const flagMatch = /^--([^=]+)$/.exec(argument);
+    if (!flagMatch) {
       throw new Error(`Invalid option: ${argument}`);
     }
-    options[match[1]] = match[2];
+    options[flagMatch[1]] = 'true';
   }
 
   return options;
@@ -21,7 +27,7 @@ function parseOptions(argumentsList) {
 function printUsage() {
   console.log('Usage:');
   console.log('  fcts sbml-report --source=<index> --target=<directory> [--input-field=<field>] [--concurrency=<number>] [--skip=<number>] [--limit=<number>] [--skip-component-tags=<tag,...>] [--skip-test-tags=<tag,...>]');
-  console.log('  fcts compare --reference=<directory|report.json> --candidate=<directory|report.json> [--output=<compare.json>]');
+  console.log('  fcts compare --reference=<directory|report.json> --candidate=<directory|report.json> [--output=<compare.json>] [--require-compatible]');
 }
 
 async function main() {

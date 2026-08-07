@@ -121,12 +121,12 @@ statuses remain consistent automatically.
 
 `fcts compare --reference=<directory> --candidate=<directory>` is the first
 comparison stage. It checks that a candidate contains no case IDs absent from
-the reference, writes `compare.json` beside the candidate report, and prints
-independent status and artifact-presence statistics for canonical JSON and
-DynMS. An incompatible candidate is recorded in that file rather than treated
-as a command failure. Its `generator` block identifies the comparison generator
-and package name and version. It does not yet compare individual artifact contents or
-calculate a score.
+the reference and writes `compare.json` beside the candidate report. An
+incompatible candidate is recorded in that file rather than treated as a command
+failure. Its `generator` block identifies the comparison generator and package
+name and version. It does not yet compare individual artifact contents or
+calculate a score. `--require-compatible` makes an incompatible comparison exit
+with a non-zero status after writing its result.
 
 ## References
 

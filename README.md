@@ -119,9 +119,8 @@ npx fcts sbml-report --source=cases/index --input-field=sbmlL2V5Path --target=re
 
 The initial comparison command checks whether every case in a candidate report
 is also present in a reference report. It writes `compare.json` beside the
-candidate report and prints status counts and separate canonical JSON and DynMS
-artifact statistics for both reports. It does not yet compare individual
-artifact contents.
+candidate report with the compatibility result. It does not yet compare
+individual cases or artifact contents.
 
 ```sh
 npx fcts compare \
@@ -133,7 +132,8 @@ Both arguments can be a report directory or a direct path to `report.json`.
 Use `--output=<path>` to write the comparison to another location. An
 incompatible candidate is recorded in `compare.json` with
 `candidateIsSubsetOfReference: false`; this is a comparison result, not a
-command error.
+command error. Use `--require-compatible` when an incompatible comparison must
+return a non-zero exit code, for example in CI.
 
 ## License
 
