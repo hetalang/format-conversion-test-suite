@@ -1,5 +1,9 @@
 {
   "schemaVersion": 1,
+  "generator": {
+    "type": "sbml-report",
+    "packageVersion": "0.1.0"
+  },
   "status": "approved",
   "startedAt": "2026-08-06T15:07:52.067Z",
   "completedAt": "2026-08-06T15:28:46.225Z",

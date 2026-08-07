@@ -124,6 +124,8 @@ async function verifyReference(reference, settings) {
   if (report.testSuite?.version !== settings.version) {
     fail(`Reference ${id} uses an unexpected test-suite version`);
   }
+  requireString(report.generator?.type, `Reference ${id}.generator.type`);
+  requireString(report.generator?.packageVersion, `Reference ${id}.generator.packageVersion`);
   if (report.testSuite?.archiveSha256 !== settings.archiveSha256) {
     fail(`Reference ${id} uses an unexpected test-suite checksum`);
   }

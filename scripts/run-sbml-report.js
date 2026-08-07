@@ -3,6 +3,7 @@ const fsp = require('node:fs/promises');
 const os = require('node:os');
 const path = require('node:path');
 const spawn = require('cross-spawn');
+const packageInfo = require('../package.json');
 
 const sbmlL2DefaultUnits = [
   '#defineUnit volume { units: litre };',
@@ -349,6 +350,10 @@ async function runSbmlReport(options, repositoryRoot) {
   const notEvaluated = results.filter((result) => result.status === 'not-evaluated').length;
   const report = {
     schemaVersion: 1,
+    generator: {
+      type: 'sbml-report',
+      packageVersion: packageInfo.version,
+    },
     status: failed > 0
       ? 'completed-with-errors'
       : notEvaluated > 0

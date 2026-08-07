@@ -86,7 +86,7 @@ Build the indexed SBML L3V2 cases and write converter outputs with a JSON
 report:
 
 ```sh
-npx fcts report --source=cases/index --input-field=sbmlL3V2Path --target=results/candidate --concurrency=1 --skip=0 --limit=10
+npx fcts sbml-report --source=cases/index --input-field=sbmlL3V2Path --target=results/candidate --concurrency=1 --skip=0 --limit=10
 ```
 
 The target directory is replaced for each run. `report.json` records every
@@ -101,7 +101,7 @@ use `--skip-component-tags` and `--skip-test-tags`. Matching cases have status
 the report.
 
 ```sh
-npx fcts report --source=cases/index --input-field=sbmlL2V5Path --target=results/candidate --skip-component-tags=CSymbolDelay,EventWithDelay --skip-test-tags=FastReaction
+npx fcts sbml-report --source=cases/index --input-field=sbmlL2V5Path --target=results/candidate --skip-component-tags=CSymbolDelay,EventWithDelay --skip-test-tags=FastReaction
 ```
 
 Each case is built through a generated `input.heta` stored beside its outputs.
@@ -112,8 +112,28 @@ same wrapper flow without adding those L2-specific definitions.
 For an SBML L2V5 run, use:
 
 ```sh
-npx fcts report --source=cases/index --input-field=sbmlL2V5Path --target=results/candidate-l2v5 --concurrency=1
+npx fcts sbml-report --source=cases/index --input-field=sbmlL2V5Path --target=results/candidate-l2v5 --concurrency=1
 ```
+
+## Compare reports
+
+The initial comparison command checks whether every case in a candidate report
+is also present in a reference report. It writes `compare.json` beside the
+candidate report and prints status counts and separate canonical JSON and DynMS
+artifact statistics for both reports. It does not yet compare individual
+artifact contents.
+
+```sh
+npx fcts compare \
+  --reference=references/sbml-L3V2-3.5.0/master \
+  --candidate=results/sbml-L3V2-3.5.0/heta-0.13.0
+```
+
+Both arguments can be a report directory or a direct path to `report.json`.
+Use `--output=<path>` to write the comparison to another location. An
+incompatible candidate is recorded in `compare.json` with
+`candidateIsSubsetOfReference: false`; this is a comparison result, not a
+command error.
 
 ## License
 
