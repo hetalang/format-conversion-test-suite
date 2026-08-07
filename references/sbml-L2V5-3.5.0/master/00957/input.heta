@@ -1,7 +1,1 @@
-#defineUnit volume { units: litre };
-#defineUnit area { units: metre^2 };
-#defineUnit length { units: metre };
-#defineUnit substance { units: mole };
-#defineUnit time { units: second };
-
 #include { source: ../../../../cases/semantic/00957/00957-sbml-l2v5.xml, type: sbml };

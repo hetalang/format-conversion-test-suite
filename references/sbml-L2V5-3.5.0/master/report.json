@@ -34,8 +34,8 @@
   "summary": {
     "requested": 970,
     "succeeded": 720,
-    "failed": 4,
-    "notEvaluated": 246
+    "failed": 3,
+    "notEvaluated": 247
   },
   "cases": [
     {
@@ -11318,7 +11318,7 @@
     {
       "caseId": "00951",
       "sourcePath": "semantic/00951/00951-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00951/input.heta",
       "logPath": "00951/build.log",
       "error": {
@@ -11362,15 +11362,11 @@
     {
       "caseId": "00957",
       "sourcePath": "semantic/00957/00957-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "success",
       "buildSourcePath": "00957/input.heta",
-      "logPath": "00957/build.log",
-      "error": {
-        "message": "heta build did not produce the required output files",
-        "exitCode": 2,
-        "signal": null,
-        "stdout": "Running compilation in directory \"Y:\\format-conversion-test-suite\"...\n\nNo declaration file, running with defaults...\n\n\u001b[34m[info] \u001b[39mHeta compiler v0.12.1 is initialized for the platform \"undefined\"\n\u001b[34m[info] \u001b[39mReading module of type \"heta\" from file \"references\\sbml-L2V5-3.5.0\\master\\00957\\input.heta\"...\n\u001b[34m[info] \u001b[39mReading module of type \"sbml\" from file \"cases\\semantic\\00957\\00957-sbml-l2v5.xml\"...\n\u001b[34m[info] \u001b[39mPlatform hash: bfeb8ea42ff610491fd58ff0ea62e20b77a9d5c0a6955045be11d643e929a63a\n\u001b[34m[info] \u001b[39mSetting references in elements, total length 111\n\u001b[31m[error] \u001b[39mFunctionDef \"sinh\" is not found as expected here: P17 { math: undefined };\n\u001b[31m[error] \u001b[39mFunctionDef \"cosh\" is not found as expected here: P18 { math: undefined };\n\u001b[31m[error] \u001b[39mFunctionDef \"asinh\" is not found as expected here: P22 { math: undefined };\n\u001b[31m[error] \u001b[39mFunctionDef \"acosh\" is not found as expected here: P23 { math: undefined };\n\u001b[31m[error] \u001b[39mFunctionDef \"atanh\" is not found as expected here: P24 { math: undefined };\n\u001b[31m[error] \u001b[39mFunctionDef \"asech\" is not found as expected here: P25 { math: undefined };\n\u001b[31m[error] \u001b[39mFunctionDef \"acsch\" is not found as expected here: P26 { math: undefined };\n\u001b[31m[error] \u001b[39mFunctionDef \"acoth\" is not found as expected here: P27 { math: undefined };\n\u001b[34m[info] \u001b[39mChecking for circular references in Records.\n\u001b[33m[warn] \u001b[39mUnits checking and export were skipped because of errors in compilation.\nCompilation ERROR! See logs.\n\n",
-        "stderr": ""
+      "outputs": {
+        "canonical": "00957/canonical/output.heta.json",
+        "dynms": "00957/dynms/output.dynms.json"
       }
     },
     {
