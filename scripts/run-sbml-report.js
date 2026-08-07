@@ -377,12 +377,6 @@ async function runSbmlReport(options, repositoryRoot) {
       operatingSystem: `${os.type()} ${os.release()}`,
     },
     testSuite: index.testSuite,
-    summary: {
-      requested: cases.length,
-      succeeded,
-      failed,
-      notEvaluated,
-    },
     cases: results,
   };
 

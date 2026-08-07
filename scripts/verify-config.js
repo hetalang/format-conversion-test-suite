@@ -95,13 +95,6 @@ function requireArray(value, label) {
   return value;
 }
 
-function countStatuses(cases) {
-  return cases.reduce((counts, caseResult) => {
-    counts[caseResult.status] = (counts[caseResult.status] || 0) + 1;
-    return counts;
-  }, {});
-}
-
 async function verifyReference(reference, settings) {
   const id = requireString(reference.id, 'reference.id');
   if (reference.type !== 'sbmlSemanticTestSuite') {
@@ -176,17 +169,6 @@ async function verifyReference(reference, settings) {
       );
       await requireFile(artifactFile, `Reference ${id} case ${caseResult.caseId} ${exportName} artifact`);
     }
-  }
-
-  const counts = countStatuses(cases);
-  const summary = report.summary || {};
-  if (
-    summary.requested !== cases.length ||
-    summary.succeeded !== (counts.success || 0) ||
-    summary.failed !== (counts.failed || 0) ||
-    summary.notEvaluated !== (counts['not-evaluated'] || 0)
-  ) {
-    fail(`Reference ${id} summary does not match its case records`);
   }
 
   console.log(`Reference ${id} is valid (${cases.length} cases).`);

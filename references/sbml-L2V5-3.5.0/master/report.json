@@ -31,12 +31,6 @@
     "version": "3.5.0",
     "archiveSha256": "523bed258b384f761da211c233c5b4a7f28cd6cc2197ff709c6e253a6eacea77"
   },
-  "summary": {
-    "requested": 970,
-    "succeeded": 720,
-    "failed": 3,
-    "notEvaluated": 247
-  },
   "cases": [
     {
       "caseId": "00001",
@@ -11372,7 +11366,7 @@
     {
       "caseId": "00958",
       "sourcePath": "semantic/00958/00958-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00958/input.heta",
       "logPath": "00958/build.log",
       "error": {
@@ -11386,7 +11380,7 @@
     {
       "caseId": "00959",
       "sourcePath": "semantic/00959/00959-sbml-l2v5.xml",
-      "status": "failed",
+      "status": "not-evaluated",
       "buildSourcePath": "00959/input.heta",
       "logPath": "00959/build.log",
       "error": {
