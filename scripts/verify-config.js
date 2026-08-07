@@ -129,7 +129,7 @@ async function verifyReference(reference, settings) {
   if (report.testSuite?.archiveSha256 !== settings.archiveSha256) {
     fail(`Reference ${id} uses an unexpected test-suite checksum`);
   }
-  if (report.command?.inputField !== inputField || report.input?.field !== inputField) {
+  if (report.command?.inputField !== inputField) {
     fail(`Reference ${id} does not match inputField ${inputField}`);
   }
   if (report.command?.target !== reference.targetDir.split(path.sep).join('/')) {

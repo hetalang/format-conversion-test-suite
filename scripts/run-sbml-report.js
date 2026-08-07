@@ -1,6 +1,5 @@
 const fs = require('node:fs');
 const fsp = require('node:fs/promises');
-const os = require('node:os');
 const path = require('node:path');
 const spawn = require('cross-spawn');
 const packageInfo = require('../package.json');
@@ -13,20 +12,7 @@ const sbmlL2DefaultUnits = [
   '#defineUnit time { units: second };',
 ];
 
-const supportedInputFields = {
-  sbmlL2V5Path: {
-    format: 'SBML Level 2 Version 5',
-    sourceType: 'sbml',
-    buildType: 'heta',
-    definesDefaultUnits: true,
-  },
-  sbmlL3V2Path: {
-    format: 'SBML Level 3 Version 2',
-    sourceType: 'sbml',
-    buildType: 'heta',
-    definesDefaultUnits: false,
-  },
-};
+const supportedInputFields = new Set(['sbmlL2V5Path', 'sbmlL3V2Path']);
 
 function parsePositiveInteger(value, optionName, defaultValue) {
   if (value === undefined) {
@@ -219,9 +205,9 @@ async function buildCase(caseEntry, indexDirectory, targetDirectory, repositoryR
   result.error = {
     message: commandResult.error || 'heta build did not produce the required output files',
     exitCode: commandResult.exitCode,
-    signal: commandResult.signal,
     stdout: commandResult.stdout,
-    stderr: commandResult.stderr,
+    ...(commandResult.signal === null ? {} : { signal: commandResult.signal }),
+    ...(commandResult.stderr ? { stderr: commandResult.stderr } : {}),
   };
   return result;
 }
@@ -284,9 +270,8 @@ async function runSbmlReport(options, repositoryRoot) {
     '--skip-test-tags',
   );
   const inputField = options['input-field'] || 'sbmlL3V2Path';
-  const input = supportedInputFields[inputField];
 
-  if (!input) {
+  if (!supportedInputFields.has(inputField)) {
     throw new Error(`Unsupported --input-field: ${inputField}`);
   }
 
@@ -319,7 +304,6 @@ async function runSbmlReport(options, repositoryRoot) {
   }
 
   const startedAt = new Date().toISOString();
-  const startedAtMs = Date.now();
   const results = await runWithConcurrency(cases, concurrency, async (caseEntry) => {
     const notEvaluatedTags = {
       componentTags: findMatchingTags(caseEntry, 'componentTags', skipComponentTags),
@@ -349,9 +333,9 @@ async function runSbmlReport(options, repositoryRoot) {
   const failed = results.filter((result) => result.status === 'failed').length;
   const notEvaluated = results.filter((result) => result.status === 'not-evaluated').length;
   const report = {
-    schemaVersion: 1,
     generator: {
       type: 'sbml-report',
+      packageName: packageInfo.name,
       packageVersion: packageInfo.version,
     },
     status: failed > 0
@@ -361,7 +345,6 @@ async function runSbmlReport(options, repositoryRoot) {
         : 'success',
     startedAt,
     completedAt: new Date().toISOString(),
-    durationMs: Date.now() - startedAtMs,
     command: {
       source: path.relative(repositoryRoot, indexPath).split(path.sep).join('/'),
       target: path.relative(repositoryRoot, targetDirectory).split(path.sep).join('/'),
@@ -372,14 +355,8 @@ async function runSbmlReport(options, repositoryRoot) {
       ...(skipComponentTags.length ? { skipComponentTags } : {}),
       ...(skipTestTags.length ? { skipTestTags } : {}),
     },
-    input: {
-      field: inputField,
-      ...input,
-    },
     environment: {
       hetaVersion: hetaVersionResult.stdout.trim(),
-      nodeVersion: process.version,
-      operatingSystem: `${os.type()} ${os.release()}`,
     },
     testSuite: index.testSuite,
     cases: results,

@@ -113,11 +113,11 @@ test tags. Valid primary statuses are `success`, `failed`, and
 `not-evaluated`.
 
 `report.json` is the machine-readable report. Its `generator` block records
-the report-generator type (`sbml-report`) and the FCTS package version. It also
-records run metadata, command parameters, selected input format, the runtime
-environment, pinned test-suite identity, and per-case results. Do not persist a
-top-level `summary`: consumers must derive counts from `report.cases` so that
-manually edited statuses remain consistent automatically.
+the report-generator type (`sbml-report`) and the FCTS package name and version.
+It also records run metadata, command parameters, the runtime environment, pinned
+test-suite identity, and per-case results. Do not persist a top-level `summary`:
+consumers must derive counts from `report.cases` so that manually edited
+statuses remain consistent automatically.
 
 `fcts compare --reference=<directory> --candidate=<directory>` is the first
 comparison stage. It checks that a candidate contains no case IDs absent from
@@ -125,9 +125,8 @@ the reference, writes `compare.json` beside the candidate report, and prints
 independent status and artifact-presence statistics for canonical JSON and
 DynMS. An incompatible candidate is recorded in that file rather than treated
 as a command failure. Its `generator` block identifies the comparison generator
-and package version; reference and candidate generator types are recorded but
-are not required to match. It does not yet compare individual artifact contents
-or calculate a score.
+and package name and version. It does not yet compare individual artifact contents or
+calculate a score.
 
 ## References
 

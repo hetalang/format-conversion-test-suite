@@ -146,26 +146,17 @@ async function compareReports(options, repositoryRoot) {
   console.log(`Common cases: ${commonCaseCount}`);
 
   const comparison = {
-    schemaVersion: 1,
-    type: 'fcts-report-comparison',
     generator: {
       type: 'report-comparison',
+      packageName: packageInfo.name,
       packageVersion: packageInfo.version,
     },
     generatedAt: new Date().toISOString(),
     reference: {
       reportPath: relativeRepositoryPath(repositoryRoot, referencePath),
-      reportStatus: reference.status,
-      inputField: reference.input?.field || reference.command?.inputField || null,
-      generatorType: reference.generator?.type || null,
-      generatorPackageVersion: reference.generator?.packageVersion || null,
     },
     candidate: {
       reportPath: relativeRepositoryPath(repositoryRoot, candidatePath),
-      reportStatus: candidate.status,
-      inputField: candidate.input?.field || candidate.command?.inputField || null,
-      generatorType: candidate.generator?.type || null,
-      generatorPackageVersion: candidate.generator?.packageVersion || null,
     },
     compatibility: {
       candidateIsSubsetOfReference: candidateOnlyCaseIds.length === 0,

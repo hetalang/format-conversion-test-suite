@@ -93,7 +93,7 @@ The target directory is replaced for each run. `report.json` records every
 case's build status and, for successful cases, the relative paths to canonical
 JSON and DynMS output files. The optional `--input-field` selects the SBML path
 field from each case: `sbmlL3V2Path` (the default) or `sbmlL2V5Path`. The
-selected field and its SBML format are recorded in `report.json`.
+selected field is recorded in `report.json` under `command.inputField`.
 
 To build all cases but exclude selected component or test tags from evaluation,
 use `--skip-component-tags` and `--skip-test-tags`. Matching cases have status
