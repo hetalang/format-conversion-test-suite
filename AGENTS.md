@@ -172,6 +172,10 @@ Keep the viewer static: it must work locally without a build step and on Pages.
 - CI uses Node.js 24 and current major GitHub Actions versions.
 - Do not add Heta conversion runs to the default CI workflow: the full suite is
   external, slow, and intended for explicit baseline or candidate runs.
+- `Verify heta-compiler conversion` is a manual workflow for a selected
+  `heta-compiler` ref. It generates L2V5 and L3V2 candidate reports, compares
+  canonical JSON and DynMS against approved references, writes a Step Summary,
+  and uploads reports and diffs as an artifact. It never updates references.
 - For changes to reporting scripts, at minimum run Node syntax checks and a
   small non-reference report target if Heta and downloaded cases are available.
 - For changes to configuration or reference validation, run

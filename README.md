@@ -157,6 +157,20 @@ An incompatible candidate is recorded in the comparison file with
 command error. Use `--require-compatible` when an incompatible comparison must
 return a non-zero exit code, for example in CI.
 
+## Verify heta-compiler in GitHub Actions
+
+The manual `Verify heta-compiler conversion` workflow checks a selected
+`hetalang/heta-compiler` branch, tag, or commit against both approved SBML
+references. It builds L3V2 and L2V5 candidate reports, compares canonical JSON
+and DynMS, writes a GitHub Step Summary, and uploads the reports and diffs as an
+artifact.
+
+Choose `warning` for an exploratory run: output differences create a warning
+but do not fail the workflow. Choose `strict` for a release check: differences
+fail the workflow. Missing artifacts, comparison errors, and
+`success-failed` cases fail under both policies. The workflow never updates
+approved references.
+
 ## License
 
 See [LICENSE](LICENSE).

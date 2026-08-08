@@ -1,0 +1,143 @@
+name: Verify heta-compiler conversion
+
+on:
+  workflow_dispatch:
+    inputs:
+      compiler_ref:
+        description: 'heta-compiler branch, tag, or commit SHA'
+        required: true
+        default: main
+        type: string
+      policy:
+        description: 'How output differences affect the workflow result'
+        required: true
+        default: warning
+        type: choice
+        options:
+          - warning
+          - strict
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout FCTS
+        uses: actions/checkout@v6
+
+      - name: Checkout heta-compiler
+        uses: actions/checkout@v6
+        with:
+          repository: hetalang/heta-compiler
+          ref: ${{ inputs.compiler_ref }}
+          path: heta-compiler
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install FCTS dependencies
+        run: npm ci
+
+      - name: Install heta-compiler from the selected ref
+        run: |
+          npm install --global ./heta-compiler
+          heta --version
+
+      - name: Read approved reference settings
+        id: references
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const options = require('./config/options.json');
+
+          const getReference = (inputField) => {
+            const reference = options.references.find((item) => item.inputField === inputField);
+            if (!reference) throw new Error(`No reference is configured for ${inputField}`);
+            const report = JSON.parse(fs.readFileSync(`${reference.targetDir}/report.json`, 'utf8'));
+            return {
+              target: reference.targetDir,
+              componentTags: report.command?.skipComponentTags?.join(',') || '',
+              testTags: report.command?.skipTestTags?.join(',') || '',
+            };
+          };
+
+          const l3 = getReference('sbmlL3V2Path');
+          const l2 = getReference('sbmlL2V5Path');
+          const output = process.env.GITHUB_OUTPUT;
+          for (const [prefix, settings] of Object.entries({ l3, l2 })) {
+            for (const [key, value] of Object.entries(settings)) {
+              fs.appendFileSync(output, `${prefix}_${key}=${value}\n`);
+            }
+          }
+          NODE
+
+      - name: Download and index SBML cases
+        run: |
+          npm run fetch:sbml
+          npm run index:sbml
+
+      - name: Build candidate reports
+        shell: bash
+        env:
+          L3_COMPONENT_TAGS: ${{ steps.references.outputs.l3_componentTags }}
+          L3_TEST_TAGS: ${{ steps.references.outputs.l3_testTags }}
+          L2_COMPONENT_TAGS: ${{ steps.references.outputs.l2_componentTags }}
+          L2_TEST_TAGS: ${{ steps.references.outputs.l2_testTags }}
+        run: |
+          build_report() {
+            local input_field="$1"
+            local target="$2"
+            local component_tags="$3"
+            local test_tags="$4"
+            local args=(sbml-report --source=cases/index --input-field="$input_field" --target="$target" --concurrency=4)
+            if [[ -n "$component_tags" ]]; then args+=("--skip-component-tags=$component_tags"); fi
+            if [[ -n "$test_tags" ]]; then args+=("--skip-test-tags=$test_tags"); fi
+            node bin/fcts.js "${args[@]}"
+          }
+
+          build_report sbmlL3V2Path results/verification/l3/report "$L3_COMPONENT_TAGS" "$L3_TEST_TAGS"
+          build_report sbmlL2V5Path results/verification/l2/report "$L2_COMPONENT_TAGS" "$L2_TEST_TAGS"
+
+      - name: Compare candidate reports
+        shell: bash
+        env:
+          L3_REFERENCE: ${{ steps.references.outputs.l3_target }}
+          L2_REFERENCE: ${{ steps.references.outputs.l2_target }}
+        run: |
+          compare_report() {
+            local reference="$1"
+            local candidate="$2"
+            local artifact="$3"
+            local target="$4"
+            shift 4
+            node bin/fcts.js compare --reference="$reference" --candidate="$candidate" --artifact="$artifact" --target="$target" --require-compatible "$@"
+          }
+
+          compare_report "$L3_REFERENCE" results/verification/l3/report canonical results/verification/l3/canonical --ignore-paths=/0/generator
+          compare_report "$L3_REFERENCE" results/verification/l3/report dynms results/verification/l3/dynms
+          compare_report "$L2_REFERENCE" results/verification/l2/report canonical results/verification/l2/canonical --ignore-paths=/0/generator
+          compare_report "$L2_REFERENCE" results/verification/l2/report dynms results/verification/l2/dynms
+
+      - name: Write verification summary
+        if: always()
+        run: |
+          node scripts/summarize-comparisons.js --policy=${{ inputs.policy }} \
+            --comparison=L3V2-canonical:results/verification/l3/canonical/compare.json \
+            --comparison=L3V2-dynms:results/verification/l3/dynms/compare.json \
+            --comparison=L2V5-canonical:results/verification/l2/canonical/compare.json \
+            --comparison=L2V5-dynms:results/verification/l2/dynms/compare.json
+
+      - name: Upload verification artifact
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: fcts-verification-${{ github.run_id }}
+          path: results/verification
+          if-no-files-found: warn
