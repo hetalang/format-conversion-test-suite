@@ -119,13 +119,22 @@ test-suite identity, and per-case results. Do not persist a top-level `summary`:
 consumers must derive counts from `report.cases` so that manually edited
 statuses remain consistent automatically.
 
-`fcts compare --reference=<directory> --candidate=<directory>` is the first
-comparison stage. It checks that a candidate contains no case IDs absent from
-the reference and writes `compare.json` beside the candidate report. An
-incompatible candidate is recorded in that file rather than treated as a command
+`fcts compare --reference=<directory> --candidate=<directory>
+--artifact=<canonical|dynms> --target=<directory>` runs one comparison pass. It
+checks that a candidate contains no case IDs absent from the reference and
+recreates the target directory for its `compare.json` and optional `diffs/`
+directory. Every reference case receives `success-success`, `success-failed`,
+`failed-success`, `failed-failed`, or `error`. `error` means a report declared a
+successful case but omitted the selected artifact path or pointed outside the
+report directory or to a missing file. For `success-success` cases, the pass
+parses and compares JSON artifacts: `artifactComparison.status` is `equal`,
+`different`, or `error`. A difference has a separate JSON Pointer diff file;
+source artifacts are not copied. `--ignore-paths=<path,...>` excludes exact JSON
+Pointer branches from the artifact diff and records the applied paths in
+`compare.json`; it is supplied manually and is not read from configuration. An
+incompatible candidate is recorded in the file rather than treated as a command
 failure. Its `generator` block identifies the comparison generator and package
-name and version. It does not yet compare individual artifact contents or
-calculate a score. `--require-compatible` makes an incompatible comparison exit
+name and version. `--require-compatible` makes an incompatible comparison exit
 with a non-zero status after writing its result.
 
 ## References

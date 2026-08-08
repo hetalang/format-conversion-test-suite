@@ -27,7 +27,7 @@ function parseOptions(argumentsList) {
 function printUsage() {
   console.log('Usage:');
   console.log('  fcts sbml-report --source=<index> --target=<directory> [--input-field=<field>] [--concurrency=<number>] [--skip=<number>] [--limit=<number>] [--skip-component-tags=<tag,...>] [--skip-test-tags=<tag,...>]');
-  console.log('  fcts compare --reference=<directory|report.json> --candidate=<directory|report.json> [--output=<compare.json>] [--require-compatible]');
+  console.log('  fcts compare --reference=<directory|report.json> --candidate=<directory|report.json> --artifact=<canonical|dynms> --target=<directory> [--ignore-paths=<path,...>] [--require-compatible]');
 }
 
 async function main() {

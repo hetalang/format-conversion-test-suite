@@ -117,20 +117,39 @@ npx fcts sbml-report --source=cases/index --input-field=sbmlL2V5Path --target=re
 
 ## Compare reports
 
-The initial comparison command checks whether every case in a candidate report
-is also present in a reference report. It writes `compare.json` beside the
-candidate report with the compatibility result. It does not yet compare
-individual cases or artifact contents.
+The comparison command runs separately for `canonical` and `dynms`. It checks
+whether every candidate case is present in the reference and records one status
+per reference case in `<target>/compare.json`. This stage reads JSON artifacts
+only for `success-success` cases, compares their content, and writes a separate
+diff file for every difference.
 
 ```sh
 npx fcts compare \
   --reference=references/sbml-L3V2-3.5.0/master \
-  --candidate=results/sbml-L3V2-3.5.0/heta-0.13.0
+  --candidate=results/sbml-L3V2-3.5.0/heta-0.13.0 \
+  --artifact=canonical \
+  --target=results/sbml-L3V2-3.5.0/heta-0.13.0/canonical-comparison
 ```
 
 Both arguments can be a report directory or a direct path to `report.json`.
-Use `--output=<path>` to write the comparison to another location. An
-incompatible candidate is recorded in `compare.json` with
+Run the command again with `--artifact=dynms` for the DynMS pass. A case status
+is `success-success`, `success-failed`, `failed-success`, or `failed-failed`.
+If a report marks a case as successful but its selected artifact path is missing
+or does not point to a file, the case status is `error` with an `issues` list.
+For `success-success` cases, `artifactComparison.status` is `equal`,
+`different`, or `error`. Differences are stored as JSON Pointer records under
+`<target>/diffs/`; source artifacts are never copied. The target directory is
+recreated for every run.
+
+Use `--ignore-paths` with a comma-separated list of exact JSON Pointer paths to
+exclude generated metadata or other known differences from the artifact diff.
+The applied paths are recorded in `compare.json`.
+
+```sh
+npx fcts compare ... --ignore-paths=/0/generator,/0/buildTimestamp
+```
+
+An incompatible candidate is recorded in the comparison file with
 `candidateIsSubsetOfReference: false`; this is a comparison result, not a
 command error. Use `--require-compatible` when an incompatible comparison must
 return a non-zero exit code, for example in CI.
