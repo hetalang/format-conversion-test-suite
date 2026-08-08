@@ -34,6 +34,9 @@ button, input, select { font: inherit; }
   color: #fff;
   background: radial-gradient(circle at 80% 0%, #687bf2 0, transparent 31%), #252b4c;
 }
+.viewer-nav { display: flex; gap: .4rem; align-items: center; }
+.viewer-nav a { padding: .4rem .65rem; border: 1px solid #6571bf; border-radius: 999px; color: #e1e5ff; font-size: .85rem; text-decoration: none; }
+.viewer-nav a.active { border-color: #aeb9ff; background: #6571bf; color: #fff; }
 
 h1, h2, p { margin: 0; }
 h1 { font-size: clamp(2rem, 5vw, 3.25rem); letter-spacing: -0.04em; }
@@ -92,6 +95,11 @@ code { padding: .08rem .28rem; border-radius: 4px; background: #eef1f8; color: #
 .case.failed { background: var(--failure); }
 .case.not-evaluated { background: #a4acba; }
 .case.unknown { background: var(--unknown); }
+.case.equal { background: var(--success); }
+.case.different { background: #e69a2f; }
+.case.comparison-error, .case.error, .case.success-failed { background: var(--failure); }
+.case.failed-success { background: #4d86d9; }
+.case.failed-failed { background: #a4acba; }
 .case[hidden] { display: none; }
 
 dialog { width: min(680px, calc(100% - 2rem)); max-height: min(760px, calc(100% - 2rem)); padding: 0; border: 0; border-radius: 16px; color: var(--ink); box-shadow: 0 24px 70px rgb(18 24 47 / 35%); }
@@ -103,6 +111,13 @@ dialog::backdrop { background: rgb(16 22 44 / 54%); }
 .status.success { color: #08744a; background: var(--success-soft); }
 .status.failed { color: #ad2736; background: var(--failure-soft); }
 .status.not-evaluated { color: #515969; background: #e5e8ee; }
+.status.equal { color: #08744a; background: var(--success-soft); }
+.status.different { color: #985800; background: #fff0d5; }
+.status.comparison-error, .status.error, .status.success-failed { color: #ad2736; background: var(--failure-soft); }
+.status.failed-success { color: #275b9d; background: #deebff; }
+.status.failed-failed { color: #515969; background: #e5e8ee; }
+.overview .difference-value { color: #a76200; }
+.overview .new-value { color: #275b9d; }
 .detail-list { display: grid; grid-template-columns: 10rem 1fr; gap: .65rem 1rem; margin: 1.2rem 0; }
 .detail-list dt { color: var(--muted); font-weight: 700; }
 .detail-list dd { margin: 0; overflow-wrap: anywhere; }

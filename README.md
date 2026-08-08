@@ -24,17 +24,20 @@ reproducibility. It does not validate numerical simulations.
 - Compare normalized generated files with approved reference outputs.
 - Support long-term regression testing of model converters.
 
-## Report viewer
+## Viewers
 
-<https://hetalang.github.io/format-conversion-test-suite/>
+The static viewers are published on GitHub Pages:
 
-The dependency-free static report viewer is in [`viewer/`](viewer/). It loads a
-local report through a file picker or a public report URL.
+- [Report viewer](https://hetalang.github.io/format-conversion-test-suite/report/)
+- [Comparison viewer](https://hetalang.github.io/format-conversion-test-suite/compare/)
+
+The dependency-free pages are in [`viewer/`](viewer/). They load a local JSON
+file through a file picker or a public URL.
 See [`viewer/README.md`](viewer/README.md) for usage.
 
 For references use:
-- [SBML L3V2 Reference Report](https://hetalang.github.io/format-conversion-test-suite?ref=https://raw.githubusercontent.com/hetalang/format-conversion-test-suite/refs/heads/main/references/sbml-L3V2-3.5.0/master/report.json)
-- [SBML L2V5 Reference Report](https://hetalang.github.io/format-conversion-test-suite?ref=https://raw.githubusercontent.com/hetalang/format-conversion-test-suite/refs/heads/main/references/sbml-L2V5-3.5.0/master/report.json)
+- [SBML L3V2 Reference Report](https://hetalang.github.io/format-conversion-test-suite/report/?ref=https://raw.githubusercontent.com/hetalang/format-conversion-test-suite/refs/heads/main/references/sbml-L3V2-3.5.0/master/report.json)
+- [SBML L2V5 Reference Report](https://hetalang.github.io/format-conversion-test-suite/report/?ref=https://raw.githubusercontent.com/hetalang/format-conversion-test-suite/refs/heads/main/references/sbml-L2V5-3.5.0/master/report.json)
 
 
 ## Cases preparation

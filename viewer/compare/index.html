@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FCTS Comparison Viewer</title>
+    <link rel="stylesheet" href="../shared/styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">HETA PROJECT / FORMAT CONVERSION TEST SUITE</p>
+        <h1>Comparison viewer</h1>
+        <p class="subtitle">Inspect JSON comparison results case by case.</p>
+      </div>
+      <div id="comparison-status" class="report-status">No comparison loaded</div>
+      <nav class="viewer-nav" aria-label="Viewer sections">
+        <a href="../report/">Report</a>
+        <a class="active" href="./">Compare</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="loader panel" aria-labelledby="load-heading">
+        <div>
+          <h2 id="load-heading">Open a comparison</h2>
+          <p>Choose a local <code>compare.json</code> or load a public URL.</p>
+        </div>
+        <div class="load-controls">
+          <label class="file-button">
+            <span>Choose local file</span>
+            <input id="comparison-file" type="file" accept="application/json,.json">
+          </label>
+          <label class="url-field" for="comparison-url">
+            <span>Comparison URL</span>
+            <input id="comparison-url" type="url" placeholder="https://example.org/compare.json">
+          </label>
+          <button id="load-url" type="button">Load URL</button>
+        </div>
+        <p class="hint">A URL can also be supplied as <code>?ref=https://…/compare.json</code>.</p>
+      </section>
+
+      <p id="error-message" class="error-message" hidden></p>
+
+      <section id="comparison-content" hidden>
+        <section id="overview" class="overview" aria-label="Comparison overview"></section>
+
+        <section class="cases panel" aria-labelledby="cases-heading">
+          <div class="cases-header">
+            <div>
+              <h2 id="cases-heading">Cases</h2>
+              <p id="case-count">0 cases</p>
+            </div>
+            <div class="filters" aria-label="Case filters">
+              <input id="case-search" type="search" placeholder="Find case ID">
+              <select id="status-filter">
+                <option value="all">All results</option>
+                <option value="equal">Equal</option>
+                <option value="different">Different</option>
+                <option value="comparison-error">Comparison error</option>
+                <option value="success-failed">Success / failed</option>
+                <option value="failed-success">Failed / success</option>
+                <option value="failed-failed">Failed / failed</option>
+                <option value="error">Report error</option>
+              </select>
+            </div>
+          </div>
+          <div id="case-grid" class="case-grid" aria-live="polite"></div>
+        </section>
+      </section>
+    </main>
+
+    <dialog id="case-dialog" aria-labelledby="case-dialog-title">
+      <div class="dialog-header">
+        <div>
+          <p class="eyebrow">CASE</p>
+          <h2 id="case-dialog-title"></h2>
+        </div>
+        <button id="close-dialog" class="close-button" type="button" aria-label="Close details">×</button>
+      </div>
+      <div id="case-details"></div>
+    </dialog>
+  </body>
+</html>

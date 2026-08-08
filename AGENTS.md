@@ -156,10 +156,12 @@ require `cases/` to be downloaded.
 
 ## Viewer and GitHub Pages
 
-`viewer/` is a dependency-free static application. It can load a local
-`report.json` or a public report URL through `?ref=<url>` (the remote host must
-allow CORS). It calculates overview counts from case records and renders
-`not-evaluated` cases in gray, including their exclusion tags.
+`viewer/` contains dependency-free static report and comparison applications.
+`viewer/report/` can load a local `report.json` or a public report URL through
+`?ref=<url>` (the remote host must allow CORS). It calculates overview counts
+from case records and renders `not-evaluated` cases in gray, including their
+exclusion tags. `viewer/compare/` loads a `compare.json`, renders the comparison
+and artifact statuses, and loads remote diff files on demand.
 
 `.github/workflows/deploy-viewer.yml` publishes `viewer/` to GitHub Pages.
 Keep the viewer static: it must work locally without a build step and on Pages.
