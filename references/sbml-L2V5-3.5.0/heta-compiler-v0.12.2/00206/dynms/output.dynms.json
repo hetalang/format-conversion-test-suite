@@ -3,9 +3,9 @@
   "dynms": "0.2.0",
   "generator": {
     "name": "heta-compiler",
-    "version": "0.12.2"
+    "version": "0.12.1"
   },
-  "created": "2026-08-06T14:54:46.682Z",
+  "created": "2026-08-08T17:22:00.928Z",
   "license": "UNLICENSED",
   "models": [
     {

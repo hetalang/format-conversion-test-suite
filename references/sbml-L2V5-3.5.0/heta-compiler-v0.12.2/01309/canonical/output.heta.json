@@ -1,0 +1,111 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T17:54:13.905Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "d02a05501a7f3899c564a1b5c685589b3c7cf118321e84302df80da695081c3a",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "3"
+    },
+    "class": "Compartment",
+    "id": "C"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "C"
+      }
+    ],
+    "assignments": {
+      "ode_": "1"
+    },
+    "class": "Process",
+    "id": "C_proc"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "2"
+    },
+    "boundary": true,
+    "class": "Species",
+    "compartment": "C",
+    "id": "S1",
+    "isAmount": true
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "defineUnit",
+    "id": "area",
+    "units": [
+      {
+        "exponent": 2,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "length",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "substance",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "time",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "volume",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1
+      }
+    ]
+  }
+]

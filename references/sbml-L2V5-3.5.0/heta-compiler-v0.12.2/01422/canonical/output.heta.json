@@ -1,0 +1,114 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T17:54:39.564Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "c8ee43d7c05034caf7a4f092cd53de53bc2cd89397353044c08e1dd8f97084bc",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "A"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "C"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": -1,
+        "target": "A"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "A"
+      }
+    ],
+    "assignments": {
+      "ode_": "(-1)"
+    },
+    "class": "Reaction",
+    "id": "J0"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "defineUnit",
+    "id": "area",
+    "units": [
+      {
+        "exponent": 2,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "length",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "substance",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "time",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "volume",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1
+      }
+    ]
+  }
+]

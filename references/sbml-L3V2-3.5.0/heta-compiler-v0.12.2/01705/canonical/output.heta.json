@@ -1,0 +1,70 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T18:33:49.510Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "628c2e2f1093cccff16a741b4f25bed5954d801cc33726274efac0398fa91a01",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "2"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "C"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E0",
+    "trigger": "t >= 2.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E1",
+    "trigger": "t >= 2.5"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E0": "5",
+      "E1": "10",
+      "start_": "10"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S1",
+    "isAmount": true
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S1"
+      }
+    ],
+    "assignments": {
+      "ode_": "(-1)"
+    },
+    "class": "Process",
+    "id": "S1_proc"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  }
+]

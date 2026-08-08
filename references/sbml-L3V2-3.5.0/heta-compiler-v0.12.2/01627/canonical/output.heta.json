@@ -1,0 +1,198 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T18:32:09.890Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "0d1ecc4ef6022d3a39134473f63332e4281a4c736f456e2954fbb5d3686b83fe",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "class": "Compartment",
+    "id": "C1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "C1"
+      }
+    ],
+    "assignments": {
+      "ode_": "0.002"
+    },
+    "class": "Process",
+    "id": "C1_proc"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "error_check",
+    "trigger": "t >= 99 and maxdiff < 0.2"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "error_check2",
+    "trigger": "maxdiff >= 4"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "error_check3",
+    "trigger": "abs(S2) >= 250"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "error_check2": "1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "errorHigh"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "error_check": "1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "errorLow"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "error_check3": "1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "errorS2"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "maxcheck",
+    "trigger": "abs(Q - R) > maxdiff"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "maxcheck": "abs(Q - R)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "maxdiff"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "Qinc": "Q + 0.01",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "Q"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "Qinc",
+    "trigger": "reset >= 0.01"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "Rinc": "R + 0.01",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "R"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "Qinc": "0",
+      "Rinc": "0",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "reset"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "reset"
+      }
+    ],
+    "assignments": {
+      "ode_": "1"
+    },
+    "class": "Process",
+    "id": "reset_proc"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "Rinc",
+    "trigger": "reset >= 0.01"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "Q + R"
+    },
+    "class": "Record",
+    "id": "S"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "C1",
+    "id": "S2"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "S2_det"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S2"
+      }
+    ],
+    "assignments": {
+      "ode_": "Q - R"
+    },
+    "class": "Process",
+    "id": "S2_proc"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  }
+]

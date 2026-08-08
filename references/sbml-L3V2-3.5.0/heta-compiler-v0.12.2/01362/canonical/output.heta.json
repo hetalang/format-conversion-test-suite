@@ -1,0 +1,32 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T18:28:15.382Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "fab4fff79effe84ba16fefc0a1e4872d8c3f0c0502de161a7185836d768f872a",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "5"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "J1"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  }
+]

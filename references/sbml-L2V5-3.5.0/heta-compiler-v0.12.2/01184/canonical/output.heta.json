@@ -1,0 +1,125 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T17:53:42.599Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "dabc4ba8d847f565ac84af2b96cc1e418b89c0c26a4e7d6cb1dd82729684f738",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S1"
+      }
+    ],
+    "assignments": {
+      "ode_": "k1"
+    },
+    "class": "Reaction",
+    "id": "_J0"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "C"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "y"
+    },
+    "boundary": true,
+    "class": "Record",
+    "id": "k1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1 / C"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S1"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "y",
+    "num": 3
+  },
+  {
+    "action": "defineUnit",
+    "id": "area",
+    "units": [
+      {
+        "exponent": 2,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "length",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "substance",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "time",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "volume",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1
+      }
+    ]
+  }
+]

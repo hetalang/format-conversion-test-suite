@@ -1,0 +1,48 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T18:24:29.516Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "a63ad304b1365b74aaa2b5b89dd74221335312e73ce377ed07df55cabddadc78",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "8"
+    },
+    "class": "Record",
+    "id": "p8"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "p8"
+      }
+    ],
+    "assignments": {
+      "ode_": "3"
+    },
+    "aux": {
+      "metaid": "p8_raterule"
+    },
+    "class": "Process",
+    "id": "p8_proc"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  }
+]

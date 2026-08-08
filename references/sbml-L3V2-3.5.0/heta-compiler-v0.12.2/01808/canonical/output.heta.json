@@ -1,0 +1,112 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T18:37:10.900Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "f7da97975edba899af5e8af3a949b302f908f98c9ab51e469f77f21b8fc26196",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "2"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "c"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "C"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "Spec"
+      },
+      {
+        "stoichiometry": 2,
+        "target": "sPeC"
+      }
+    ],
+    "assignments": {
+      "ode_": "k"
+    },
+    "class": "Reaction",
+    "id": "j"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "spec"
+      }
+    ],
+    "assignments": {
+      "ode_": "K"
+    },
+    "class": "Reaction",
+    "id": "J"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k",
+    "num": 2
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "K",
+    "num": 1
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "3"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "spec"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "5"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "sPeC"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "4"
+    },
+    "class": "Species",
+    "compartment": "c",
+    "id": "Spec"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  }
+]

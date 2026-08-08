@@ -1,0 +1,74 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T18:25:03.949Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "8112bf5ae2414939127249db73b7368dbc34cf2a395475a8bc6d6e8c26daeb5f",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "C"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "extentconv",
+    "num": 1000
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "extentpertimeconv",
+    "num": 16.6666666666667
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "s1"
+      }
+    ],
+    "assignments": {
+      "ode_": "10"
+    },
+    "class": "Reaction",
+    "id": "J0"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "s1",
+    "isAmount": true
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "timeconv",
+    "num": 60
+  }
+]

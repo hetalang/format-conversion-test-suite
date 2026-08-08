@@ -1,0 +1,77 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T18:27:03.007Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "bd49a2b7e73ae51717e90a4a3a9f1f926cbcccf818068e5615ffe572bf698c33",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "C"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E0",
+    "trigger": "t > 5.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E1",
+    "trigger": "t > 5.5"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "p1"
+      }
+    ],
+    "assignments": {
+      "ode_": "0.01 * p1"
+    },
+    "class": "Reaction",
+    "id": "J0"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "2"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "p1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E0": "5",
+      "E1": "3",
+      "start_": "10"
+    },
+    "class": "Record",
+    "id": "p2"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  }
+]

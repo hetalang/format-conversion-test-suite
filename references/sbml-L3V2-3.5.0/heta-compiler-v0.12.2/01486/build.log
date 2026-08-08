@@ -1,0 +1,21 @@
+Running compilation in directory "Y:\format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "references\sbml-L3V2-3.5.0\master\01486\input.heta"...
+[info]	Reading module of type "sbml" from file "cases\semantic\01486\01486-sbml-l3v2.xml"...
+[info]	Platform hash: f682b75c1e0eee7dd7c6378f920e3ba0dfd85f430f7bcf110965cc96d4da84ac
+[info]	Setting references in elements, total length 135
+[error]	FunctionDef "sinh" is not found as expected here: my_sinh { math: sinh(x) };
+[error]	FunctionDef "cosh" is not found as expected here: my_cosh { math: cosh(x) };
+[error]	FunctionDef "asinh" is not found as expected here: my_arcsinh { math: asinh(x) };
+[error]	FunctionDef "acosh" is not found as expected here: my_arccosh { math: acosh(x) };
+[error]	FunctionDef "atanh" is not found as expected here: my_arctanh { math: atanh(x) };
+[error]	FunctionDef "asech" is not found as expected here: my_arcsech { math: asech(x) };
+[error]	FunctionDef "acsch" is not found as expected here: my_arccsch { math: acsch(x) };
+[error]	FunctionDef "acoth" is not found as expected here: my_arccoth { math: acoth(x) };
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

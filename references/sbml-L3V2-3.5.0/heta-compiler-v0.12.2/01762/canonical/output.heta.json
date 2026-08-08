@@ -1,0 +1,61 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T18:35:55.012Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "586dc9c9f8439e72770b1bf249e95779882fd07b7cfefb2fc8d552213b62d6ae",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "avogadro__J0_local",
+    "num": 1e+24
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "C"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S1"
+      }
+    ],
+    "assignments": {
+      "ode_": "6.02214076e+23 / avogadro__J0_local"
+    },
+    "class": "Reaction",
+    "id": "J0"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S1"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  }
+]

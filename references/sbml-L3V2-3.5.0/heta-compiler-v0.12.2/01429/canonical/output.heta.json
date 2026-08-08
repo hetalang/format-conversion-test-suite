@@ -1,0 +1,59 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T18:29:18.834Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "cdf5bc3e106fd241c841a16639cda686df96da7a5c25942fcdb3eaaeecb45772",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "A"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "C"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "A"
+      },
+      {
+        "stoichiometry": 2,
+        "target": "A"
+      }
+    ],
+    "assignments": {
+      "ode_": "1"
+    },
+    "class": "Reaction",
+    "id": "J0"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  }
+]

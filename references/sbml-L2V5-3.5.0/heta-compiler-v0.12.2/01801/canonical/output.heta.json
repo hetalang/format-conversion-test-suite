@@ -1,0 +1,137 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T17:56:09.051Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "47919367ca253a0081deeac2b7735a85b27a4b293d8731614fd06ad2bdf3ff66",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "C"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S2"
+      },
+      {
+        "stoichiometry": -1,
+        "target": "S1"
+      }
+    ],
+    "assignments": {
+      "ode_": "S1_stoich__J1_local * S2_stoich__J1_local * 20"
+    },
+    "class": "Reaction",
+    "id": "J1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "2"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S1",
+    "isAmount": true
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "S1_stoich__J1_local",
+    "num": 0.1
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "3"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S2",
+    "isAmount": true
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "S2_stoich__J1_local",
+    "num": 0.1
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "defineUnit",
+    "id": "area",
+    "units": [
+      {
+        "exponent": 2,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "length",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "substance",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "time",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "volume",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1
+      }
+    ]
+  }
+]

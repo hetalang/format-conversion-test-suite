@@ -1,0 +1,17 @@
+Running compilation in directory "Y:\format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "references\sbml-L3V2-3.5.0\master\01274\input.heta"...
+[info]	Reading module of type "sbml" from file "cases\semantic\01274\01274-sbml-l3v2.xml"...
+[info]	Platform hash: 656dcb5341ea98e816f08da96b90e5461a2aea7064009fa94a1752cbefdb2869
+[info]	Setting references in elements, total length 82
+[error]	FunctionDef "implies" is not found as expected here: p1 { math: undefined };
+[error]	FunctionDef "implies" is not found as expected here: p2 { math: undefined };
+[error]	FunctionDef "implies" is not found as expected here: p3 { math: undefined };
+[error]	FunctionDef "implies" is not found as expected here: p4 { math: undefined };
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

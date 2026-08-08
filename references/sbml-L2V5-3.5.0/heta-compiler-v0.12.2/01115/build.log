@@ -1,0 +1,16 @@
+Running compilation in directory "Y:\format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results\sbml-L2V5-3.5.0\master\01115\input.heta"...
+[info]	Reading module of type "sbml" from file "cases\semantic\01115\01115-sbml-l2v5.xml"...
+[error]	id must not be a reserved word, got "e". Reserved words list: 
+	 include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, e, E, pi, PI, null
+[error]	e component does not exist which is not allowed for the "update" action.
+[info]	Platform hash: 0c846dde5844bfa8fef35ba0a08ed44efa4b67f85089b669c8e6ff2395b3bade
+[info]	Setting references in elements, total length 87
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

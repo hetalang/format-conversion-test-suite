@@ -1,0 +1,96 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T18:32:21.155Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "c6c8b64440eeb03961f14c21e3bfe40639d3cd96da1981133e4a35f2e8fa2fe2",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "C"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S2"
+      },
+      {
+        "stoichiometry": -1,
+        "target": "S1"
+      }
+    ],
+    "assignments": {
+      "ode_": "0.01"
+    },
+    "class": "Reaction",
+    "id": "J0"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "getThree()"
+    },
+    "boundary": true,
+    "class": "Record",
+    "id": "m_cf"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "2 / C"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "getFive()"
+    },
+    "boundary": true,
+    "class": "Record",
+    "id": "s1_cf"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "3 / C"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S2"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "defineFunction",
+    "id": "getFive",
+    "math": "5"
+  },
+  {
+    "action": "defineFunction",
+    "id": "getThree",
+    "math": "3"
+  }
+]

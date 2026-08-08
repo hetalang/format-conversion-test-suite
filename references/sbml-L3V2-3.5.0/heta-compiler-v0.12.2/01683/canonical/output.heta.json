@@ -1,0 +1,96 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T18:33:19.441Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "4abb873a10a34f1203cdf9e5d79192cae54eeca3d467f92569bd83241e5336e6",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "C"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E0",
+    "trigger": "t > 3.5"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E1",
+    "trigger": "t > 3.5"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S2"
+      },
+      {
+        "stoichiometry": -1,
+        "target": "S1"
+      }
+    ],
+    "assignments": {
+      "ode_": "0.01"
+    },
+    "class": "Reaction",
+    "id": "J0"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "m_cf",
+    "num": 3
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E0": "1",
+      "E1": "4",
+      "start_": "2 / C"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S1"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "s1_cf",
+    "num": 5
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E0": "3",
+      "E1": "4",
+      "start_": "3 / C"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S2"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  }
+]

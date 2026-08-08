@@ -1,0 +1,14 @@
+Running compilation in directory "Y:\format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "references\sbml-L3V2-3.5.0\master\01465\input.heta"...
+[info]	Reading module of type "sbml" from file "cases\semantic\01465\01465-sbml-l3v2.xml"...
+[error]	S1_sr component does not exist which is not allowed for the "update" action.
+[info]	Platform hash: 11ae99c33850ab35c9f5006a56e6b820ed26d99f91188b68c5d10e1033131b04
+[info]	Setting references in elements, total length 81
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

@@ -1,0 +1,150 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T18:22:48.470Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "a0e82591f35dde762387d9ac8965583b9de2e462bfa0b5f47a7ac34aaa15153f",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "C",
+    "title": "C",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "kf",
+    "num": 1.1,
+    "title": "kf"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "kr",
+    "num": 0.09,
+    "title": "kr"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S1"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "S2"
+      },
+      {
+        "stoichiometry": -1,
+        "target": "S3"
+      }
+    ],
+    "assignments": {
+      "ode_": "(-(C * (kf * S1 * S2 + (-1) * kr * S3)))"
+    },
+    "class": "Reaction",
+    "id": "reaction1",
+    "title": "reaction1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1 / C"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S1",
+    "title": "S1",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "litre",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0.5 / C"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S2",
+    "title": "S2",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "litre",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0 / C"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S3",
+    "title": "S3",
+    "units": [
+      {
+        "exponent": -1,
+        "kind": "litre",
+        "multiplier": 1
+      },
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "id": "t",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  }
+]

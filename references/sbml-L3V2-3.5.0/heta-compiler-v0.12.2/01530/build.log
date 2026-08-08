@@ -1,0 +1,23 @@
+Running compilation in directory "Y:\format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "references\sbml-L3V2-3.5.0\master\01530\input.heta"...
+[info]	Reading module of type "sbml" from file "cases\semantic\01530\01530-sbml-l3v2.xml"...
+[error]	P52 Some of properties do not satisfy requirements for class "Record"
+    1. /assignments/E50 should not be empty string.
+    2. /assignments/E50 should be a string, number or null.
+[info]	Platform hash: 7b1511093442e4815690ec5a581360020866b54dfec71cabc5190c68523eb698
+[info]	Setting references in elements, total length 182
+[error]	FunctionDef "sinh" is not found as expected here: P40 { math: undefined };
+[error]	FunctionDef "cosh" is not found as expected here: P41 { math: undefined };
+[error]	FunctionDef "asinh" is not found as expected here: P45 { math: undefined };
+[error]	FunctionDef "acosh" is not found as expected here: P46 { math: undefined };
+[error]	FunctionDef "atanh" is not found as expected here: P47 { math: undefined };
+[error]	FunctionDef "asech" is not found as expected here: P48 { math: undefined };
+[error]	FunctionDef "acsch" is not found as expected here: P49 { math: undefined };
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

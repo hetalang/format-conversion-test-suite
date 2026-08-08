@@ -1,0 +1,78 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T18:25:50.865Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "fdb61c8de1273f3fda8478df229663fe8ef1bd467d3dd108d6835abb8c72bb62",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "c"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S1"
+      }
+    ],
+    "assignments": {
+      "ode_": "1"
+    },
+    "class": "Reaction",
+    "id": "J0",
+    "reversible": false
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "p1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "p1"
+      }
+    ],
+    "assignments": {
+      "ode_": "J0"
+    },
+    "class": "Process",
+    "id": "p1_proc"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "c",
+    "id": "S1"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  }
+]

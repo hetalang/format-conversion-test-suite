@@ -1,0 +1,15 @@
+Running compilation in directory "Y:\format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "references\sbml-L3V2-3.5.0\master\01596\input.heta"...
+[info]	Reading module of type "sbml" from file "cases\semantic\01596\01596-sbml-l3v2.xml"...
+[info]	Platform hash: 86b5e9fc76e1a3addf7f5911e7d9036063d4c8ef39e9ffee278713ebb2db86cc
+[info]	Setting references in elements, total length 81
+[error]	FunctionDef "cosh" is not found as expected here: P1 { math: undefined };
+[error]	FunctionDef "cosh" is not found as expected here: E0 { trigger: cosh(t) > 0.5 };
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

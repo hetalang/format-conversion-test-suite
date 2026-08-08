@@ -1,0 +1,17 @@
+Running compilation in directory "Y:\format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "references\sbml-L3V2-3.5.0\master\01818\input.heta"...
+[info]	Reading module of type "sbml" from file "cases\semantic\01818\01818-sbml-l3v2.xml"...
+[error]	id must not be a reserved word, got "pi". Reserved words list: 
+	 include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, e, E, pi, PI, null
+[error]	id must not be a reserved word, got "PI". Reserved words list: 
+	 include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, e, E, pi, PI, null
+[info]	Platform hash: 31c53d4c56f00be2b4ce7cd3439014f9c6a8e942e61d7fa8e4ed1079e64afefc
+[info]	Setting references in elements, total length 79
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

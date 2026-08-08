@@ -1,0 +1,71 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T18:25:52.438Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "0fca58bbbc0ab194f4e742ce81a0606b0c87cac44daafcb0f473bd588a8a5b63",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "_E0",
+    "trigger": "t > 5.5"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "c"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S1"
+      }
+    ],
+    "assignments": {
+      "ode_": "k1"
+    },
+    "class": "Reaction",
+    "id": "J0",
+    "reversible": false
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "_E0": "1 + J0",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "k1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "c",
+    "id": "S1"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  }
+]

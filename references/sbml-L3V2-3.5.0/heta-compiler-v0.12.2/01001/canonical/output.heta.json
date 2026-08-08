@@ -1,0 +1,110 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T18:21:49.956Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "3239b2506e25bb7066e5419112f460be3ffa7f984d2369050b9b660f098b82ae",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "10"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "compartment",
+    "title": "compartment",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k1",
+    "num": 1.5,
+    "title": "k1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S2"
+      },
+      {
+        "stoichiometry": -1,
+        "target": "S1"
+      }
+    ],
+    "assignments": {
+      "ode_": "k1 * S1"
+    },
+    "class": "Reaction",
+    "id": "reaction1",
+    "reversible": false,
+    "title": "reaction1"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0.0015"
+    },
+    "class": "Species",
+    "compartment": "compartment",
+    "id": "S1",
+    "isAmount": true,
+    "title": "S1",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Species",
+    "compartment": "compartment",
+    "id": "S2",
+    "isAmount": true,
+    "title": "S2",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "id": "t",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  }
+]

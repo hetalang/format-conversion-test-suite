@@ -1,0 +1,77 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T18:37:18.495Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "2234ef1eb9f489d89d2dbd028aca2bec05a0342b6e2b6da007b7714bf1e9c0be",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "INF"
+    },
+    "boundary": true,
+    "class": "Record",
+    "id": "a"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "Inf"
+    },
+    "boundary": true,
+    "class": "Record",
+    "id": "b"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "inf"
+    },
+    "boundary": true,
+    "class": "Record",
+    "id": "c"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "Infinity"
+    },
+    "boundary": true,
+    "class": "Record",
+    "id": "d"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "inf",
+    "num": 0.1
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "Inf",
+    "num": 1
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "INF",
+    "num": 10
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  }
+]

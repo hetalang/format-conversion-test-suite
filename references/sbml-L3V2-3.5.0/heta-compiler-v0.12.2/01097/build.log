@@ -1,0 +1,14 @@
+Running compilation in directory "Y:\format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "references\sbml-L3V2-3.5.0\master\01097\input.heta"...
+[info]	Reading module of type "sbml" from file "cases\semantic\01097\01097-sbml-l3v2.xml"...
+[error]	generatedId_0 component does not exist which is not allowed for the "update" action.
+[info]	Platform hash: 68d24dfc417d4ba1105b65b00a3f139a7524a68a3d021187e7c6acc2c2be4ff1
+[info]	Setting references in elements, total length 86
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

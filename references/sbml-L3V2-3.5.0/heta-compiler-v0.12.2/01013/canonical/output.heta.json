@@ -1,0 +1,189 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T18:22:01.327Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "f849289835c3c741c074c8a8636eeb827b6dce1c4ffcad146965549766cc0156",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "10"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "compartment",
+    "title": "compartment",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k1",
+    "num": 620,
+    "title": "k1"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "k2",
+    "num": 500,
+    "title": "k2"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S3"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "S4"
+      },
+      {
+        "stoichiometry": -1,
+        "target": "S1"
+      },
+      {
+        "stoichiometry": -1,
+        "target": "S2"
+      }
+    ],
+    "assignments": {
+      "ode_": "k1 * S1 * S2"
+    },
+    "class": "Reaction",
+    "id": "reaction1",
+    "reversible": false,
+    "title": "reaction1"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S1"
+      },
+      {
+        "stoichiometry": 1,
+        "target": "S2"
+      },
+      {
+        "stoichiometry": -1,
+        "target": "S3"
+      },
+      {
+        "stoichiometry": -1,
+        "target": "S4"
+      }
+    ],
+    "assignments": {
+      "ode_": "k2 * S3 * S4"
+    },
+    "class": "Reaction",
+    "id": "reaction2",
+    "reversible": false,
+    "title": "reaction2"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0.01"
+    },
+    "class": "Species",
+    "compartment": "compartment",
+    "id": "S1",
+    "isAmount": true,
+    "title": "S1",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0.015"
+    },
+    "class": "Species",
+    "compartment": "compartment",
+    "id": "S2",
+    "isAmount": true,
+    "title": "S2",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0.02"
+    },
+    "class": "Species",
+    "compartment": "compartment",
+    "id": "S3",
+    "isAmount": true,
+    "title": "S3",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0.001"
+    },
+    "class": "Species",
+    "compartment": "compartment",
+    "id": "S4",
+    "isAmount": true,
+    "title": "S4",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "upsert",
+    "id": "t",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  }
+]

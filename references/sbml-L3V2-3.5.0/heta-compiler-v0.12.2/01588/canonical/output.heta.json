@@ -1,0 +1,125 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T18:31:29.512Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "c7e21afe3d241593a98d4b0a6723a2533b5fc3edc2dc298d9ab9d415bc1c7ebd",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "error_check",
+    "trigger": "t >= 99 and maxdiff < 0.2"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "error_check2",
+    "trigger": "maxdiff >= 4"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "error_check2": "1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "errorHigh"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "error_check": "1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "errorLow"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1 * 0.01"
+    },
+    "boundary": true,
+    "class": "Record",
+    "id": "k1"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "maxcheck",
+    "trigger": "abs(Q - R) > maxdiff"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "maxcheck": "abs(Q - R)",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "maxdiff"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "Qinc": "Q + k1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "Q"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "Qinc",
+    "trigger": "(t - reset) >= 0.01"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "Rinc": "R + k1",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "R"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "Qinc": "t",
+      "Rinc": "t",
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "reset"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "Rinc",
+    "trigger": "(t - reset) >= 0.01"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "Q + R"
+    },
+    "class": "Record",
+    "id": "S"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  }
+]

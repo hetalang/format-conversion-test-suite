@@ -1,0 +1,1 @@
+#include { source: ../../../../cases/semantic/01073/01073-sbml-l3v2.xml, type: sbml };
