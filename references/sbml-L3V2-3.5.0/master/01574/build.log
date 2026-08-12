@@ -1,0 +1,14 @@
+Running compilation in directory "Y:\format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "references\sbml-L3V2-3.5.0\master\01574\input.heta"...
+[info]	Reading module of type "sbml" from file "cases\semantic\01574\01574-sbml-l3v2.xml"...
+[error]	S1_stoich component does not exist which is not allowed for the "update" action.
+[info]	Platform hash: 30da1aa852db6b56e480442e10a63dcfb16e3892ae9102fb844fcaaab9fa1a79
+[info]	Setting references in elements, total length 82
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

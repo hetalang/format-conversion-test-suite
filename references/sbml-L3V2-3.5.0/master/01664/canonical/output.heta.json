@@ -1,0 +1,38 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T18:32:47.866Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "4983099a9924d79cf3ad55ac4a2486b521757503abba496fecb67c763643dabc",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E0",
+    "trigger": "t > 1.5"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E0": "6.02214076e+23",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "p1"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  }
+]

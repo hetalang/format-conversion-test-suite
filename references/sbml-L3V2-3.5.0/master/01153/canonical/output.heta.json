@@ -1,0 +1,37 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T18:24:33.081Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "11bf90f75b9d2e38a3f65e4166aa5e5efc1bfffdaa8e04811b969f2a80dc8499",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "i",
+    "num": 2
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "34 * i"
+    },
+    "class": "Record",
+    "id": "z"
+  }
+]

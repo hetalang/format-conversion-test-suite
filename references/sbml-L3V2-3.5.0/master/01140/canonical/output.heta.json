@@ -1,0 +1,48 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T18:24:16.070Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "90d29a15f92839f70592c8853493f80e938c64eb7440e6f97a64c7ac20b81a60",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "C"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "conv",
+    "num": 0.1
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "8"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "s8",
+    "isAmount": true
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  }
+]

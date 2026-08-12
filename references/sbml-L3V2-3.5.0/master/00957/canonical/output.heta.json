@@ -5,10 +5,10 @@
       "name": "heta-compiler",
       "version": "0.12.1"
     },
-    "created": "2026-08-06T20:28:27.294Z",
+    "created": "2026-08-07T08:32:06.876Z",
     "format": "JSON",
     "canonical": true,
-    "hashSum": "54313f49e2952f0aa6a1b05a93de2d58bad6deaf25b2110263b41dfe687bd9c8",
+    "hashSum": "b81781917152e7d2726ee52fb088773ef538b96545da3a52dc960c86ab991451",
     "hashAlgorithm": "sha256"
   },
   {
@@ -314,6 +314,39 @@
     ],
     "id": "sinh",
     "math": "0.5 * (exp(x) - exp(-x))"
+  },
+  {
+    "action": "defineUnit",
+    "id": "area",
+    "units": [
+      {
+        "exponent": 2,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "length",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "substance",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
   },
   {
     "action": "defineUnit",

@@ -1,0 +1,86 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T18:35:01.023Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "ccedb87907a33e7f25358035a674c56215369c4aa92e86573dd852ec0aecaf73",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "1"
+    },
+    "boundary": true,
+    "class": "Compartment",
+    "id": "C"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "S2"
+      },
+      {
+        "stoichiometry": -1,
+        "target": "S1"
+      }
+    ],
+    "assignments": {
+      "ode_": "m_cf__J0_local * s1_cf__J0_local * 0.01"
+    },
+    "class": "Reaction",
+    "id": "J0"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "m_cf__J0_local",
+    "num": 1
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "2 / C"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S1"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "s1_cf",
+    "num": 5
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "s1_cf__J0_local",
+    "num": 1
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "3 / C"
+    },
+    "class": "Species",
+    "compartment": "C",
+    "id": "S2"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  }
+]

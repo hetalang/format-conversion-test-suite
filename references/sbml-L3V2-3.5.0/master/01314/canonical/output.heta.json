@@ -1,0 +1,56 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T18:27:23.388Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "a8eb5bd1863b4e0e13f277fbe1a89315bfc0a3be3c80b9dc4cce5dd8440caf71",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "addoneagainandagain(3)"
+    },
+    "boundary": true,
+    "class": "Record",
+    "id": "p1"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "addone",
+    "math": "x + 1"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "addoneagain",
+    "math": "addone(x) + 1"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x"
+    ],
+    "id": "addoneagainandagain",
+    "math": "addoneagain(x) + addone(x) + 1"
+  }
+]

@@ -1,0 +1,132 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T17:56:21.788Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "2c932e74afe1bf3fc23ec2bafae7b78040dc2f72af0df6be4dc94dbda2c74b09",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "time"
+    },
+    "boundary": true,
+    "class": "Record",
+    "id": "a"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "Time"
+    },
+    "boundary": true,
+    "class": "Record",
+    "id": "b"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "TIME"
+    },
+    "boundary": true,
+    "class": "Record",
+    "id": "c"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "t"
+    },
+    "boundary": true,
+    "class": "Record",
+    "id": "d"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "time",
+    "num": 10
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "Time",
+    "num": 11
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "TIME",
+    "num": 12
+  },
+  {
+    "action": "defineUnit",
+    "id": "area",
+    "units": [
+      {
+        "exponent": 2,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "length",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "metre",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "substance",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "mole",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "time",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "second",
+        "multiplier": 1
+      }
+    ]
+  },
+  {
+    "action": "defineUnit",
+    "id": "volume",
+    "units": [
+      {
+        "exponent": 1,
+        "kind": "litre",
+        "multiplier": 1
+      }
+    ]
+  }
+]

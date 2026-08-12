@@ -1,0 +1,14 @@
+Running compilation in directory "Y:\format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results\sbml-L2V5-3.5.0\master\01817\input.heta"...
+[info]	Reading module of type "sbml" from file "cases\semantic\01817\01817-sbml-l2v5.xml"...
+[info]	Platform hash: 3dea960d18ea037bbb99bbb1c9644b47454d9b3fa0eb2190ee0ca2e4918e2d09
+[info]	Setting references in elements, total length 89
+[error]	Record assignments "a" should be a numeric expression.
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

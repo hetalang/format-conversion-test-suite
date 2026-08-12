@@ -1,0 +1,47 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T18:27:19.656Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "cfa10ac688b31950441df85ad3a273784c47a952c62f8c10a1db6942e3b4f273",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "getgetthree()"
+    },
+    "boundary": true,
+    "class": "Record",
+    "id": "p1"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "defineFunction",
+    "id": "getgetthree",
+    "math": "getthree()"
+  },
+  {
+    "action": "defineFunction",
+    "id": "getthree",
+    "math": "three()"
+  },
+  {
+    "action": "defineFunction",
+    "id": "three",
+    "math": "3"
+  }
+]

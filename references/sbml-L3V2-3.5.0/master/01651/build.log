@@ -1,0 +1,15 @@
+Running compilation in directory "Y:\format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "references\sbml-L3V2-3.5.0\master\01651\input.heta"...
+[info]	Reading module of type "sbml" from file "cases\semantic\01651\01651-sbml-l3v2.xml"...
+[info]	Platform hash: b0101872c220a6bc3073cc799848f6c19644c163d606e70b4cdab801960a24f7
+[info]	Setting references in elements, total length 84
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: m_cf [start_]= S1_stoich * 3;
+[error]	Component "S1_stoich" is not found in space "nameless" as expected in expression: s1_cf [start_]= S1_stoich * 5;
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

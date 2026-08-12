@@ -1,0 +1,77 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T18:37:34.350Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "f30f8a567fb00b766b2a6bac88bf0e23ee26ca9415ee49cae5b7efcf9324454e",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "time"
+    },
+    "boundary": true,
+    "class": "Record",
+    "id": "a"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "Time"
+    },
+    "boundary": true,
+    "class": "Record",
+    "id": "b"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "TIME"
+    },
+    "boundary": true,
+    "class": "Record",
+    "id": "c"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "t"
+    },
+    "boundary": true,
+    "class": "Record",
+    "id": "d"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "time",
+    "num": 10
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "Time",
+    "num": 11
+  },
+  {
+    "action": "upsert",
+    "class": "Const",
+    "id": "TIME",
+    "num": 12
+  }
+]

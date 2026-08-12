@@ -1,0 +1,14 @@
+Running compilation in directory "Y:\format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "results\sbml-L2V5-3.5.0\master\01485\input.heta"...
+[info]	Reading module of type "sbml" from file "cases\semantic\01485\01485-sbml-l2v5.xml"...
+[info]	Platform hash: a62234d4de888528a97c8b16370842cf51699c643b55894f59a05e6476b123df
+[info]	Setting references in elements, total length 135
+[error]	FunctionDef "tanh" is not found as expected here: my_tanh { math: tanh(x) };
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

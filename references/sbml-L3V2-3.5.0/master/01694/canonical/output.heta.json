@@ -1,0 +1,43 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T18:33:36.513Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "701e862a4f0e50a50924f50645fc79f43c6a760a1ea96005a341dc0144f1b643",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "class": "DSwitcher",
+    "id": "E0",
+    "trigger": "P1 > getPointNine()"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "E0": "3",
+      "start_": "1"
+    },
+    "class": "Record",
+    "id": "P1"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "defineFunction",
+    "id": "getPointNine",
+    "math": "0.9"
+  }
+]

@@ -1,0 +1,103 @@
+[
+  {
+    "action": "hasMeta",
+    "generator": {
+      "name": "heta-compiler",
+      "version": "0.12.1"
+    },
+    "created": "2026-08-08T18:30:17.071Z",
+    "format": "JSON",
+    "canonical": true,
+    "hashSum": "5acbf86720ffbd267907d39a76091d0be83dc71fd92978ffb7adec27998376e2",
+    "hashAlgorithm": "sha256"
+  },
+  {
+    "action": "setNS",
+    "space": "nameless",
+    "type": "concrete"
+  },
+  {
+    "action": "upsert",
+    "id": "t"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "0"
+    },
+    "class": "Record",
+    "id": "x"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "x"
+      }
+    ],
+    "assignments": {
+      "ode_": "1"
+    },
+    "class": "Process",
+    "id": "x_proc"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "start_": "2"
+    },
+    "class": "Record",
+    "id": "y"
+  },
+  {
+    "action": "upsert",
+    "actors": [
+      {
+        "stoichiometry": 1,
+        "target": "y"
+      }
+    ],
+    "assignments": {
+      "ode_": "(-2)"
+    },
+    "class": "Process",
+    "id": "y_proc"
+  },
+  {
+    "action": "upsert",
+    "assignments": {
+      "ode_": "my_piecewise(my_piecewise(2, my_gt(y, 1.49), 1), my_lteq(x, 0.49), 0)"
+    },
+    "class": "Record",
+    "id": "z"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "my_gt",
+    "math": "x > y"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y"
+    ],
+    "id": "my_lteq",
+    "math": "x <= y"
+  },
+  {
+    "action": "defineFunction",
+    "arguments": [
+      "x",
+      "y",
+      "z"
+    ],
+    "id": "my_piecewise",
+    "math": "(y ? x : z)"
+  }
+]

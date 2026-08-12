@@ -1,0 +1,14 @@
+Running compilation in directory "Y:\format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "references\sbml-L3V2-3.5.0\master\01495\input.heta"...
+[info]	Reading module of type "sbml" from file "cases\semantic\01495\01495-sbml-l3v2.xml"...
+[info]	Platform hash: d620a3df0e3c34525beb8acd88731c285d9e2312c182eeefe71873bfdcf34aa4
+[info]	Setting references in elements, total length 80
+[error]	FunctionDef "quotient" is not found as expected here: my_quotient { math: quotient(x, y) };
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+

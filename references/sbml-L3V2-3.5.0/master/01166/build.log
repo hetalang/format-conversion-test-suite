@@ -1,0 +1,19 @@
+Running compilation in directory "Y:\format-conversion-test-suite"...
+
+No declaration file, running with defaults...
+
+[info]	Heta compiler v0.12.1 is initialized for the platform "undefined"
+[info]	Reading module of type "heta" from file "references\sbml-L3V2-3.5.0\master\01166\input.heta"...
+[info]	Reading module of type "sbml" from file "cases\semantic\01166\01166-sbml-l3v2.xml"...
+[error]	id must not be a reserved word, got "E". Reserved words list: 
+	 include, block, namespace, abstract, concrete, begin, end, NaN, Infinity, e, E, pi, PI, null
+[info]	Platform hash: 2b3c1007f6a4ae98fcb0e1427c8f77641992f4e24ec3da30f860223baad7c199
+[info]	Setting references in elements, total length 84
+[error]	J0 Property "actors[2].target" has lost reference "E".
+[error]	Component "E" is not found in space "nameless" as expected in expression: J0 [ode_]= (S + E) / ES;
+[error]	J1 Property "actors[0].target" has lost reference "E".
+[error]	Component "E" is not found in space "nameless" as expected in expression: J1 [ode_]= ES / (E + D);
+[info]	Checking for circular references in Records.
+[warn]	Units checking and export were skipped because of errors in compilation.
+Compilation ERROR! See logs.
+
