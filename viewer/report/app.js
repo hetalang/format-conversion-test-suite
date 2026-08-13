@@ -87,12 +87,13 @@ function renderCaseDetails(caseResult) {
   elements.details.append(createElement('span', { className: `status ${statusName(caseResult)}` }, statusName(caseResult)));
 
   const list = createElement('dl', { className: 'detail-list' });
-  const addDetail = (label, value) => {
+  const addDetail = (label, value, className = '') => {
     if (value === undefined || value === null || value === '') return;
     list.append(createElement('dt', {}, label));
-    list.append(createElement('dd', {}, String(value)));
+    list.append(createElement('dd', { className }, String(value)));
   };
 
+  addDetail('Synopsis', caseResult.synopsis, 'synopsis');
   addDetail('Build status', caseResult.buildStatus);
   addDetail('Not evaluated component tags', caseResult.notEvaluatedComponentTags?.join(', '));
   addDetail('Not evaluated test tags', caseResult.notEvaluatedTestTags?.join(', '));

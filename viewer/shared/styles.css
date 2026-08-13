@@ -121,6 +121,7 @@ dialog::backdrop { background: rgb(16 22 44 / 54%); }
 .detail-list { display: grid; grid-template-columns: 10rem 1fr; gap: .65rem 1rem; margin: 1.2rem 0; }
 .detail-list dt { color: var(--muted); font-weight: 700; }
 .detail-list dd { margin: 0; overflow-wrap: anywhere; }
+.detail-list dd.synopsis { white-space: pre-line; }
 a { color: #3d50c8; }
 details { margin-top: 1rem; }
 pre { max-height: 260px; overflow: auto; padding: .85rem; border-radius: 8px; background: #252b3a; color: #e8edf9; white-space: pre-wrap; overflow-wrap: anywhere; }

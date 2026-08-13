@@ -142,6 +142,7 @@ async function buildCase(caseEntry, indexDirectory, targetDirectory, repositoryR
   const sourceFilePath = caseEntry[inputField];
   const result = {
     caseId: caseEntry.caseId,
+    synopsis: typeof caseEntry.synopsis === 'string' ? caseEntry.synopsis : '',
     sourcePath: sourceFilePath,
     status: 'failed',
   };
@@ -323,6 +324,7 @@ async function runSbmlReport(options, repositoryRoot) {
     } catch (error) {
       return markNotEvaluated({
         caseId: caseEntry.caseId,
+        synopsis: typeof caseEntry.synopsis === 'string' ? caseEntry.synopsis : '',
         sourcePath: caseEntry[inputField],
         status: 'failed',
         error: { message: error.message },

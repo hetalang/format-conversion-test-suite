@@ -81,7 +81,8 @@ npm run index:sbml
 ```
 
 This command writes a reproducible `cases/index.json` with one record per case,
-relative paths to available SBML L2V5 and L3V2 files, and summary counts.
+including its synopsis and tags, relative paths to available SBML L2V5 and L3V2
+files, and summary counts.
 
 ### Build master report
 

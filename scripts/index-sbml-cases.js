@@ -30,7 +30,7 @@ function resolveTargetDir(targetDir) {
   return targetPath;
 }
 
-async function readModelTags(semanticPath, caseId) {
+async function readModelMetadata(semanticPath, caseId) {
   const modelPath = path.join(semanticPath, caseId, `${caseId}-model.m`);
 
   try {
@@ -45,13 +45,39 @@ async function readModelTags(semanticPath, caseId) {
         : [];
     };
 
+    const readSynopsis = () => {
+      const lines = content.split(/\r?\n/);
+      const synopsisStart = lines.findIndex((line) => /^[ \t]*synopsis:[ \t]*/i.test(line));
+
+      if (synopsisStart === -1) {
+        return '';
+      }
+
+      const synopsis = [lines[synopsisStart].replace(/^[ \t]*synopsis:[ \t]*/i, '').trimEnd()];
+
+      for (let index = synopsisStart + 1; index < lines.length; index += 1) {
+        const line = lines[index];
+
+        // Synopsis continuations are indented, while the following metadata
+        // field begins at the start of the line.
+        if (!/^[ \t]+/.test(line) || /^[ \t]*[A-Za-z][A-Za-z0-9]*:[ \t]*/.test(line)) {
+          break;
+        }
+
+        synopsis.push(line.trim());
+      }
+
+      return synopsis.join('\n').trim();
+    };
+
     return {
+      synopsis: readSynopsis(),
       componentTags: readTags('componentTags'),
       testTags: readTags('testTags'),
     };
   } catch (error) {
     if (error.code === 'ENOENT') {
-      return { componentTags: [], testTags: [] };
+      return { synopsis: '', componentTags: [], testTags: [] };
     }
     throw error;
   }
@@ -87,7 +113,7 @@ async function main() {
       withFileTypes: true,
     });
 
-    const caseIndex = { caseId, ...(await readModelTags(semanticPath, caseId)) };
+    const caseIndex = { caseId, ...(await readModelMetadata(semanticPath, caseId)) };
 
     for (const file of files.sort((left, right) => left.name.localeCompare(right.name))) {
       const relativeFilePath = path
