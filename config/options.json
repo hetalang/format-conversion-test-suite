@@ -10,7 +10,7 @@
       "id": "sbml-L3V2-3.5.0-master",
       "type": "sbmlSemanticTestSuite",
       "inputField": "sbmlL3V2Path",
-      "targetDir": "references/sbml-L3V2-3.5.0/master",
+      "targetDir": "references/sbml-L3V2-3.5.0/heta-compiler-v0.12.2",
       "exports": [
         "canonical",
         "dynms"
@@ -20,7 +20,7 @@
       "id": "sbml-L2V5-3.5.0-master",
       "type": "sbmlSemanticTestSuite",
       "inputField": "sbmlL2V5Path",
-      "targetDir": "references/sbml-L2V5-3.5.0/master",
+      "targetDir": "references/sbml-L2V5-3.5.0/heta-compiler-v0.12.2",
       "exports": [
         "canonical",
         "dynms"

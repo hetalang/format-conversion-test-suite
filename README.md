@@ -36,8 +36,8 @@ file through a file picker or a public URL.
 See [`viewer/README.md`](viewer/README.md) for usage.
 
 For references use:
-- [SBML L3V2 Reference Report](https://hetalang.github.io/format-conversion-test-suite/report/?ref=https://raw.githubusercontent.com/hetalang/format-conversion-test-suite/refs/heads/main/references/sbml-L3V2-3.5.0/master/report.json)
-- [SBML L2V5 Reference Report](https://hetalang.github.io/format-conversion-test-suite/report/?ref=https://raw.githubusercontent.com/hetalang/format-conversion-test-suite/refs/heads/main/references/sbml-L2V5-3.5.0/master/report.json)
+- [SBML L3V2 Reference Report](https://hetalang.github.io/format-conversion-test-suite/report/?ref=https://raw.githubusercontent.com/hetalang/format-conversion-test-suite/refs/heads/main/references/sbml-L3V2-3.5.0/heta-compiler-v0.12.2/report.json)
+- [SBML L2V5 Reference Report](https://hetalang.github.io/format-conversion-test-suite/report/?ref=https://raw.githubusercontent.com/hetalang/format-conversion-test-suite/refs/heads/main/references/sbml-L2V5-3.5.0/heta-compiler-v0.12.2/report.json)
 
 
 ## Cases preparation
