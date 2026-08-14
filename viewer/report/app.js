@@ -41,6 +41,12 @@ function statusName(caseResult) {
   return knownStatuses.includes(caseResult.status) ? caseResult.status : 'unknown';
 }
 
+function caseNumber(index) {
+  const configuredSkip = Number(state.report?.command?.skip);
+  const skip = Number.isSafeInteger(configuredSkip) && configuredSkip >= 0 ? configuredSkip : 0;
+  return skip + index + 1;
+}
+
 function resolveArtifactPath(artifactPath) {
   if (!state.reportUrl || !artifactPath) return null;
   try {
@@ -141,20 +147,21 @@ function renderCases() {
   const search = elements.search.value.trim().toLowerCase();
   const selectedStatus = elements.filter.value;
   const cases = state.report.cases || [];
-  const visibleCases = cases.filter((caseResult) => {
+  const visibleCases = cases.map((caseResult, index) => ({ caseResult, index })).filter(({ caseResult }) => {
     const matchesSearch = String(caseResult.caseId || '').toLowerCase().includes(search);
     const matchesStatus = selectedStatus === 'all' || statusName(caseResult) === selectedStatus;
     return matchesSearch && matchesStatus;
   });
 
   elements.grid.replaceChildren();
-  for (const caseResult of visibleCases) {
+  for (const { caseResult, index } of visibleCases) {
     const status = statusName(caseResult);
+    const number = caseNumber(index);
     const button = createElement('button', {
       type: 'button',
       className: `case ${status}`,
-      title: `Case ${caseResult.caseId}: ${status}`,
-      'aria-label': `Open case ${caseResult.caseId}: ${status}`,
+      title: `\#${number} (ID ${caseResult.caseId}): ${status}`,
+      'aria-label': `Open case ${number} (ID ${caseResult.caseId}): ${status}`,
     });
     button.addEventListener('click', () => renderCaseDetails(caseResult));
     elements.grid.append(button);
