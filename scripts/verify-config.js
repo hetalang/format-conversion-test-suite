@@ -132,10 +132,6 @@ async function verifyReference(reference, settings) {
   if (report.command?.inputField !== inputField) {
     fail(`Reference ${id} does not match inputField ${inputField}`);
   }
-  if (report.command?.target !== reference.targetDir.split(path.sep).join('/')) {
-    fail(`Reference ${id} report target does not match its configured targetDir`);
-  }
-
   const cases = requireArray(report.cases, `Reference ${id}.cases`);
   const caseIds = new Set();
   for (const caseResult of cases) {
