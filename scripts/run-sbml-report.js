@@ -31,7 +31,7 @@ const sbmlL3Defaults = [
   '#defineFunction implies { arguments: [A, B], math: "(not A) or B" };',
 ];
 
-const supportedInputFields = new Set(['sbmlL2V5Path', 'sbmlL3V2Path']);
+const supportedInputFields = new Set(['sbmlL2V5Path', 'sbmlL3V1Path', 'sbmlL3V2Path']);
 
 function parsePositiveInteger(value, optionName, defaultValue) {
   if (value === undefined) {
@@ -142,7 +142,7 @@ function createBuildSource(sourcePath, distDirectory, inputField) {
     lines.push(...sbmlL2Defaults, '');
   }
 
-  if (inputField === 'sbmlL3V2Path') {
+  if (inputField === 'sbmlL3V1Path' || inputField === 'sbmlL3V2Path') {
     lines.push(...sbmlL3Defaults, '');
   }
 

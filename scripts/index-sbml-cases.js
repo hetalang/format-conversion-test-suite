@@ -106,6 +106,7 @@ async function main() {
 
   const cases = [];
   let sbmlL2V5Count = 0;
+  let sbmlL3V1Count = 0;
   let sbmlL3V2Count = 0;
 
   for (const caseId of caseDirectories) {
@@ -124,6 +125,10 @@ async function main() {
       if (file.isFile() && file.name.endsWith('-sbml-l3v2.xml')) {
         caseIndex.sbmlL3V2Path = relativeFilePath;
         sbmlL3V2Count += 1;
+      }
+      if (file.isFile() && file.name.endsWith('-sbml-l3v1.xml')) {
+        caseIndex.sbmlL3V1Path = relativeFilePath;
+        sbmlL3V1Count += 1;
       }
       if (file.isFile() && file.name.endsWith('-sbml-l2v5.xml')) {
         caseIndex.sbmlL2V5Path = relativeFilePath;
@@ -144,6 +149,7 @@ async function main() {
     summary: {
       caseCount: caseDirectories.length,
       sbmlL2V5Count,
+      sbmlL3V1Count,
       sbmlL3V2Count,
     },
     cases,
