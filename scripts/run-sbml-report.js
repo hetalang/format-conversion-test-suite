@@ -370,7 +370,7 @@ async function runSbmlReport(options, repositoryRoot) {
   const failed = results.filter((result) => result.status === 'failed').length;
   const notEvaluated = results.filter((result) => result.status === 'not-evaluated').length;
   const report = {
-    description: 'This report records conversion of SBML Semantic Test Suite cases with heta-compiler. Each selected SBML case is built as a Heta project; successful builds produce canonical JSON and DynMS artifacts for structural validation and comparison.',
+    description: 'This report records conversion of SBML Semantic Test Suite cases with heta-compiler. Each selected SBML case is built as a Heta project; successful builds produce canonical JSON and DynMS artifacts.',
     generator: {
       type: 'sbml-report',
       packageName: packageInfo.name,

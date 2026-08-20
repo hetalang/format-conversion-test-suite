@@ -1,10 +1,8 @@
 # FCTS Viewers
 
-Dependency-free static pages for viewing FCTS reports and comparisons.
+Dependency-free static page for viewing FCTS reports.
 
 - [`report/`](report/) displays an FCTS `report.json`.
-- [`compare/`](compare/) displays an FCTS `compare.json` for canonical JSON or
-  DynMS.
 
 The viewer recognizes `success`, `failed`, and `not-evaluated` case statuses.
 Use `not-evaluated` for cases intentionally excluded from assessment; they are
@@ -30,14 +28,6 @@ https://example.org/viewer/report/?ref=https://example.org/reports/master/report
 ```
 
 The report host must permit cross-origin browser requests (CORS).
-
-## Comparison viewer
-
-Open `compare/index.html` and choose a local `compare.json`, or load it from a
-URL with `?ref=<url>`. It shows the case availability status and, for
-`success-success` cases, whether the selected JSON artifacts are equal or
-different. When a comparison is loaded from a URL, its diff files are loaded on
-demand from paths stored in `compare.json`; the hosting site must permit CORS.
 
 ## Publishing
 

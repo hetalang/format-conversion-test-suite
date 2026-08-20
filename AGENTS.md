@@ -2,25 +2,20 @@
 
 ## Project purpose
 
-This repository is a reproducible format-conversion test suite. Its current
-scope is conversion of the [SBML Semantic Test Suite](https://github.com/sbmlteam/sbml-test-suite)
+This repository is a reproducible format-conversion build test suite. Its
+current scope is conversion of the [SBML Semantic Test Suite](https://github.com/sbmlteam/sbml-test-suite)
 by `heta-compiler`:
 
 ```text
 SBML → Heta → canonical JSON + DynMS
 ```
 
-It validates conversion outputs, their structure, and reproducibility. It does
-not run or validate numerical simulations.
+It verifies that conversion builds produce the required artifacts. It does not
+compare generated files with baselines and does not run or validate numerical
+simulations.
 
-The repository has two complementary roles:
-
-- acquire and index a pinned external SBML test suite;
-- keep manually approved converter outputs as versioned baselines for future
-  comparison.
-
-Future work may add normalization, output comparison, other conversion paths,
-and other source formats. Keep these stages independent.
+Future work may add other source formats or build-test types. Keep stages
+independent.
 
 ## Technology and conventions
 
@@ -38,19 +33,18 @@ and other source formats. Keep these stages independent.
 ## Repository layout
 
 ```text
-config/options.json       Pinned SBML archive and approved reference definitions
-scripts/                  Acquisition, indexing, reporting, and validation scripts
-bin/fcts.js               CLI entry point (`fcts sbml-report`, `fcts compare`)
+config/options.json       Pinned SBML archive definition
+scripts/                  Acquisition, indexing, reporting, and configuration validation
+bin/fcts.js               CLI entry point (`fcts sbml-report`)
 cases/                    Downloaded SBML suite and generated index (gitignored)
-results/                  Disposable candidate report runs (gitignored)
-references/               Versioned, manually approved baseline outputs
+results/                  Disposable report runs (gitignored)
 viewer/                   Dependency-free static report viewer published to Pages
-.github/workflows/        Configuration verification and viewer deployment
+.github/workflows/        Configuration verification and manual build workflow
 ```
 
 `config/options.json` is the source of truth for the downloaded test-suite
-version, archive URL, checksum, extraction target, and registered references.
-Do not duplicate these values in scripts.
+version, archive URL, checksum, and extraction target. Do not duplicate these
+values in scripts.
 
 ## Case preparation
 
@@ -61,7 +55,7 @@ npm run fetch:sbml
 ```
 
 The script downloads the configured archive, verifies its SHA-256 digest, and
-extracts it to the configured target. It deliberately replaces the downloaded
+extracts it to the configured target. It deliberately replaces downloaded
 `cases/` content on every successful run; this is disposable external input.
 
 ### Index cases
@@ -76,7 +70,8 @@ path. It also reads the corresponding `*-model.m` file and records
 `componentTags` and `testTags` as arrays. Keep this parser deliberately simple
 and tied to the test-suite metadata format.
 
-The index is generated input and is not a baseline artifact.
+The index records the pinned test-suite identity, including archive URL and
+checksum. It is generated input, not a versioned baseline artifact.
 
 ## Building reports
 
@@ -88,16 +83,15 @@ npx fcts sbml-report --source=cases/index --input-field=sbmlL3V2Path \
 ```
 
 Supported input fields are `sbmlL3V2Path` (the default) and `sbmlL2V5Path`.
-The selected field and its format are recorded in the report. The target is
-always deleted and recreated at the start of a run, so report runs must use a
-dedicated target directory.
+The target is always deleted and recreated at the start of a run, so report
+runs must use a dedicated target directory.
 
 Every selected case is attempted even if another case fails. For each case the
 runner creates `<caseId>/input.heta`, invokes `heta build`, and stores compiler
-logs as `<caseId>/build.log` when Heta creates them. Successful cases reference
-their canonical JSON and DynMS artifacts by paths relative to the report
-directory. L2V5 builds add standard unit definitions before including SBML;
-L3V2 builds do not.
+logs as `<caseId>/build.log` when Heta creates them. A successful case records
+paths to canonical JSON and DynMS artifacts relative to the report directory.
+L2V5 builds add standard unit definitions before including SBML; L3V2 builds do
+not.
 
 Cases can be excluded from assessment without skipping their build:
 
@@ -108,86 +102,44 @@ npx fcts sbml-report --source=cases/index --input-field=sbmlL2V5Path \
 ```
 
 Matching cases have `status: "not-evaluated"`, retain their generated artifacts
-and compiler result in `buildStatus`, and record the matched component and/or
-test tags. Valid primary statuses are `success`, `failed`, and
-`not-evaluated`.
+and compiler result in `buildStatus`, and record matching tags. Valid primary
+statuses are `success`, `failed`, and `not-evaluated`.
 
-`report.json` is the machine-readable report. Its `generator` block records
-the report-generator type (`sbml-report`) and the FCTS package name and version.
-It also records run metadata, command parameters, the runtime environment, pinned
-test-suite identity, and per-case results. Do not persist a top-level `summary`:
-consumers must derive counts from `report.cases` so that manually edited
-statuses remain consistent automatically.
-
-`fcts compare --reference=<directory> --candidate=<directory>
---artifact=<canonical|dynms> --target=<directory>` runs one comparison pass. It
-checks that a candidate contains no case IDs absent from the reference and
-recreates the target directory for its `compare.json` and optional `diffs/`
-directory. Every reference case receives `success-success`, `success-failed`,
-`failed-success`, `failed-failed`, or `error`. `error` means a report declared a
-successful case but omitted the selected artifact path or pointed outside the
-report directory or to a missing file. For `success-success` cases, the pass
-parses and compares JSON artifacts: `artifactComparison.status` is `equal`,
-`different`, or `error`. A difference has a separate JSON Pointer diff file;
-source artifacts are not copied. `--ignore-paths=<path,...>` excludes exact JSON
-Pointer branches from the artifact diff and records the applied paths in
-`compare.json`; it is supplied manually and is not read from configuration. An
-incompatible candidate is recorded in the file rather than treated as a command
-failure. Its `generator` block identifies the comparison generator and package
-name and version. `--require-compatible` makes an incompatible comparison exit
-with a non-zero status after writing its result.
-
-## References
-
-`references/` contains approved baselines, such as the L2V5 and L3V2 master
-reports defined in `config/options.json`. These files are part of the repository
-and may be reviewed or corrected manually.
-
-Never generate directly into a reference directory and never automatically
-replace approved reference files. A developer must explicitly approve and copy
-candidate results into a reference. Preserve manual status decisions, notably
-`not-evaluated` for deliberately unsupported features.
-
-`npm run verify:config` is the lightweight repository check used in CI. It
-checks that the configured archive URL is reachable without downloading it and
-validates each registered reference report, its suite identity, selected input
-field, statuses, and required output artifacts. It does not execute Heta or
-require `cases/` to be downloaded.
+`report.json` is machine-readable. Its `generator` block records the
+report-generator type and FCTS package identity; `environment` records the Heta
+version and test-suite identity. It also records run metadata, command
+parameters, and per-case results. Do not persist a top-level `summary`:
+consumers must derive counts from `report.cases`.
 
 ## Viewer and GitHub Pages
 
-`viewer/` contains dependency-free static report and comparison applications.
-`viewer/report/` can load a local `report.json` or a public report URL through
-`?ref=<url>` (the remote host must allow CORS). It calculates overview counts
-from case records and renders `not-evaluated` cases in gray, including their
-exclusion tags. `viewer/compare/` loads a `compare.json`, renders the comparison
-and artifact statuses, and loads remote diff files on demand.
+`viewer/` contains a dependency-free static report application. It can load a
+local `report.json` or a public report URL through `?ref=<url>` (the remote host
+must allow CORS). It displays report metadata and derived case counts, and
+renders `not-evaluated` cases in gray, including their exclusion tags.
 
 `.github/workflows/deploy-viewer.yml` publishes `viewer/` to GitHub Pages.
 Keep the viewer static: it must work locally without a build step and on Pages.
 
 ## CI and verification
 
+- `npm run verify:config` checks that the configured archive URL is reachable
+  and validates its pinned configuration. It does not execute Heta or require
+  downloaded cases.
 - Configuration verification runs on pushes, pull requests, and manual runs.
 - CI uses Node.js 24 and current major GitHub Actions versions.
-- Do not add Heta conversion runs to the default CI workflow: the full suite is
-  external, slow, and intended for explicit baseline or candidate runs.
 - `Verify heta-compiler conversion` is a manual workflow for a selected
-  `heta-compiler` ref. It generates L2V5 and L3V2 candidate reports, compares
-  canonical JSON and DynMS against approved references, writes a Step Summary,
-  and uploads reports and diffs as an artifact. It never updates references.
+  `heta-compiler` ref. It generates L2V5 and L3V2 reports, fails when any case
+  fails to build, and uploads the reports for inspection.
 - For changes to reporting scripts, at minimum run Node syntax checks and a
-  small non-reference report target if Heta and downloaded cases are available.
-- For changes to configuration or reference validation, run
-  `npm run verify:config`. Report unrelated missing baseline artifacts rather
-  than silently altering a reference to make the check pass.
+  small report target if Heta and downloaded cases are available.
+- For changes to configuration validation, run `npm run verify:config`.
 
 ## Rules for agents
 
 - Preserve deterministic behavior and keep stages independently executable.
-- Do not modify downloaded cases, generated candidate results, or approved
-  references beyond the scope explicitly requested by the user.
-- Do not make a generated output become a baseline implicitly.
+- Do not modify downloaded cases or generated report results beyond the scope
+  explicitly requested by the user.
 - Keep reports machine-readable and backward-compatible where practical.
 - When adding report fields, update the viewer and validation only when they
   genuinely consume the field; do not duplicate derived data.
