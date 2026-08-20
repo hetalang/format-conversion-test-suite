@@ -535,12 +535,18 @@ async function runSbmlReport(options, repositoryRoot) {
 
   const reportPath = path.join(targetDirectory, 'report.json');
   await fsp.writeFile(reportPath, `${JSON.stringify(report, null, 2)}\n`);
+  const successRatio = assessed > 0 ? succeeded / assessed : 0;
+  const badgeColor = assessed > 0 && successRatio === 1
+    ? 'brightgreen'
+    : successRatio > 0.8
+      ? 'yellow'
+      : 'red';
   const badge = {
     schemaVersion: 1,
     label: report.generator.type,
     message: `${succeeded}/${assessed}`,
-    color: assessed > 0 && failed === 0 ? 'brightgreen' : 'red',
-    ...(failed > 0 ? { isError: true } : {}),
+    color: badgeColor,
+    ...(badgeColor === 'red' && failed > 0 ? { isError: true } : {}),
     cacheSeconds: 300,
   };
   const badgePath = path.join(targetDirectory, 'badge.json');
