@@ -61,7 +61,10 @@ npx fcts sbml-report --source=cases/index --input-field=sbmlL3V2Path \
 The target directory is recreated for each run. `report.json` records the
 conversion description, generator and run metadata, command parameters, build
 status for every selected case, and relative paths to artifacts from successful
-builds.
+builds. After a successful compiler build, canonical JSON and DynMS artifacts
+are validated against the `heta-compiler/heta-json-schema` and
+`heta-compiler/dynms-schema` exports. A schema violation marks the case as
+`failed` while preserving `buildStatus: "success"` and validation errors.
 
 `--input-field` accepts `sbmlL3V2Path` (default) or `sbmlL2V5Path`. To build
 cases while excluding selected tags from assessment, use

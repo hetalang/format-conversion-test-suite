@@ -133,6 +133,10 @@ function renderCaseDetails(caseResult) {
 
   addDetail('Synopsis', caseResult.synopsis, 'synopsis');
   addDetail('Build status', caseResult.buildStatus);
+  addDetail('Canonical schema validation', caseResult.validation?.canonical?.status);
+  addDetail('Canonical schema', caseResult.validation?.canonical?.schema?.title);
+  addDetail('DynMS schema validation', caseResult.validation?.dynms?.status);
+  addDetail('DynMS schema', caseResult.validation?.dynms?.schema?.title);
   addDetail('Not evaluated component tags', caseResult.notEvaluatedComponentTags?.join(', '));
   addDetail('Not evaluated test tags', caseResult.notEvaluatedTestTags?.join(', '));
   addDetail('Source', caseResult.sourcePath);
@@ -163,6 +167,12 @@ function renderCaseDetails(caseResult) {
   const diagnostics = [
     ['Compiler output', caseResult.error?.stdout],
     ['Compiler error output', caseResult.error?.stderr],
+    ['DynMS schema validation errors', caseResult.validation?.dynms?.errors?.length
+      ? JSON.stringify(caseResult.validation.dynms.errors, null, 2)
+      : null],
+    ['Canonical schema validation errors', caseResult.validation?.canonical?.errors?.length
+      ? JSON.stringify(caseResult.validation.canonical.errors, null, 2)
+      : null],
   ].filter(([, value]) => value);
 
   for (const [title, value] of diagnostics) {

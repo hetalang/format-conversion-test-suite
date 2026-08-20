@@ -2,6 +2,8 @@ const fs = require('node:fs');
 const fsp = require('node:fs/promises');
 const path = require('node:path');
 const spawn = require('cross-spawn');
+const Ajv2020 = require('ajv/dist/2020');
+const addFormats = require('ajv-formats');
 const packageInfo = require('../package.json');
 
 const sbmlL2Defaults = [
@@ -162,6 +164,103 @@ function createBuildSource(sourcePath, distDirectory, inputField) {
   return lines.join('\n');
 }
 
+function resolveInside(directory, relativePath, label) {
+  const resolvedPath = path.resolve(directory, relativePath);
+  const relative = path.relative(directory, resolvedPath);
+
+  if (!relative || relative.startsWith('..') || path.isAbsolute(relative)) {
+    throw new Error(`${label} must be inside ${directory}`);
+  }
+
+  return resolvedPath;
+}
+
+async function loadSchemaValidator(repositoryRoot, exportName, sourceName, schemaLabel) {
+  const npmRootResult = await runProcess('npm', ['root', '--global'], repositoryRoot);
+  if (npmRootResult.exitCode !== 0) {
+    throw new Error(npmRootResult.error || npmRootResult.stderr || 'Unable to locate global npm packages');
+  }
+
+  const globalNpmRoot = npmRootResult.stdout.trim();
+  if (!globalNpmRoot) {
+    throw new Error('Unable to locate global npm packages');
+  }
+
+  const compilerPackageDirectory = path.join(globalNpmRoot, 'heta-compiler');
+  const compilerPackagePath = path.join(compilerPackageDirectory, 'package.json');
+  let compilerPackage;
+  try {
+    compilerPackage = JSON.parse(await fsp.readFile(compilerPackagePath, 'utf8'));
+  } catch (error) {
+    throw new Error(`Unable to read global heta-compiler package metadata: ${error.message}`);
+  }
+
+  const schemaExport = compilerPackage.exports?.[exportName];
+  if (typeof schemaExport !== 'string' || !schemaExport) {
+    throw new Error(`The installed heta-compiler does not export ${exportName}`);
+  }
+
+  const schemaPath = resolveInside(
+    compilerPackageDirectory,
+    schemaExport,
+    `heta-compiler ${exportName} export`,
+  );
+  let schema;
+  try {
+    schema = JSON.parse(await fsp.readFile(schemaPath, 'utf8'));
+  } catch (error) {
+    throw new Error(`Unable to read ${schemaLabel} from heta-compiler: ${error.message}`);
+  }
+
+  const ajv = new Ajv2020({ allErrors: true, strict: false });
+  addFormats(ajv);
+  let validate;
+  try {
+    validate = ajv.compile(schema);
+  } catch (error) {
+    throw new Error(`Unable to compile ${schemaLabel}: ${error.message}`);
+  }
+
+  return {
+    validate,
+    schema: {
+      source: sourceName,
+      ...(typeof schema.$id === 'string' ? { id: schema.$id } : {}),
+      ...(typeof schema.title === 'string' ? { title: schema.title } : {}),
+    },
+  };
+}
+
+async function validateJsonOutput(outputPath, schemaValidator, artifactLabel) {
+  let output;
+  try {
+    output = JSON.parse(await fsp.readFile(outputPath, 'utf8'));
+  } catch (error) {
+    return {
+      status: 'failed',
+      schema: schemaValidator.schema,
+      errors: [{ message: `Unable to parse ${artifactLabel} JSON: ${error.message}` }],
+    };
+  }
+
+  const valid = schemaValidator.validate(output);
+  if (valid) {
+    return { status: 'valid', schema: schemaValidator.schema };
+  }
+
+  return {
+    status: 'failed',
+    schema: schemaValidator.schema,
+    errors: (schemaValidator.validate.errors || []).map((error) => ({
+      instancePath: error.instancePath,
+      schemaPath: error.schemaPath,
+      keyword: error.keyword,
+      message: error.message,
+      params: error.params,
+    })),
+  };
+}
+
 function formatNotEvaluatedTags(notEvaluatedTags) {
   const groups = [];
   if (notEvaluatedTags.componentTags.length) {
@@ -173,7 +272,7 @@ function formatNotEvaluatedTags(notEvaluatedTags) {
   return groups.join('; ');
 }
 
-async function buildCase(caseEntry, indexDirectory, targetDirectory, repositoryRoot, inputField, notEvaluatedTags) {
+async function buildCase(caseEntry, indexDirectory, targetDirectory, repositoryRoot, inputField, notEvaluatedTags, validators) {
   const sourceFilePath = caseEntry[inputField];
   const result = {
     caseId: caseEntry.caseId,
@@ -235,6 +334,21 @@ async function buildCase(caseEntry, indexDirectory, targetDirectory, repositoryR
       canonical: path.relative(targetDirectory, canonicalPath).split(path.sep).join('/'),
       dynms: path.relative(targetDirectory, dynmsPath).split(path.sep).join('/'),
     };
+    result.validation = {
+      canonical: await validateJsonOutput(canonicalPath, validators.canonical, 'canonical'),
+      dynms: await validateJsonOutput(dynmsPath, validators.dynms, 'DynMS'),
+    };
+    const invalidArtifacts = Object.entries(result.validation)
+      .filter(([, validation]) => validation.status === 'failed')
+      .map(([artifact]) => artifact);
+    if (invalidArtifacts.length) {
+      result.buildStatus = 'success';
+      result.status = 'failed';
+      result.error = {
+        phase: 'json-schema-validation',
+        message: `${invalidArtifacts.join(' and ')} output does not conform to the exported schema`,
+      };
+    }
     return result;
   }
 
@@ -266,7 +380,7 @@ function markNotEvaluated(result, notEvaluatedTags) {
   return {
     ...result,
     // Keep the actual compiler result while excluding this case from evaluation.
-    buildStatus: result.status,
+    buildStatus: result.buildStatus || result.status,
     status: 'not-evaluated',
     ...(componentTags.length ? { notEvaluatedComponentTags: componentTags } : {}),
     ...(testTags.length ? { notEvaluatedTestTags: testTags } : {}),
@@ -338,6 +452,21 @@ async function runSbmlReport(options, repositoryRoot) {
   if (hetaVersionResult.exitCode !== 0) {
     throw new Error(hetaVersionResult.error || hetaVersionResult.stderr || 'Unable to determine heta version');
   }
+  const [canonicalValidator, dynmsValidator] = await Promise.all([
+    loadSchemaValidator(
+      repositoryRoot,
+      './heta-json-schema',
+      'heta-compiler/heta-json-schema',
+      'the canonical JSON schema',
+    ),
+    loadSchemaValidator(
+      repositoryRoot,
+      './dynms-schema',
+      'heta-compiler/dynms-schema',
+      'the DynMS schema',
+    ),
+  ]);
+  const validators = { canonical: canonicalValidator, dynms: dynmsValidator };
 
   const startedAt = new Date().toISOString();
   const results = await runWithConcurrency(cases, concurrency, async (caseEntry) => {
@@ -354,6 +483,7 @@ async function runSbmlReport(options, repositoryRoot) {
         repositoryRoot,
         inputField,
         notEvaluatedTags,
+        validators,
       );
       return markNotEvaluated(result, notEvaluatedTags);
     } catch (error) {
@@ -396,6 +526,8 @@ async function runSbmlReport(options, repositoryRoot) {
     environment: {
       hetaVersion: hetaVersionResult.stdout.trim(),
       testSuite: index.testSuite,
+      canonicalSchema: canonicalValidator.schema,
+      dynmsSchema: dynmsValidator.schema,
     },
     cases: results,
   };

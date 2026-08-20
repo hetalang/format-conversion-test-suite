@@ -90,8 +90,10 @@ Every selected case is attempted even if another case fails. For each case the
 runner creates `<caseId>/input.heta`, invokes `heta build`, and stores compiler
 logs as `<caseId>/build.log` when Heta creates them. A successful case records
 paths to canonical JSON and DynMS artifacts relative to the report directory.
-L2V5 builds add standard unit definitions before including SBML; L3V2 builds do
-not.
+Both artifacts are then validated against their corresponding public
+`heta-compiler` schema exports; a schema violation marks the case as `failed`
+with `buildStatus: "success"`. L2V5 builds add standard unit definitions before
+including SBML; L3V2 builds do not.
 
 Cases can be excluded from assessment without skipping their build:
 
