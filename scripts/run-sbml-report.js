@@ -10,6 +10,18 @@ const sbmlL2Defaults = [
   '#defineUnit length { units: metre };',
   '#defineUnit substance { units: mole };',
   '#defineUnit time { units: second };',
+  '#defineFunction sinh { arguments: [x], math: "0.5 * (exp(x) - exp(-x))" };',
+  '#defineFunction cosh { arguments: [x], math: "0.5 * (exp(x) + exp(-x))" };',
+  '#defineFunction tanh { arguments: [x], math: "(exp(2 * x) - 1) / (exp(2 * x) + 1)" };',
+  '#defineFunction sech { arguments: [x], math: "1 / cosh(x)" };',
+  '#defineFunction csch { arguments: [x], math: "1 / sinh(x)" };',
+  '#defineFunction coth { arguments: [x], math: "1 / tanh(x)" };',
+  '#defineFunction asinh { arguments: [x], math: "ln(x + sqrt(x^2 + 1))" };',
+  '#defineFunction acosh { arguments: [x], math: "ln(x + sqrt(x^2 - 1))" };',
+  '#defineFunction atanh { arguments: [x], math: "0.5 * ln((1 + x) / (1 - x))" };',
+  '#defineFunction asech { arguments: [x], math: "ln((1 + sqrt(1 - x^2)) / x)" };',
+  '#defineFunction acsch { arguments: [x], math: "ln(1 / x + sqrt(1 + 1 / x^2))" };',
+  '#defineFunction acoth { arguments: [x], math: "0.5 * ln((x + 1) / (x - 1))" };'
 ];
 
 const sbmlL3Defaults = [
@@ -358,6 +370,7 @@ async function runSbmlReport(options, repositoryRoot) {
   const failed = results.filter((result) => result.status === 'failed').length;
   const notEvaluated = results.filter((result) => result.status === 'not-evaluated').length;
   const report = {
+    description: 'This report records conversion of SBML Semantic Test Suite cases with heta-compiler. Each selected SBML case is built as a Heta project; successful builds produce canonical JSON and DynMS artifacts for structural validation and comparison.',
     generator: {
       type: 'sbml-report',
       packageName: packageInfo.name,
@@ -382,8 +395,8 @@ async function runSbmlReport(options, repositoryRoot) {
     },
     environment: {
       hetaVersion: hetaVersionResult.stdout.trim(),
+      testSuite: index.testSuite,
     },
-    testSuite: index.testSuite,
     cases: results,
   };
 

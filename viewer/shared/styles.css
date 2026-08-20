@@ -45,15 +45,6 @@ h2 { font-size: 1.2rem; letter-spacing: -0.02em; }
 .eyebrow { color: var(--accent); font-size: .72rem; font-weight: 800; letter-spacing: .11em; }
 .page-header .eyebrow { color: #aeb9ff; }
 
-.report-status {
-  flex: 0 0 auto;
-  padding: .4rem .7rem;
-  border: 1px solid #6571bf;
-  border-radius: 999px;
-  color: #e1e5ff;
-  font-size: .85rem;
-}
-
 main { width: min(1160px, calc(100% - 3rem)); margin: 2rem auto 4rem; }
 .panel, .overview > * { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); box-shadow: 0 4px 18px rgb(31 39 68 / 4%); }
 
@@ -69,6 +60,13 @@ main { width: min(1160px, calc(100% - 3rem)); margin: 2rem auto 4rem; }
 code { padding: .08rem .28rem; border-radius: 4px; background: #eef1f8; color: #40506e; }
 
 .error-message { margin: 1rem 0; padding: .85rem 1rem; border: 1px solid #f5abb5; border-radius: 9px; color: #9e2231; background: var(--failure-soft); }
+.report-context { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr); gap: 1.5rem; margin-top: 1.4rem; padding: 1.25rem 1.4rem; }
+.report-description { margin-top: .45rem; color: var(--muted); }
+.report-metadata { display: grid; grid-template-columns: max-content minmax(0, 1fr); align-content: start; gap: .45rem .9rem; margin: 0; }
+.report-metadata dt { color: var(--muted); font-weight: 700; }
+.report-metadata dd { margin: 0; overflow-wrap: anywhere; }
+.report-command { grid-column: 1 / -1; padding-top: 1rem; border-top: 1px solid var(--line); }
+.report-command h3 { margin: 0 0 .65rem; font-size: .9rem; letter-spacing: .02em; text-transform: uppercase; }
 .overview { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: .85rem; margin: 1.4rem 0; }
 .overview > * { padding: 1rem; }
 .overview .label { color: var(--muted); font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
@@ -128,6 +126,7 @@ pre { max-height: 260px; overflow: auto; padding: .85rem; border-radius: 8px; ba
 
 @media (max-width: 760px) {
   .page-header, .loader, .cases-header { align-items: stretch; flex-direction: column; }
+  .report-context { grid-template-columns: 1fr; }
   .overview { grid-template-columns: repeat(2, 1fr); }
   .url-field input { width: 100%; }
   .detail-list { grid-template-columns: 1fr; gap: .12rem; }

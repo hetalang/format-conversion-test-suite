@@ -121,12 +121,13 @@ async function verifyReference(reference, settings) {
     fail(`Reference ${id} report is not valid JSON: ${error.message}`);
   }
 
-  if (report.testSuite?.version !== settings.version) {
+  const testSuite = report.environment?.testSuite || report.testSuite;
+  if (testSuite?.version !== settings.version) {
     fail(`Reference ${id} uses an unexpected test-suite version`);
   }
   requireString(report.generator?.type, `Reference ${id}.generator.type`);
   requireString(report.generator?.packageVersion, `Reference ${id}.generator.packageVersion`);
-  if (report.testSuite?.archiveSha256 !== settings.archiveSha256) {
+  if (testSuite?.archiveSha256 !== settings.archiveSha256) {
     fail(`Reference ${id} uses an unexpected test-suite checksum`);
   }
   if (report.command?.inputField !== inputField) {

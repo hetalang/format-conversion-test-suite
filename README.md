@@ -93,9 +93,10 @@ report:
 npx fcts sbml-report --source=cases/index --input-field=sbmlL3V2Path --target=results/candidate --concurrency=1 --skip=0 --limit=10
 ```
 
-The target directory is replaced for each run. `report.json` records every
-case's build status and, for successful cases, the relative paths to canonical
-JSON and DynMS output files. The optional `--input-field` selects the SBML path
+The target directory is replaced for each run. `report.json` includes a
+human-readable description of the conversion workflow, its generator and run
+metadata, every case's build status, and, for successful cases, the relative
+paths to canonical JSON and DynMS output files. The optional `--input-field` selects the SBML path
 field from each case: `sbmlL3V2Path` (the default) or `sbmlL2V5Path`. The
 selected field is recorded in `report.json` under `command.inputField`.
 

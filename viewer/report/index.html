@@ -12,9 +12,8 @@
       <div>
         <p class="eyebrow">HETA PROJECT / FORMAT CONVERSION TEST SUITE</p>
         <h1>Report viewer</h1>
-        <p class="subtitle">Explore conversion results case by case.</p>
+        <p class="subtitle">Explore conversion results and their provenance case by case.</p>
       </div>
-      <div id="report-status" class="report-status">No report loaded</div>
       <nav class="viewer-nav" aria-label="Viewer sections">
         <a class="active" href="./">Report</a>
         <a href="../compare/">Compare</a>
@@ -44,6 +43,23 @@
       <p id="error-message" class="error-message" hidden></p>
 
       <section id="report-content" hidden>
+        <section class="report-context panel" aria-labelledby="report-context-heading">
+          <div>
+            <p class="eyebrow">ABOUT THIS REPORT</p>
+            <h2 id="report-context-heading">Report details</h2>
+            <p id="report-description" class="report-description"></p>
+          </div>
+          <dl id="report-metadata" class="report-metadata"></dl>
+          <section class="report-command" aria-labelledby="report-command-heading">
+            <h3 id="report-command-heading">Command</h3>
+            <dl id="report-command-values" class="report-metadata"></dl>
+          </section>
+          <section class="report-command report-environment" aria-labelledby="report-environment-heading">
+            <h3 id="report-environment-heading">Environment</h3>
+            <dl id="report-environment-values" class="report-metadata"></dl>
+          </section>
+        </section>
+
         <section id="overview" class="overview" aria-label="Report overview"></section>
 
         <section class="cases panel" aria-labelledby="cases-heading">

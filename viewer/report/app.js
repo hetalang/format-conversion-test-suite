@@ -3,8 +3,11 @@ const elements = {
   url: document.querySelector('#report-url'),
   loadUrl: document.querySelector('#load-url'),
   error: document.querySelector('#error-message'),
-  status: document.querySelector('#report-status'),
   content: document.querySelector('#report-content'),
+  description: document.querySelector('#report-description'),
+  metadata: document.querySelector('#report-metadata'),
+  command: document.querySelector('#report-command-values'),
+  environment: document.querySelector('#report-environment-values'),
   overview: document.querySelector('#overview'),
   grid: document.querySelector('#case-grid'),
   count: document.querySelector('#case-count'),
@@ -63,28 +66,53 @@ function appendOverviewItem(label, value, extraClass = '') {
   elements.overview.append(item);
 }
 
+function formatDate(value) {
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? value : date.toLocaleString();
+}
+
+function appendReportMetadata(label, value, target = elements.metadata) {
+  if (value === undefined || value === null || value === '') return;
+  target.append(createElement('dt', {}, label));
+  target.append(createElement('dd', {}, formatMetadataValue(value)));
+}
+
+function formatMetadataValue(value) {
+  return typeof value === 'object' ? JSON.stringify(value) : String(value);
+}
+
+function renderReportContext() {
+  const { report } = state;
+  const command = report.command || {};
+  const environment = report.environment || {};
+  const generator = report.generator || {};
+  elements.description.textContent = typeof report.description === 'string' && report.description.trim()
+    ? report.description
+    : 'No description was provided by this report generator.';
+  elements.metadata.replaceChildren();
+  elements.command.replaceChildren();
+  elements.environment.replaceChildren();
+  appendReportMetadata('Generator', generator.type);
+  appendReportMetadata('Status', report.status);
+  appendReportMetadata('Started', formatDate(report.startedAt));
+  appendReportMetadata('Completed', formatDate(report.completedAt));
+  for (const [key, value] of Object.entries(command)) {
+    appendReportMetadata(key, value, elements.command);
+  }
+  for (const [key, value] of Object.entries(environment)) {
+    appendReportMetadata(key, value, elements.environment);
+  }
+}
+
 function renderOverview() {
   const { report } = state;
-  const environment = report.environment || {};
   const cases = report.cases || [];
   const countStatus = (status) => cases.filter((caseResult) => statusName(caseResult) === status).length;
   elements.overview.replaceChildren();
 
-  appendOverviewItem('Report status', report.status || 'unknown', 'meta-value');
   appendOverviewItem('Successful', countStatus('success'), 'success-value');
   appendOverviewItem('Failed', countStatus('failed'), 'failure-value');
   appendOverviewItem('Not evaluated', countStatus('not-evaluated'), 'neutral-value');
-  const skippedComponentTags = report.command?.skipComponentTags;
-  if (Array.isArray(skippedComponentTags) && skippedComponentTags.length) {
-    appendOverviewItem('Not evaluated component tags', skippedComponentTags.join(', '), 'meta-value');
-  }
-  const skippedTestTags = report.command?.skipTestTags;
-  if (Array.isArray(skippedTestTags) && skippedTestTags.length) {
-    appendOverviewItem('Not evaluated test tags', skippedTestTags.join(', '), 'meta-value');
-  }
-  if (environment.hetaVersion) {
-    appendOverviewItem('Heta compiler', environment.hetaVersion, 'meta-value');
-  }
 }
 
 function renderCaseDetails(caseResult) {
@@ -169,16 +197,16 @@ function renderCases() {
   elements.count.textContent = `${visibleCases.length} of ${cases.length} cases`;
 }
 
-function renderReport(report, reportUrl, label) {
+function renderReport(report, reportUrl) {
   if (!report || !Array.isArray(report.cases)) {
     throw new Error('The selected JSON is not an FCTS report with a cases array.');
   }
 
   state.report = report;
   state.reportUrl = reportUrl;
-  elements.status.textContent = label;
   elements.content.hidden = false;
   showError('');
+  renderReportContext();
   renderOverview();
   renderCases();
 }
@@ -187,14 +215,14 @@ async function loadUrl(url) {
   const response = await fetch(url);
   if (!response.ok) throw new Error(`Unable to load report: HTTP ${response.status}`);
   const report = await response.json();
-  renderReport(report, response.url, new URL(response.url).hostname);
+  renderReport(report, response.url);
 }
 
 elements.file.addEventListener('change', async () => {
   const [file] = elements.file.files;
   if (!file) return;
   try {
-    renderReport(JSON.parse(await file.text()), null, file.name);
+    renderReport(JSON.parse(await file.text()), null);
   } catch (error) {
     showError(error.message);
   }
