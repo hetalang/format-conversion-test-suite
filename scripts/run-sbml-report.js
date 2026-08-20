@@ -499,6 +499,7 @@ async function runSbmlReport(options, repositoryRoot) {
   const succeeded = results.filter((result) => result.status === 'success').length;
   const failed = results.filter((result) => result.status === 'failed').length;
   const notEvaluated = results.filter((result) => result.status === 'not-evaluated').length;
+  const assessed = succeeded + failed;
   const report = {
     description: 'This report records conversion of SBML Semantic Test Suite cases with heta-compiler. Each selected SBML case is built as a Heta project; successful builds produce canonical JSON and DynMS artifacts.',
     generator: {
@@ -534,7 +535,18 @@ async function runSbmlReport(options, repositoryRoot) {
 
   const reportPath = path.join(targetDirectory, 'report.json');
   await fsp.writeFile(reportPath, `${JSON.stringify(report, null, 2)}\n`);
+  const badge = {
+    schemaVersion: 1,
+    label: report.generator.type,
+    message: `${succeeded}/${assessed}`,
+    color: assessed > 0 && failed === 0 ? 'brightgreen' : 'red',
+    ...(failed > 0 ? { isError: true } : {}),
+    cacheSeconds: 300,
+  };
+  const badgePath = path.join(targetDirectory, 'badge.json');
+  await fsp.writeFile(badgePath, `${JSON.stringify(badge, null, 2)}\n`);
   console.log(`Report written to ${reportPath}`);
+  console.log(`Badge endpoint data written to ${badgePath}`);
 
   return report;
 }

@@ -65,6 +65,10 @@ builds. After a successful compiler build, canonical JSON and DynMS artifacts
 are validated against the `heta-compiler/heta-json-schema` and
 `heta-compiler/dynms-schema` exports. A schema violation marks the case as
 `failed` while preserving `buildStatus: "success"` and validation errors.
+The target also receives `badge.json`, which is compatible with the
+[Shields endpoint badge](https://shields.io/badges/endpoint-badge). It contains
+successful assessed cases over all assessed cases; `not-evaluated` cases are
+excluded.
 
 `--input-field` accepts `sbmlL3V2Path` (default) or `sbmlL2V5Path`. To build
 cases while excluding selected tags from assessment, use

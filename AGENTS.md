@@ -113,6 +113,10 @@ version and test-suite identity. It also records run metadata, command
 parameters, and per-case results. Do not persist a top-level `summary`:
 consumers must derive counts from `report.cases`.
 
+Each report target also contains `badge.json` in the Shields endpoint badge
+schema. It stores derived successful and assessed case counts only; do not add
+them as a report summary.
+
 ## Viewer and GitHub Pages
 
 `viewer/` contains a dependency-free static report application. It can load a
