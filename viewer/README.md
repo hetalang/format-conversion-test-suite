@@ -18,9 +18,9 @@ affected case's details.
 Open `report/index.html` in a browser and choose a local `report.json` file.
 This mode also works without a web server.
 
-The viewer shows the report description, generator, status, start and completion
-times, and all available `command` and `environment` fields as key-value pairs.
-Older reports without a description remain supported.
+The viewer shows the report description, status, start and completion times, and
+all available `generator`, `command`, and `environment` fields as key-value
+pairs. Older reports without a description remain supported.
 
 To load a hosted report, enter its URL in the page or add it as a query
 parameter:

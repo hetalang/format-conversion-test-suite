@@ -6,6 +6,7 @@ const elements = {
   content: document.querySelector('#report-content'),
   description: document.querySelector('#report-description'),
   metadata: document.querySelector('#report-metadata'),
+  generator: document.querySelector('#report-generator-values'),
   command: document.querySelector('#report-command-values'),
   environment: document.querySelector('#report-environment-values'),
   overview: document.querySelector('#overview'),
@@ -90,12 +91,15 @@ function renderReportContext() {
     ? report.description
     : 'No description was provided by this report generator.';
   elements.metadata.replaceChildren();
+  elements.generator.replaceChildren();
   elements.command.replaceChildren();
   elements.environment.replaceChildren();
-  appendReportMetadata('Generator', generator.type);
   appendReportMetadata('Status', report.status);
   appendReportMetadata('Started', formatDate(report.startedAt));
   appendReportMetadata('Completed', formatDate(report.completedAt));
+  for (const [key, value] of Object.entries(generator)) {
+    appendReportMetadata(key, value, elements.generator);
+  }
   for (const [key, value] of Object.entries(command)) {
     appendReportMetadata(key, value, elements.command);
   }

@@ -11,6 +11,7 @@ async function readOptions() {
   if (
     !settings ||
     typeof settings.version !== 'string' ||
+    typeof settings.archiveUrl !== 'string' ||
     typeof settings.targetDir !== 'string'
   ) {
     throw new Error(`Invalid SBML Test Suite configuration in ${optionsPath}`);
@@ -143,6 +144,7 @@ async function main() {
     schemaVersion: 1,
     testSuite: {
       version: settings.version,
+      archiveUrl: settings.archiveUrl,
       archiveSha256: settings.archiveSha256,
     },
     root: path.relative(casesPath, semanticPath).split(path.sep).join('/'),
