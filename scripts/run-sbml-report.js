@@ -498,7 +498,6 @@ async function runSbmlReport(options, repositoryRoot) {
   });
   const succeeded = results.filter((result) => result.status === 'success').length;
   const failed = results.filter((result) => result.status === 'failed').length;
-  const notEvaluated = results.filter((result) => result.status === 'not-evaluated').length;
   const assessed = succeeded + failed;
   const report = {
     description: 'This report records conversion of SBML Semantic Test Suite cases with heta-compiler. Each selected SBML case is built as a Heta project; successful builds produce canonical JSON and DynMS artifacts.',
@@ -507,11 +506,7 @@ async function runSbmlReport(options, repositoryRoot) {
       packageName: packageInfo.name,
       packageVersion: packageInfo.version,
     },
-    status: failed > 0
-      ? 'completed-with-errors'
-      : notEvaluated > 0
-        ? 'completed-with-not-evaluated'
-        : 'success',
+    status: failed > 0 ? 'completed-with-errors' : 'success',
     startedAt,
     completedAt: new Date().toISOString(),
     command: {
