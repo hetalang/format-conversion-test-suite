@@ -70,8 +70,8 @@ The target also receives `badge.json`, which is compatible with the
 successful assessed cases over all assessed cases; `not-evaluated` cases are
 excluded.
 
-`--input-field` accepts `sbmlL3V2Path` (default) or `sbmlL2V5Path`. To build
-cases while excluding selected tags from assessment, use
+`--input-field` accepts `sbmlL3V2Path` (default), `sbmlL3V1Path`, or
+`sbmlL2V5Path`. To build cases while excluding selected tags from assessment, use
 `--skip-component-tags` and `--skip-test-tags`; matching cases keep their build
 result but receive status `not-evaluated`. Excluded cases do not affect the
 overall report status: a report is `success` when every assessed case succeeds.

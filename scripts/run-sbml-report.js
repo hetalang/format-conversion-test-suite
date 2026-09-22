@@ -6,7 +6,7 @@ const Ajv2020 = require('ajv/dist/2020');
 const addFormats = require('ajv-formats');
 const packageInfo = require('../package.json');
 
-const sbmlL2Defaults = [
+const sbmlL2V5Defaults = [
   '#defineUnit volume { units: litre };',
   '#defineUnit area { units: metre^2 };',
   '#defineUnit length { units: metre };',
@@ -26,7 +26,23 @@ const sbmlL2Defaults = [
   '#defineFunction acoth { arguments: [x], math: "0.5 * ln((x + 1) / (x - 1))" };'
 ];
 
-const sbmlL3Defaults = [
+const sbmlL3V1Defaults = [
+  '#defineFunction sinh { arguments: [x], math: "0.5 * (exp(x) - exp(-x))" };',
+  '#defineFunction cosh { arguments: [x], math: "0.5 * (exp(x) + exp(-x))" };',
+  '#defineFunction tanh { arguments: [x], math: "(exp(2 * x) - 1) / (exp(2 * x) + 1)" };',
+  '#defineFunction sech { arguments: [x], math: "1 / cosh(x)" };',
+  '#defineFunction csch { arguments: [x], math: "1 / sinh(x)" };',
+  '#defineFunction coth { arguments: [x], math: "1 / tanh(x)" };',
+  '#defineFunction asinh { arguments: [x], math: "ln(x + sqrt(x^2 + 1))" };',
+  '#defineFunction acosh { arguments: [x], math: "ln(x + sqrt(x^2 - 1))" };',
+  '#defineFunction atanh { arguments: [x], math: "0.5 * ln((1 + x) / (1 - x))" };',
+  '#defineFunction asech { arguments: [x], math: "ln((1 + sqrt(1 - x^2)) / x)" };',
+  '#defineFunction acsch { arguments: [x], math: "ln(1 / x + sqrt(1 + 1 / x^2))" };',
+  '#defineFunction acoth { arguments: [x], math: "0.5 * ln((x + 1) / (x - 1))" };',
+  '#defineFunction sign { arguments: [x], math: "piecewise(-1, x < 0, 1, x > 0, 0)" };',
+];
+
+const sbmlL3V2Defaults = [
   '#defineFunction sinh { arguments: [x], math: "0.5 * (exp(x) - exp(-x))" };',
   '#defineFunction cosh { arguments: [x], math: "0.5 * (exp(x) + exp(-x))" };',
   '#defineFunction tanh { arguments: [x], math: "(exp(2 * x) - 1) / (exp(2 * x) + 1)" };',
@@ -46,6 +62,11 @@ const sbmlL3Defaults = [
 ];
 
 const supportedInputFields = new Set(['sbmlL2V5Path', 'sbmlL3V1Path', 'sbmlL3V2Path']);
+const sbmlDefaultsByInputField = {
+  sbmlL2V5Path: sbmlL2V5Defaults,
+  sbmlL3V1Path: sbmlL3V1Defaults,
+  sbmlL3V2Path: sbmlL3V2Defaults,
+};
 
 function parsePositiveInteger(value, optionName, defaultValue) {
   if (value === undefined) {
@@ -150,15 +171,7 @@ function runProcess(command, argumentsList, cwd) {
 
 function createBuildSource(sourcePath, distDirectory, inputField) {
   const includePath = path.relative(distDirectory, sourcePath).split(path.sep).join('/');
-  const lines = [];
-
-  if (inputField === 'sbmlL2V5Path') {
-    lines.push(...sbmlL2Defaults, '');
-  }
-
-  if (inputField === 'sbmlL3V1Path' || inputField === 'sbmlL3V2Path') {
-    lines.push(...sbmlL3Defaults, '');
-  }
+  const lines = [...sbmlDefaultsByInputField[inputField], ''];
 
   lines.push(`#include { source: ${includePath}, type: sbml };`, '');
   return lines.join('\n');
