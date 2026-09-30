@@ -565,4 +565,18 @@ async function runSbmlReport(options, repositoryRoot) {
   return report;
 }
 
-module.exports = { runSbmlReport };
+module.exports = {
+  createBuildSource,
+  fileExists,
+  findMatchingTags,
+  formatNotEvaluatedTags,
+  markNotEvaluated,
+  parseCommaSeparatedValues,
+  parseNonNegativeInteger,
+  parsePositiveInteger,
+  resolveIndexPath,
+  resolveInsideRepository,
+  runProcess,
+  runSbmlReport,
+  runWithConcurrency,
+};

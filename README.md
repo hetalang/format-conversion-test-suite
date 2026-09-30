@@ -80,6 +80,22 @@ excluded.
 result but receive status `not-evaluated`. Excluded cases do not affect the
 overall report status: a report is `success` when every assessed case succeeds.
 
+## Simulate DynMS output
+
+The L2V5 simulation command creates the same per-case Heta project structure
+as the conversion report, then passes that project to DynMSR `heta_load()`.
+DynMSR performs the Heta-to-DynMS import, runs mrgsolve with the indexed time
+grid and tolerances, and compares the result with the Semantic Test Suite CSV:
+
+```sh
+npx fcts sbml-dynms-simulation --source=cases/index --input-field=sbmlL2V5Path \
+  --target=results/simulation --concurrency=1 --limit=10
+```
+
+Before it begins, the command checks that DynMSR is installed in the active R
+library and records the installed DynMSR and DynMS format versions. Only
+`sbmlL2V5Path` is supported at present.
+
 ## GitHub Actions
 
 The manual **Verify heta-compiler conversion** workflow downloads and indexes

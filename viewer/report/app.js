@@ -137,6 +137,9 @@ function renderCaseDetails(caseResult) {
   addDetail('Canonical schema', caseResult.validation?.canonical?.schema?.title);
   addDetail('DynMS schema validation', caseResult.validation?.dynms?.status);
   addDetail('DynMS schema', caseResult.validation?.dynms?.schema?.title);
+  addDetail('Simulation comparison', caseResult.comparison?.status);
+  addDetail('Compared values', caseResult.comparison?.comparedValues);
+  addDetail('Maximum absolute error', caseResult.comparison?.maxAbsoluteError);
   addDetail('Not evaluated component tags', caseResult.notEvaluatedComponentTags?.join(', '));
   addDetail('Not evaluated test tags', caseResult.notEvaluatedTestTags?.join(', '));
   addDetail('Source', caseResult.sourcePath);
@@ -172,6 +175,9 @@ function renderCaseDetails(caseResult) {
       : null],
     ['Canonical schema validation errors', caseResult.validation?.canonical?.errors?.length
       ? JSON.stringify(caseResult.validation.canonical.errors, null, 2)
+      : null],
+    ['Simulation comparison failures', caseResult.comparison?.failures?.length
+      ? JSON.stringify(caseResult.comparison.failures, null, 2)
       : null],
   ].filter(([, value]) => value);
 
