@@ -3,7 +3,8 @@ const path = require('node:path');
 const packageInfo = require('../package.json');
 const common = require('./run-sbml-report');
 
-const inputField = 'sbmlL2V5Path';
+const defaultInputField = 'sbmlL2V5Path';
+const supportedInputFields = new Set(['sbmlL2V5Path', 'sbmlL3V1Path', 'sbmlL3V2Path']);
 const relative = (from, target) => path.relative(from, target).split(path.sep).join('/');
 
 function csv(text, label) {
@@ -63,16 +64,16 @@ async function readDynmsEnvironment(repositoryRoot) {
   }
 }
 
-async function runCase(entry, indexDirectory, target, root, tags) {
-  const result = { caseId: entry.caseId, synopsis: entry.synopsis || '', sourcePath: entry[inputField], status: 'failed' };
+async function runCase(entry, indexDirectory, target, root, selectedInputField, tags) {
+  const result = { caseId: entry.caseId, synopsis: entry.synopsis || '', sourcePath: entry[selectedInputField], status: 'failed' };
   console.log(`Simulating case ${entry.caseId}${common.formatNotEvaluatedTags(tags) ? ` (not evaluated: ${common.formatNotEvaluatedTags(tags)})` : ''}...`);
   if (!entry.simulation?.timeCourse) { result.error = { message: 'Case has no time-course simulation settings' }; return result; }
-  const source = path.resolve(indexDirectory, entry[inputField]);
+  const source = path.resolve(indexDirectory, entry[selectedInputField]);
   if (path.relative(indexDirectory, source).startsWith('..')) { result.error = { message: 'Source path is outside the index directory' }; return result; }
   const directory = path.join(target, entry.caseId); const heta = path.join(directory, 'input.heta'); const log = path.join(directory, 'build.log');
   const settings = path.join(directory, 'simulation-input.json'); const output = path.join(directory, 'simulation.csv');
   await fs.mkdir(directory, { recursive: true });
-  await Promise.all([fs.writeFile(heta, common.createBuildSource(source, directory, inputField)), fs.writeFile(settings, `${JSON.stringify(entry.simulation, null, 2)}\n`)]);
+  await Promise.all([fs.writeFile(heta, common.createBuildSource(source, directory, selectedInputField)), fs.writeFile(settings, `${JSON.stringify(entry.simulation, null, 2)}\n`)]);
   result.buildSourcePath = relative(target, heta); result.simulationInputPath = relative(target, settings);
   const simulated = await common.runProcess('Rscript', ['--vanilla', path.join(root, 'scripts', 'run-dynms-simulation.R'), directory, 'input.heta', output, settings, log], root);
   if (await common.fileExists(log)) result.logPath = relative(target, log);
@@ -89,7 +90,8 @@ async function runCase(entry, indexDirectory, target, root, tags) {
 
 async function runSbmlDynmsSimulation(options, root) {
   if (!options.source || !options.target) throw new Error('--source and --target are required');
-  if ((options['input-field'] || inputField) !== inputField) throw new Error(`Unsupported --input-field; only ${inputField} is currently supported`);
+  const inputField = options['input-field'] || defaultInputField;
+  if (!supportedInputFields.has(inputField)) throw new Error(`Unsupported --input-field: ${inputField}`);
   const concurrency = common.parsePositiveInteger(options.concurrency, '--concurrency', 1); const limit = common.parsePositiveInteger(options.limit, '--limit', undefined); const skip = common.parseNonNegativeInteger(options.skip, '--skip', 0);
   const skippedComponentTags = common.parseCommaSeparatedValues(options['skip-component-tags'], '--skip-component-tags'); const skippedTestTags = common.parseCommaSeparatedValues(options['skip-test-tags'], '--skip-test-tags');
   const [indexPath, dynmsEnvironment] = await Promise.all([common.resolveIndexPath(root, options.source), readDynmsEnvironment(root)]);
@@ -101,11 +103,11 @@ async function runSbmlDynmsSimulation(options, root) {
   const startedAt = new Date().toISOString();
   const casesResult = await common.runWithConcurrency(cases, concurrency, async (entry) => {
     const tags = { componentTags: common.findMatchingTags(entry, 'componentTags', skippedComponentTags), testTags: common.findMatchingTags(entry, 'testTags', skippedTestTags) };
-    try { return common.markNotEvaluated(await runCase(entry, path.dirname(indexPath), target, root, tags), tags); }
+    try { return common.markNotEvaluated(await runCase(entry, path.dirname(indexPath), target, root, inputField, tags), tags); }
     catch (error) { return common.markNotEvaluated({ caseId: entry.caseId, status: 'failed', error: { message: error.message } }, tags); }
   });
   const succeeded = casesResult.filter((entry) => entry.status === 'success').length; const failed = casesResult.filter((entry) => entry.status === 'failed').length; const assessed = succeeded + failed;
-  const report = { description: 'This report records SBML L2V5 conversion through heta-compiler, DynMSR/mrgsolve simulation, and comparison with SBML Semantic Test Suite reference results.', generator: { type: 'sbml-dynms-simulation', packageName: packageInfo.name, packageVersion: packageInfo.version }, status: failed ? 'completed-with-errors' : 'success', startedAt, completedAt: new Date().toISOString(), command: { source: relative(root, indexPath), target: relative(root, target), inputField, concurrency, ...(skip ? { skip } : {}), ...(limit === undefined ? {} : { limit }), ...(skippedComponentTags.length ? { skipComponentTags: skippedComponentTags } : {}), ...(skippedTestTags.length ? { skipTestTags: skippedTestTags } : {}) }, environment: { hetaVersion: hetaVersion.stdout.trim(), ...dynmsEnvironment, testSuite: index.testSuite, simulationBackend: 'DynMSR/mrgsolve' }, cases: casesResult };
+  const report = { description: 'This report records SBML conversion through heta-compiler, DynMSR/mrgsolve simulation, and comparison with SBML Semantic Test Suite reference results.', generator: { type: 'sbml-dynms-simulation', packageName: packageInfo.name, packageVersion: packageInfo.version }, status: failed ? 'completed-with-errors' : 'success', startedAt, completedAt: new Date().toISOString(), command: { source: relative(root, indexPath), target: relative(root, target), inputField, concurrency, ...(skip ? { skip } : {}), ...(limit === undefined ? {} : { limit }), ...(skippedComponentTags.length ? { skipComponentTags: skippedComponentTags } : {}), ...(skippedTestTags.length ? { skipTestTags: skippedTestTags } : {}) }, environment: { hetaVersion: hetaVersion.stdout.trim(), ...dynmsEnvironment, testSuite: index.testSuite, simulationBackend: 'DynMSR/mrgsolve' }, cases: casesResult };
   await fs.writeFile(path.join(target, 'report.json'), `${JSON.stringify(report, null, 2)}\n`);
   const ratio = assessed ? succeeded / assessed : 0; await fs.writeFile(path.join(target, 'badge.json'), `${JSON.stringify({ schemaVersion: 1, label: report.generator.type, message: `${succeeded}/${assessed}`, color: assessed && ratio === 1 ? 'brightgreen' : ratio > 0.8 ? 'yellow' : 'red', ...(failed ? { isError: true } : {}), cacheSeconds: 300 }, null, 2)}\n`);
   console.log(`Report written to ${path.join(target, 'report.json')}`); return report;

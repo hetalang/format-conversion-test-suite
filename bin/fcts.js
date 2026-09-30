@@ -27,7 +27,7 @@ function parseOptions(argumentsList) {
 function printUsage() {
   console.log('Usage:');
   console.log('  fcts sbml-report --source=<index> --target=<directory> [--input-field=<field>] [--concurrency=<number>] [--skip=<number>] [--limit=<number>] [--skip-component-tags=<tag,...>] [--skip-test-tags=<tag,...>]');
-  console.log('  fcts sbml-dynms-simulation --source=<index> --target=<directory> [--input-field=sbmlL2V5Path] [--concurrency=<number>] [--skip=<number>] [--limit=<number>] [--skip-component-tags=<tag,...>] [--skip-test-tags=<tag,...>]');
+  console.log('  fcts sbml-dynms-simulation --source=<index> --target=<directory> [--input-field=sbmlL2V5Path|sbmlL3V1Path|sbmlL3V2Path] [--concurrency=<number>] [--skip=<number>] [--limit=<number>] [--skip-component-tags=<tag,...>] [--skip-test-tags=<tag,...>]');
 }
 
 async function main() {
