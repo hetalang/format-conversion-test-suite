@@ -153,6 +153,9 @@ function renderCaseDetails(caseResult) {
     ...(caseResult.buildSourcePath ? { input: caseResult.buildSourcePath } : {}),
     ...(caseResult.outputs || {}),
     ...(caseResult.logPath ? { log: caseResult.logPath } : {}),
+    ...(Array.isArray(caseResult.simulationPlotPaths)
+      ? Object.fromEntries(caseResult.simulationPlotPaths.map((plotPath, index) => [`plot ${index + 1}`, plotPath]))
+      : {}),
   };
   if (Object.keys(artifacts).length) {
     const outputHeading = createElement('h3', {}, 'Artifacts');

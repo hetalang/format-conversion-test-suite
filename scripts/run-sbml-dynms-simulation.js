@@ -71,16 +71,24 @@ async function runCase(entry, indexDirectory, target, root, selectedInputField, 
   const source = path.resolve(indexDirectory, entry[selectedInputField]);
   if (path.relative(indexDirectory, source).startsWith('..')) { result.error = { message: 'Source path is outside the index directory' }; return result; }
   const directory = path.join(target, entry.caseId); const heta = path.join(directory, 'input.heta'); const log = path.join(directory, 'build.log');
-  const settings = path.join(directory, 'simulation-input.json'); const output = path.join(directory, 'simulation.csv');
+  const settings = path.join(directory, 'simulation-input.json'); const output = path.join(directory, 'simulation.csv'); const plotDirectory = directory;
   await fs.mkdir(directory, { recursive: true });
   await Promise.all([fs.writeFile(heta, common.createBuildSource(source, directory, selectedInputField)), fs.writeFile(settings, `${JSON.stringify(entry.simulation, null, 2)}\n`)]);
   result.buildSourcePath = relative(target, heta); result.simulationInputPath = relative(target, settings);
-  const simulated = await common.runProcess('Rscript', ['--vanilla', path.join(root, 'scripts', 'run-dynms-simulation.R'), directory, 'input.heta', output, settings, log], root);
+  const referencePath = path.resolve(indexDirectory, entry.simulation.referenceResultsPath);
+  const simulated = await common.runProcess('Rscript', ['--vanilla', path.join(root, 'scripts', 'run-dynms-simulation.R'), directory, 'input.heta', output, settings, log, referencePath, plotDirectory], root);
   if (await common.fileExists(log)) result.logPath = relative(target, log);
   if (simulated.exitCode !== 0 || !(await common.fileExists(output))) { result.error = { phase: 'heta-load-simulation', message: simulated.error || 'DynMSR heta_load simulation did not produce output', exitCode: simulated.exitCode, stdout: simulated.stdout, ...(simulated.stderr ? { stderr: simulated.stderr } : {}) }; return result; }
   result.outputs = { simulation: relative(target, output) };
+  const plotPaths = entry.simulation.variables.map((_, index) => path.join(plotDirectory, `plot-${String(index + 1).padStart(3, '0')}.png`));
+  if (await Promise.all(plotPaths.map((plotPath) => common.fileExists(plotPath))).then((exists) => exists.every(Boolean))) {
+    result.simulationPlotPaths = plotPaths.map((plotPath) => relative(target, plotPath));
+  } else {
+    result.error = { phase: 'plotting', message: 'Simulation completed but did not produce every comparison plot' };
+    return result;
+  }
   try {
-    const [referenceText, outputText] = await Promise.all([fs.readFile(path.resolve(indexDirectory, entry.simulation.referenceResultsPath), 'utf8'), fs.readFile(output, 'utf8')]);
+    const [referenceText, outputText] = await Promise.all([fs.readFile(referencePath, 'utf8'), fs.readFile(output, 'utf8')]);
     result.comparison = compare(csv(referenceText, entry.simulation.referenceResultsPath), csv(outputText, result.outputs.simulation), entry.simulation);
   } catch (error) { result.error = { phase: 'comparison', message: error.message }; return result; }
   if (result.comparison.status === 'valid') result.status = 'success';

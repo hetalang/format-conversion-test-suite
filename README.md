@@ -95,6 +95,8 @@ npx fcts sbml-dynms-simulation --source=cases/index --input-field=sbmlL3V2Path \
 Before it begins, the command checks that DynMSR is installed in the active R
 library and records the installed DynMSR and DynMS format versions. The command
 supports `sbmlL2V5Path` (the default), `sbmlL3V1Path`, and `sbmlL3V2Path`.
+Each simulated variable also receives a PNG plot that overlays the reference
+and DynMSR/mrgsolve result; plots are retained even when comparison fails.
 
 ## GitHub Actions
 
