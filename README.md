@@ -48,8 +48,12 @@ npm run index:sbml
 ```
 
 The index contains available SBML paths, source metadata, and the pinned
-test-suite identity. Both `cases/` and `results/` are generated and ignored by
-Git.
+test-suite identity. Each case also has normalized simulation settings,
+including time grids where a case defines one, tolerances, selected
+amount/concentration variables, and repository-relative paths to the original
+settings file and reference CSV. Steady-state cases have no `timeCourse` field.
+The reference values themselves remain in the downloaded Semantic Test Suite.
+Both `cases/` and `results/` are generated and ignored by Git.
 
 ## Build a report
 

@@ -84,6 +84,112 @@ async function readModelMetadata(semanticPath, caseId) {
   }
 }
 
+function toRelativeCasePath(casesPath, filePath) {
+  return path.relative(casesPath, filePath).split(path.sep).join('/');
+}
+
+function parseSettingNumber(value, settingName, settingsPath, {
+  minimum,
+  exclusiveMinimum = false,
+  integer = false,
+} = {}) {
+  const parsed = Number(value);
+
+  if (!Number.isFinite(parsed) || (integer && !Number.isInteger(parsed)) || (minimum !== undefined && (
+    exclusiveMinimum ? parsed <= minimum : parsed < minimum
+  ))) {
+    const comparison = exclusiveMinimum ? 'greater than' : 'at least';
+    const requirement = minimum === undefined ? 'a finite number' : `${comparison} ${minimum}`;
+    throw new Error(`${settingsPath}: setting "${settingName}" must be ${requirement}`);
+  }
+
+  return parsed;
+}
+
+function hasSettingValue(value) {
+  return value.trim().length > 0;
+}
+
+function parseSettingVariables(value, settingName, settingsPath, { required = false } = {}) {
+  const variables = value.split(',').map((variable) => variable.trim()).filter(Boolean);
+
+  if (required && !variables.length) {
+    throw new Error(`${settingsPath}: setting "${settingName}" must contain at least one variable`);
+  }
+
+  return variables;
+}
+
+async function readSimulationMetadata(semanticPath, casesPath, caseId) {
+  const casePath = path.join(semanticPath, caseId);
+  const settingsPath = path.join(casePath, `${caseId}-settings.txt`);
+  const referenceResultsPath = path.join(casePath, `${caseId}-results.csv`);
+  let content;
+
+  try {
+    content = await fs.readFile(settingsPath, 'utf8');
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      throw new Error(`Simulation settings are missing for case ${caseId}: ${settingsPath}`);
+    }
+    throw error;
+  }
+
+  try {
+    await fs.access(referenceResultsPath);
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      throw new Error(`Reference simulation results are missing for case ${caseId}: ${referenceResultsPath}`);
+    }
+    throw error;
+  }
+
+  const settings = {};
+  for (const line of content.split(/\r?\n/)) {
+    const match = /^\s*([A-Za-z]+)\s*:\s*(.*)\s*$/.exec(line);
+    if (match) {
+      settings[match[1]] = match[2];
+    }
+  }
+
+  const requiredSettings = ['start', 'duration', 'steps', 'variables', 'absolute', 'relative', 'amount', 'concentration'];
+  for (const settingName of requiredSettings) {
+    if (!(settingName in settings)) {
+      throw new Error(`${settingsPath}: required setting "${settingName}" is missing`);
+    }
+  }
+
+  const timeSettingNames = ['start', 'duration', 'steps'];
+  const populatedTimeSettings = timeSettingNames.filter((settingName) => hasSettingValue(settings[settingName]));
+  if (populatedTimeSettings.length > 0 && populatedTimeSettings.length < timeSettingNames.length) {
+    throw new Error(`${settingsPath}: start, duration, and steps must either all be set or all be empty`);
+  }
+
+  const simulation = {
+    sourceSettingsPath: toRelativeCasePath(casesPath, settingsPath),
+    referenceResultsPath: toRelativeCasePath(casesPath, referenceResultsPath),
+    variables: parseSettingVariables(settings.variables, 'variables', settingsPath, { required: true }),
+    absoluteTolerance: parseSettingNumber(settings.absolute, 'absolute', settingsPath, { minimum: 0 }),
+    relativeTolerance: parseSettingNumber(settings.relative, 'relative', settingsPath, { minimum: 0 }),
+    amountVariables: parseSettingVariables(settings.amount, 'amount', settingsPath),
+    concentrationVariables: parseSettingVariables(settings.concentration, 'concentration', settingsPath),
+  };
+
+  if (populatedTimeSettings.length) {
+    simulation.timeCourse = {
+      start: parseSettingNumber(settings.start, 'start', settingsPath),
+      duration: parseSettingNumber(settings.duration, 'duration', settingsPath, { minimum: 0 }),
+      steps: parseSettingNumber(settings.steps, 'steps', settingsPath, {
+        minimum: 0,
+        exclusiveMinimum: true,
+        integer: true,
+      }),
+    };
+  }
+
+  return simulation;
+}
+
 async function main() {
   const settings = await readOptions();
   const semanticPath = resolveTargetDir(settings.targetDir);
@@ -109,19 +215,22 @@ async function main() {
   let sbmlL2V5Count = 0;
   let sbmlL3V1Count = 0;
   let sbmlL3V2Count = 0;
+  let simulationCount = 0;
 
   for (const caseId of caseDirectories) {
     const files = await fs.readdir(path.join(semanticPath, caseId), {
       withFileTypes: true,
     });
 
-    const caseIndex = { caseId, ...(await readModelMetadata(semanticPath, caseId)) };
+    const caseIndex = {
+      caseId,
+      ...(await readModelMetadata(semanticPath, caseId)),
+      simulation: await readSimulationMetadata(semanticPath, casesPath, caseId),
+    };
+    simulationCount += 1;
 
     for (const file of files.sort((left, right) => left.name.localeCompare(right.name))) {
-      const relativeFilePath = path
-        .relative(casesPath, path.join(semanticPath, caseId, file.name))
-        .split(path.sep)
-        .join('/');
+      const relativeFilePath = toRelativeCasePath(casesPath, path.join(semanticPath, caseId, file.name));
 
       if (file.isFile() && file.name.endsWith('-sbml-l3v2.xml')) {
         caseIndex.sbmlL3V2Path = relativeFilePath;
@@ -150,6 +259,7 @@ async function main() {
     root: path.relative(casesPath, semanticPath).split(path.sep).join('/'),
     summary: {
       caseCount: caseDirectories.length,
+      simulationCount,
       sbmlL2V5Count,
       sbmlL3V1Count,
       sbmlL3V2Count,
