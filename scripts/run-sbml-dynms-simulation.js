@@ -81,11 +81,12 @@ async function runCase(entry, indexDirectory, target, root, selectedInputField, 
   if (simulated.exitCode !== 0 || !(await common.fileExists(output))) { result.error = { phase: 'heta-load-simulation', message: simulated.error || 'DynMSR heta_load simulation did not produce output', exitCode: simulated.exitCode, stdout: simulated.stdout, ...(simulated.stderr ? { stderr: simulated.stderr } : {}) }; return result; }
   result.outputs = { simulation: relative(target, output) };
   const plotPaths = entry.simulation.variables.map((_, index) => path.join(plotDirectory, `plot-${String(index + 1).padStart(3, '0')}.png`));
-  if (await Promise.all(plotPaths.map((plotPath) => common.fileExists(plotPath))).then((exists) => exists.every(Boolean))) {
-    result.simulationPlotPaths = plotPaths.map((plotPath) => relative(target, plotPath));
-  } else {
-    result.error = { phase: 'plotting', message: 'Simulation completed but did not produce every comparison plot' };
-    return result;
+  const plotExists = await Promise.all(plotPaths.map((plotPath) => common.fileExists(plotPath)));
+  result.simulationPlotPaths = plotPaths
+    .filter((_, index) => plotExists[index])
+    .map((plotPath) => relative(target, plotPath));
+  if (!result.simulationPlotPaths.length) {
+    delete result.simulationPlotPaths;
   }
   try {
     const [referenceText, outputText] = await Promise.all([fs.readFile(referencePath, 'utf8'), fs.readFile(output, 'utf8')]);

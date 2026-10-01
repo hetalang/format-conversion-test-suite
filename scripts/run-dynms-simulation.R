@@ -33,11 +33,21 @@ if (length(platform$models) != 1L) {
 }
 
 model <- platform$models[[1]]
-requested <- simulation$variables
+requested <- unname(unlist(simulation$variables, use.names = FALSE))
+observable_map <- simulation$dynmsObservables
+if (is.null(observable_map)) {
+  observable_map <- stats::setNames(requested, requested)
+} else {
+  observable_map <- unlist(observable_map, use.names = TRUE)
+}
+
+if (!identical(sort(names(observable_map)), sort(requested))) {
+  stop("DynMS observable map must define exactly one entry for every requested variable.", call. = FALSE)
+}
 
 compiled <- build_mrgsolve(
   model,
-  observables = unname(unlist(requested, use.names = FALSE)),
+  observables = unname(observable_map),
   quiet = TRUE
 )
 result <- mrgsolve::mrgsim(
@@ -52,10 +62,11 @@ data <- methods::slot(result, "data")
 output <- data.frame(time = data$time, check.names = FALSE)
 
 for (symbol in requested) {
-  if (!(symbol %in% names(data))) {
-    stop("mrgsolve did not produce a column for requested variable: ", symbol, call. = FALSE)
+  observable <- observable_map[[symbol]]
+  if (!(observable %in% names(data))) {
+    stop("mrgsolve did not produce a column for requested variable: ", observable, call. = FALSE)
   }
-  output[[symbol]] <- data[[symbol]]
+  output[[symbol]] <- data[[observable]]
 }
 
 write.csv(output, output_path, row.names = FALSE, quote = FALSE)

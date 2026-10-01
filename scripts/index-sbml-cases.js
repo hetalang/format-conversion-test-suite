@@ -120,6 +120,48 @@ function parseSettingVariables(value, settingName, settingsPath, { required = fa
   return variables;
 }
 
+function readXmlAttribute(attributes, name) {
+  const match = new RegExp(`\\b${name}\\s*=\\s*(["'])(.*?)\\1`, 'i').exec(attributes);
+  return match ? match[2] : undefined;
+}
+
+async function readDynmsObservables(casesPath, sbmlPath, simulation) {
+  const xmlPath = path.join(casesPath, sbmlPath);
+  const xml = await fs.readFile(xmlPath, 'utf8');
+  const speciesHasOnlySubstanceUnits = new Map();
+  const speciesPattern = /<species\b([^>]*)>/gi;
+  let match;
+
+  while ((match = speciesPattern.exec(xml))) {
+    const id = readXmlAttribute(match[1], 'id');
+    if (id) {
+      speciesHasOnlySubstanceUnits.set(id, readXmlAttribute(match[1], 'hasOnlySubstanceUnits') === 'true');
+    }
+  }
+
+  const amountVariables = new Set(simulation.amountVariables);
+  const concentrationVariables = new Set(simulation.concentrationVariables);
+  const observables = {};
+
+  for (const variable of simulation.variables) {
+    if (!speciesHasOnlySubstanceUnits.has(variable)) {
+      observables[variable] = variable;
+      continue;
+    }
+
+    if (amountVariables.has(variable) === concentrationVariables.has(variable)) {
+      throw new Error(`${xmlPath}: species ${variable} must be listed in exactly one of amount or concentration settings`);
+    }
+
+    const hasOnlySubstanceUnits = speciesHasOnlySubstanceUnits.get(variable);
+    observables[variable] = hasOnlySubstanceUnits
+      ? (concentrationVariables.has(variable) ? `${variable}_conc_` : variable)
+      : (amountVariables.has(variable) ? `${variable}_amt_` : variable);
+  }
+
+  return observables;
+}
+
 async function readSimulationMetadata(semanticPath, casesPath, caseId) {
   const casePath = path.join(semanticPath, caseId);
   const settingsPath = path.join(casePath, `${caseId}-settings.txt`);
@@ -244,6 +286,14 @@ async function main() {
         caseIndex.sbmlL2V5Path = relativeFilePath;
         sbmlL2V5Count += 1;
       }
+    }
+
+    if (caseIndex.sbmlL2V5Path) {
+      caseIndex.simulation.dynmsObservables = await readDynmsObservables(
+        casesPath,
+        caseIndex.sbmlL2V5Path,
+        caseIndex.simulation,
+      );
     }
 
     cases.push(caseIndex);
