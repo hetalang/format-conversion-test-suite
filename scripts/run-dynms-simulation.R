@@ -33,36 +33,46 @@ if (length(platform$models) != 1L) {
 }
 
 model <- platform$models[[1]]
-dynamic <- model$dynamic
-assignments <- model$assignments
 requested <- simulation$variables
 column_map <- list()
 
-for (symbol in requested) {
-  dynamic_index <- which(vapply(dynamic, function(item) {
+find_symbol <- function(collection, symbol) {
+  which(vapply(collection, function(item) {
     identical(item$id, symbol) || identical(item$title, symbol)
   }, logical(1)))
-  assignment_index <- which(vapply(assignments, function(item) identical(item$id, symbol), logical(1)))
-
-  if (length(dynamic_index) == 1L) {
-    column_map[[symbol]] <- dynamic[[dynamic_index]]$id
-  } else if (length(assignment_index) == 1L) {
-    if (!any(vapply(model$observables, function(item) identical(item$symbol, symbol), logical(1)))) {
-      model$observables[[length(model$observables) + 1L]] <- list(symbol = symbol)
-    }
-    column_map[[symbol]] <- symbol
-  } else {
-    stop("DynMS model has no dynamic state or assignment for requested variable: ", symbol, call. = FALSE)
-  }
 }
 
-platform$models[[1]] <- model
-prepared_path <- tempfile(fileext = ".dynms.json")
-on.exit(unlink(prepared_path), add = TRUE)
-jsonlite::write_json(unclass(platform), prepared_path, auto_unbox = TRUE, pretty = FALSE)
+select_symbol <- function(collection, symbol, collection_name) {
+  index <- find_symbol(collection, symbol)
+  if (length(index) == 1L) {
+    return(collection[[index]]$id)
+  }
+  if (length(index) > 1L) {
+    stop("DynMS model has multiple ", collection_name, " entries for requested variable: ", symbol, call. = FALSE)
+  }
+  NULL
+}
 
-prepared_platform <- dynms_load(prepared_path)
-compiled <- build_mrgsolve(get_model(prepared_platform, 1), quiet = TRUE)
+for (symbol in requested) {
+  amount <- symbol %in% simulation$amountVariables
+  concentration <- symbol %in% simulation$concentrationVariables
+  candidate_collections <- if (amount) {
+    list(dynamic = model$dynamic)
+  } else if (concentration) {
+    list(assignments = model$assignments)
+  } else {
+    list(assignments = model$assignments, dynamic = model$dynamic, static = model$static, constants = model$constants)
+  }
+  selected <- NULL
+  for (collection_name in names(candidate_collections)) {
+    selected <- select_symbol(candidate_collections[[collection_name]], symbol, collection_name)
+    if (!is.null(selected)) break
+  }
+  if (is.null(selected)) stop("DynMS model has no supported symbol for requested variable: ", symbol, call. = FALSE)
+  column_map[[symbol]] <- selected
+}
+
+compiled <- build_mrgsolve(model, observables = unname(unlist(column_map)), quiet = TRUE)
 result <- mrgsolve::mrgsim(
   compiled,
   start = time_course$start,
