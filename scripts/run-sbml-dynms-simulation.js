@@ -10,7 +10,7 @@ const relative = (from, target) => path.relative(from, target).split(path.sep).j
 function csv(text, label) {
   const lines = text.trim().split(/\r?\n/).filter(Boolean);
   if (lines.length < 2) throw new Error(`${label} must contain a header and data`);
-  const headers = lines[0].split(',');
+  const headers = lines[0].split(',').map((header) => /^time$/i.test(header) ? 'time' : header);
   return { headers, rows: lines.slice(1).map((line, row) => {
     const cells = line.split(',');
     if (cells.length !== headers.length) throw new Error(`${label} row ${row + 2} has an invalid column count`);
@@ -72,8 +72,12 @@ async function runCase(entry, indexDirectory, target, root, selectedInputField, 
   if (path.relative(indexDirectory, source).startsWith('..')) { result.error = { message: 'Source path is outside the index directory' }; return result; }
   const directory = path.join(target, entry.caseId); const heta = path.join(directory, 'input.heta'); const log = path.join(directory, 'build.log');
   const settings = path.join(directory, 'simulation-input.json'); const output = path.join(directory, 'simulation.csv'); const plotDirectory = directory;
+  const speciesOutputs = entry.simulation.speciesOutputsByInputField?.[selectedInputField];
+  if (!speciesOutputs) { result.error = { message: `Case index has no species output metadata for ${selectedInputField}; rerun npm run index:sbml` }; return result; }
   await fs.mkdir(directory, { recursive: true });
-  await Promise.all([fs.writeFile(heta, common.createBuildSource(source, directory, selectedInputField)), fs.writeFile(settings, `${JSON.stringify(entry.simulation, null, 2)}\n`)]);
+  const simulation = { ...entry.simulation, speciesOutputs };
+  delete simulation.speciesOutputsByInputField;
+  await Promise.all([fs.writeFile(heta, common.createBuildSource(source, directory, selectedInputField)), fs.writeFile(settings, `${JSON.stringify(simulation, null, 2)}\n`)]);
   result.buildSourcePath = relative(target, heta); result.simulationInputPath = relative(target, settings);
   const referencePath = path.resolve(indexDirectory, entry.simulation.referenceResultsPath);
   const simulated = await common.runProcess('Rscript', ['--vanilla', path.join(root, 'scripts', 'run-dynms-simulation.R'), directory, 'input.heta', output, settings, log, referencePath, plotDirectory], root);

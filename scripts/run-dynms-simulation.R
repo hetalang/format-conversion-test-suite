@@ -34,20 +34,22 @@ if (length(platform$models) != 1L) {
 
 model <- platform$models[[1]]
 requested <- unname(unlist(simulation$variables, use.names = FALSE))
-observable_map <- simulation$dynmsObservables
-if (is.null(observable_map)) {
-  observable_map <- stats::setNames(requested, requested)
-} else {
-  observable_map <- unlist(observable_map, use.names = TRUE)
+species_outputs <- simulation$speciesOutputs
+if (is.null(species_outputs)) {
+  stop("Simulation settings must include species output metadata for the selected SBML version.", call. = FALSE)
 }
 
-if (!identical(sort(names(observable_map)), sort(requested))) {
-  stop("DynMS observable map must define exactly one entry for every requested variable.", call. = FALSE)
-}
+converted_species <- names(species_outputs)[vapply(species_outputs, function(species) {
+  species$modelValue != species$referenceValue
+}, logical(1))]
+compartments <- vapply(species_outputs[converted_species], function(species) {
+  species$compartment
+}, character(1))
+observables <- unique(c(requested, compartments))
 
 compiled <- build_mrgsolve(
   model,
-  observables = unname(observable_map),
+  observables = observables,
   quiet = TRUE
 )
 result <- mrgsolve::mrgsim(
@@ -62,11 +64,20 @@ data <- methods::slot(result, "data")
 output <- data.frame(time = data$time, check.names = FALSE)
 
 for (symbol in requested) {
-  observable <- observable_map[[symbol]]
-  if (!(observable %in% names(data))) {
-    stop("mrgsolve did not produce a column for requested variable: ", observable, call. = FALSE)
+  if (!(symbol %in% names(data))) {
+    stop("mrgsolve did not produce a column for requested variable: ", symbol, call. = FALSE)
   }
-  output[[symbol]] <- data[[observable]]
+  value <- data[[symbol]]
+  species <- species_outputs[[symbol]]
+  if (!is.null(species) && species$modelValue != species$referenceValue) {
+    compartment <- species$compartment
+    if (!(compartment %in% names(data))) {
+      stop("mrgsolve did not produce a column for compartment: ", compartment, call. = FALSE)
+    }
+    size <- data[[compartment]]
+    value <- if (species$modelValue == "amount") value / size else value * size
+  }
+  output[[symbol]] <- value
 }
 
 write.csv(output, output_path, row.names = FALSE, quote = FALSE)

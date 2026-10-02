@@ -52,6 +52,11 @@ test-suite identity. Each case also has normalized simulation settings,
 including time grids where a case defines one, tolerances, selected
 amount/concentration variables, and repository-relative paths to the original
 settings file and reference CSV. Steady-state cases have no `timeCourse` field.
+For each available SBML version, `simulation.speciesOutputsByInputField` records
+each requested species' compartment, its value type in the model, and the value
+type requested by the reference CSV. The model type is amount when
+`hasOnlySubstanceUnits="true"` or the compartment has `spatialDimensions="0"`;
+otherwise it is concentration.
 The reference values themselves remain in the downloaded Semantic Test Suite.
 Both `cases/` and `results/` are generated and ignored by Git.
 
@@ -85,7 +90,11 @@ overall report status: a report is `success` when every assessed case succeeds.
 The simulation command creates the same per-case Heta project structure
 as the conversion report, then passes that project to DynMSR `heta_load()`.
 DynMSR performs the Heta-to-DynMS import, runs mrgsolve with the indexed time
-grid and tolerances, and compares the result with the Semantic Test Suite CSV:
+grid and tolerances, and compares the result with the Semantic Test Suite CSV.
+When the reference requests a different species value type, the runner uses the
+compartment size at each output time to convert amount to concentration or vice
+versa. The generated `simulation.csv` uses the reference's variable names and
+value types:
 
 ```sh
 npx fcts sbml-dynms-simulation --source=cases/index --input-field=sbmlL3V2Path \

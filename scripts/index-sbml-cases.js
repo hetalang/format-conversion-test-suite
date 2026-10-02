@@ -125,41 +125,56 @@ function readXmlAttribute(attributes, name) {
   return match ? match[2] : undefined;
 }
 
-async function readDynmsObservables(casesPath, sbmlPath, simulation) {
+async function readSpeciesOutputs(casesPath, sbmlPath, simulation) {
   const xmlPath = path.join(casesPath, sbmlPath);
   const xml = await fs.readFile(xmlPath, 'utf8');
-  const speciesHasOnlySubstanceUnits = new Map();
-  const speciesPattern = /<species\b([^>]*)>/gi;
+  const zeroDimensionalCompartments = new Set();
+  const compartmentPattern = /<compartment\b([^>]*)>/gi;
   let match;
+
+  while ((match = compartmentPattern.exec(xml))) {
+    const id = readXmlAttribute(match[1], 'id');
+    if (id && Number(readXmlAttribute(match[1], 'spatialDimensions')) === 0) {
+      zeroDimensionalCompartments.add(id);
+    }
+  }
+
+  const species = new Map();
+  const speciesPattern = /<species\b([^>]*)>/gi;
 
   while ((match = speciesPattern.exec(xml))) {
     const id = readXmlAttribute(match[1], 'id');
     if (id) {
-      speciesHasOnlySubstanceUnits.set(id, readXmlAttribute(match[1], 'hasOnlySubstanceUnits') === 'true');
+      species.set(id, {
+        compartment: readXmlAttribute(match[1], 'compartment'),
+        modelValue: readXmlAttribute(match[1], 'hasOnlySubstanceUnits') === 'true'
+          || zeroDimensionalCompartments.has(readXmlAttribute(match[1], 'compartment'))
+          ? 'amount' : 'concentration',
+      });
     }
   }
 
   const amountVariables = new Set(simulation.amountVariables);
   const concentrationVariables = new Set(simulation.concentrationVariables);
-  const observables = {};
+  const outputs = {};
 
   for (const variable of simulation.variables) {
-    if (!speciesHasOnlySubstanceUnits.has(variable)) {
-      observables[variable] = variable;
-      continue;
-    }
+    if (!species.has(variable)) continue;
 
     if (amountVariables.has(variable) === concentrationVariables.has(variable)) {
       throw new Error(`${xmlPath}: species ${variable} must be listed in exactly one of amount or concentration settings`);
     }
 
-    const hasOnlySubstanceUnits = speciesHasOnlySubstanceUnits.get(variable);
-    observables[variable] = hasOnlySubstanceUnits
-      ? (concentrationVariables.has(variable) ? `${variable}_conc_` : variable)
-      : (amountVariables.has(variable) ? `${variable}_amt_` : variable);
+    const { compartment, modelValue } = species.get(variable);
+    if (!compartment) throw new Error(`${xmlPath}: species ${variable} has no compartment`);
+    outputs[variable] = {
+      compartment,
+      modelValue,
+      referenceValue: amountVariables.has(variable) ? 'amount' : 'concentration',
+    };
   }
 
-  return observables;
+  return outputs;
 }
 
 async function readSimulationMetadata(semanticPath, casesPath, caseId) {
@@ -288,12 +303,15 @@ async function main() {
       }
     }
 
-    if (caseIndex.sbmlL2V5Path) {
-      caseIndex.simulation.dynmsObservables = await readDynmsObservables(
-        casesPath,
-        caseIndex.sbmlL2V5Path,
-        caseIndex.simulation,
-      );
+    caseIndex.simulation.speciesOutputsByInputField = {};
+    for (const inputField of ['sbmlL2V5Path', 'sbmlL3V1Path', 'sbmlL3V2Path']) {
+      if (caseIndex[inputField]) {
+        caseIndex.simulation.speciesOutputsByInputField[inputField] = await readSpeciesOutputs(
+          casesPath,
+          caseIndex[inputField],
+          caseIndex.simulation,
+        );
+      }
     }
 
     cases.push(caseIndex);
