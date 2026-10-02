@@ -57,8 +57,10 @@ result <- mrgsolve::mrgsim(
   start = time_course$start,
   end = time_course$start + time_course$duration,
   delta = time_course$duration / time_course$steps,
-  atol = simulation$absoluteTolerance,
-  rtol = simulation$relativeTolerance
+  atol = simulation$absoluteTolerance / 10,
+  rtol = simulation$relativeTolerance / 10,
+  hmax = 0.01,
+  maxsteps = 100000
 )
 data <- methods::slot(result, "data")
 output <- data.frame(time = data$time, check.names = FALSE)

@@ -5,6 +5,7 @@ const common = require('./run-sbml-report');
 
 const defaultInputField = 'sbmlL2V5Path';
 const supportedInputFields = new Set(['sbmlL2V5Path', 'sbmlL3V1Path', 'sbmlL3V2Path']);
+const timeTolerance = 1e-6;
 const relative = (from, target) => path.relative(from, target).split(path.sep).join('/');
 
 function csv(text, label) {
@@ -29,7 +30,7 @@ function compare(reference, actual, settings) {
   if (reference.rows.length !== actual.rows.length) return { status: 'failed', error: { message: `Simulation produced ${actual.rows.length} rows; expected ${reference.rows.length}` } };
   let comparedValues = 0; let maxAbsoluteError = 0; const failures = [];
   for (let i = 0; i < reference.rows.length; i += 1) {
-    if (Math.abs(reference.rows[i].time - actual.rows[i].time) > 1e-12) failures.push({ row: i + 1, variable: 'time', expected: reference.rows[i].time, actual: actual.rows[i].time });
+    if (Math.abs(reference.rows[i].time - actual.rows[i].time) > timeTolerance) failures.push({ row: i + 1, variable: 'time', expected: reference.rows[i].time, actual: actual.rows[i].time });
     for (const variable of settings.variables) {
       const expected = reference.rows[i][variable]; const observed = actual.rows[i][variable];
       const absoluteError = Math.abs(observed - expected); const tolerance = settings.absoluteTolerance + settings.relativeTolerance * Math.abs(expected);

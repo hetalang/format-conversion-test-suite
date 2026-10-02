@@ -90,7 +90,12 @@ overall report status: a report is `success` when every assessed case succeeds.
 The simulation command creates the same per-case Heta project structure
 as the conversion report, then passes that project to DynMSR `heta_load()`.
 DynMSR performs the Heta-to-DynMS import, runs mrgsolve with the indexed time
-grid and tolerances, and compares the result with the Semantic Test Suite CSV.
+grid, and compares the result with the Semantic Test Suite CSV. The solver uses
+one tenth of the case's absolute and relative tolerances; comparison uses the
+original case tolerances.
+Output times are compared with a fixed absolute tolerance of `1e-6`.
+The mrgsolve solver uses `hmax = 0.01` and `maxsteps = 100000` for every
+simulation.
 When the reference requests a different species value type, the runner uses the
 compartment size at each output time to convert amount to concentration or vice
 versa. The generated `simulation.csv` uses the reference's variable names and
