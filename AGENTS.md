@@ -100,7 +100,7 @@ Cases can be excluded from assessment without skipping their build:
 ```sh
 npx fcts sbml-report --source=cases/index --input-field=sbmlL2V5Path \
   --target=results/candidate --skip-component-tags=CSymbolDelay,EventWithDelay \
-  --skip-test-tags=FastReaction
+  --skip-test-tags=FastReaction,VolumeConcentrationRates
 ```
 
 Matching cases have `status: "not-evaluated"`, retain their generated artifacts

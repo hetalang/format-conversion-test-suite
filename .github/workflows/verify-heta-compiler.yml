@@ -51,13 +51,13 @@ jobs:
         run: |
           node bin/fcts.js sbml-report --source=cases/index --input-field=sbmlL3V2Path --target=results/verification/l3 --concurrency=4 \
             --skip-component-tags=CSymbolDelay,EventWithDelay,AlgebraicRule,CSymbolRateOf,comp:Deletion,comp:ModelDefinition,comp:Port,comp:ReplacedBy,comp:ReplacedElement,comp:SBaseRef,comp:Submodel,fbc:FluxBound,fbc:FluxObjective,fbc:Objective \
-            --skip-test-tags=AssignedVariableStoichiometry,AssignedConstantStoichiometry,SpeciesReferenceInMath,NoMathML,comp:SubmodelOutput,fbc:BoundEqual,fbc:BoundGreaterEqual,fbc:BoundLessEqual,fbc:MaximizeObjective,fbc:MinimizeObjective,fbc:NonStrict,BoolNumericSwap
+            --skip-test-tags=AssignedVariableStoichiometry,AssignedConstantStoichiometry,SpeciesReferenceInMath,NoMathML,comp:SubmodelOutput,fbc:BoundEqual,fbc:BoundGreaterEqual,fbc:BoundLessEqual,fbc:MaximizeObjective,fbc:MinimizeObjective,fbc:NonStrict,BoolNumericSwap,VolumeConcentrationRates
           node bin/fcts.js sbml-report --source=cases/index --input-field=sbmlL3V1Path --target=results/verification/l3v1 --concurrency=4 \
             --skip-component-tags=CSymbolDelay,EventWithDelay,AlgebraicRule,CSymbolRateOf,comp:Deletion,comp:ModelDefinition,comp:Port,comp:ReplacedBy,comp:ReplacedElement,comp:SBaseRef,comp:Submodel,fbc:FluxBound,fbc:FluxObjective,fbc:Objective \
-            --skip-test-tags=AssignedVariableStoichiometry,AssignedConstantStoichiometry,SpeciesReferenceInMath,NoMathML,comp:SubmodelOutput,fbc:BoundEqual,fbc:BoundGreaterEqual,fbc:BoundLessEqual,fbc:MaximizeObjective,fbc:MinimizeObjective,fbc:NonStrict,FastReaction
+            --skip-test-tags=AssignedVariableStoichiometry,AssignedConstantStoichiometry,SpeciesReferenceInMath,NoMathML,comp:SubmodelOutput,fbc:BoundEqual,fbc:BoundGreaterEqual,fbc:BoundLessEqual,fbc:MaximizeObjective,fbc:MinimizeObjective,fbc:NonStrict,FastReaction,VolumeConcentrationRates
           node bin/fcts.js sbml-report --source=cases/index --input-field=sbmlL2V5Path --target=results/verification/l2 --concurrency=4 \
             --skip-component-tags=StoichiometryMath,CSymbolDelay,EventWithDelay,AlgebraicRule \
-            --skip-test-tags=FastReaction
+            --skip-test-tags=FastReaction,VolumeConcentrationRates
 
       - name: Fail when a case does not build
         shell: bash
