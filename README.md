@@ -112,6 +112,26 @@ supports `sbmlL2V5Path` (the default), `sbmlL3V1Path`, and `sbmlL3V2Path`.
 Each simulated variable also receives a PNG plot that overlays the reference
 and DynMSR/mrgsolve result; plots are retained even when comparison fails.
 
+## Simulate with HetaSimulator.jl
+
+The HetaSimulator backend builds the same per-case Heta project and loads it
+with `HetaSimulator.load_platform()`. It creates a scenario with
+`events_save=(false, false)`, uses the indexed output grid as `saveat`, runs
+with one tenth of the case tolerances, and compares its CSV output using the
+original tolerances. Amount/concentration output conversion follows the same
+rules as the DynMSR backend. The active HetaSimulator.jl version is recorded in
+the report; it is not pinned by this repository. It uses Julia's `Plots`
+package to retain one PNG per simulated variable, with reference and
+HetaSimulator.jl output overlaid.
+
+```sh
+npx fcts sbml-hetasimulator-simulation --source=cases/index --input-field=sbmlL3V2Path \
+  --target=results/hetasimulator-simulation --concurrency=1 --limit=10
+```
+
+The command supports `sbmlL2V5Path` (the default), `sbmlL3V1Path`, and
+`sbmlL3V2Path`, plus the standard component and test tag exclusion options.
+
 ## GitHub Actions
 
 The manual **Verify heta-compiler conversion** workflow downloads and indexes

@@ -3,6 +3,7 @@
 const path = require('node:path');
 const { runSbmlReport } = require('../scripts/run-sbml-report');
 const { runSbmlDynmsSimulation } = require('../scripts/run-sbml-dynms-simulation');
+const { runSbmlHetaSimulatorSimulation } = require('../scripts/run-sbml-hetasimulator-simulation');
 
 function parseOptions(argumentsList) {
   const options = {};
@@ -28,6 +29,7 @@ function printUsage() {
   console.log('Usage:');
   console.log('  fcts sbml-report --source=<index> --target=<directory> [--input-field=<field>] [--concurrency=<number>] [--skip=<number>] [--limit=<number>] [--skip-component-tags=<tag,...>] [--skip-test-tags=<tag,...>]');
   console.log('  fcts sbml-dynms-simulation --source=<index> --target=<directory> [--input-field=sbmlL2V5Path|sbmlL3V1Path|sbmlL3V2Path] [--concurrency=<number>] [--skip=<number>] [--limit=<number>] [--skip-component-tags=<tag,...>] [--skip-test-tags=<tag,...>]');
+  console.log('  fcts sbml-hetasimulator-simulation --source=<index> --target=<directory> [--input-field=sbmlL2V5Path|sbmlL3V1Path|sbmlL3V2Path] [--concurrency=<number>] [--skip=<number>] [--limit=<number>] [--skip-component-tags=<tag,...>] [--skip-test-tags=<tag,...>]');
 }
 
 async function main() {
@@ -40,6 +42,11 @@ async function main() {
 
   if (command === 'sbml-dynms-simulation') {
     await runSbmlDynmsSimulation(parseOptions(argumentsList), path.resolve(__dirname, '..'));
+    return;
+  }
+
+  if (command === 'sbml-hetasimulator-simulation') {
+    await runSbmlHetaSimulatorSimulation(parseOptions(argumentsList), path.resolve(__dirname, '..'));
     return;
   }
 
