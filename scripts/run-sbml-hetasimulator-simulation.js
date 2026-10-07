@@ -15,7 +15,15 @@ function readCsv(text, label) {
   const rows = lines.slice(1).map((line, rowIndex) => {
     const cells = line.split(',');
     if (cells.length !== headers.length) throw new Error(`${label} row ${rowIndex + 2} has an invalid column count`);
-    return cells.map((cell, columnIndex) => { const value = Number(cell); if (!Number.isFinite(value)) throw new Error(`${label} row ${rowIndex + 2}, column ${columnIndex + 1} is not finite`); return value; });
+    return cells.map((cell, columnIndex) => {
+      const valueText = cell.trim();
+      if (/^\+?inf(inity)?$/i.test(valueText)) return Infinity;
+      if (/^-inf(inity)?$/i.test(valueText)) return -Infinity;
+      if (/^nan$/i.test(valueText)) return NaN;
+      const value = Number(valueText);
+      if (!Number.isFinite(value)) throw new Error(`${label} row ${rowIndex + 2}, column ${columnIndex + 1} is not numeric`);
+      return value;
+    });
   });
   return { headers, rows };
 }
@@ -29,7 +37,13 @@ function compare(reference, actual, settings) {
     if (Math.abs(expectedRow[0] - actualRow[0]) > timeTolerance && failures.length < 20) failures.push({ row: rowIndex + 1, variable: 'time', expected: expectedRow[0], actual: actualRow[0] });
     for (let variableIndex = 0; variableIndex < settings.variables.length; variableIndex += 1) {
       const expected = expectedRow[variableIndex + 1]; const observed = actualRow[variableIndex + 1]; const absoluteError = Math.abs(observed - expected); const tolerance = settings.absoluteTolerance + settings.relativeTolerance * Math.abs(expected);
-      comparedValues += 1; maxAbsoluteError = Math.max(maxAbsoluteError, absoluteError);
+      comparedValues += 1;
+      if (!Number.isFinite(expected) || !Number.isFinite(observed)) {
+        const matches = Number.isNaN(expected) ? Number.isNaN(observed) : expected === observed;
+        if (!matches && failures.length < 20) failures.push({ row: rowIndex + 1, time: expectedRow[0], variable: settings.variables[variableIndex], expected, actual: observed, absoluteError, tolerance });
+        continue;
+      }
+      maxAbsoluteError = Math.max(maxAbsoluteError, absoluteError);
       if (absoluteError > tolerance && failures.length < 20) failures.push({ row: rowIndex + 1, time: expectedRow[0], variable: settings.variables[variableIndex], expected, actual: observed, absoluteError, tolerance });
     }
   }

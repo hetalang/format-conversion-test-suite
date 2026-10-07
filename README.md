@@ -127,6 +127,8 @@ packages once and simulates selected cases sequentially; `--concurrency` only
 affects the Node.js preparation of case input files. Julia prints live
 per-case progress as `Simulating case <id> (<current>/<total>)... OK.` and renders
 PNG plots off-screen without opening plot windows.
+Reference and simulation CSV values expressed as `INF`, `-INF`, or `NaN` are
+compared as IEEE non-finite values.
 
 ```sh
 npx fcts sbml-hetasimulator-simulation --source=cases/index --input-field=sbmlL3V2Path \
