@@ -20,14 +20,19 @@ isfinite(relative_tolerance) && relative_tolerance > 0 || error("relative tolera
 variables = String.(settings["variables"])
 species_outputs = get(settings, "speciesOutputs", Dict{String, Any}())
 requested = Symbol.(variables)
-conversion_compartments = [String(species_outputs[variable]["compartment"]) for variable in variables if haskey(species_outputs, variable) && species_outputs[variable]["modelValue"] != species_outputs[variable]["referenceValue"]]
-observables = unique(vcat(requested, Symbol.(conversion_compartments)))
+conversion_compartments = Symbol[]
+for variable in variables
+  if haskey(species_outputs, variable) && species_outputs[variable]["modelValue"] != species_outputs[variable]["referenceValue"]
+    push!(conversion_compartments, Symbol(species_outputs[variable]["compartment"]))
+  end
+end
+observables = unique(vcat(requested, conversion_compartments))
 platform = load_platform(project_directory; source = source_file)
 length(platform.models) == 1 || error("HetaSimulator simulation requires exactly one model")
 model = only(values(platform.models))
 saveat = collect(range(start_time, stop = start_time + duration, length = steps + 1))
 scenario = Scenario(model, (start_time, start_time + duration); observables, saveat, events_save = (false, false))
-result_frame = DataFrame(sim(scenario; abstol = absolute_tolerance / 10, reltol = relative_tolerance / 10))
+result_frame = DataFrame(sim(scenario; abstol = absolute_tolerance / 10, reltol = relative_tolerance / 10, dtmax = 0.01))
 
 output = DataFrame(time = result_frame.t)
 for (index, variable_name) in enumerate(variables)

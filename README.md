@@ -116,13 +116,13 @@ and DynMSR/mrgsolve result; plots are retained even when comparison fails.
 
 The HetaSimulator backend builds the same per-case Heta project and loads it
 with `HetaSimulator.load_platform()`. It creates a scenario with
-`events_save=(false, false)`, uses the indexed output grid as `saveat`, runs
-with one tenth of the case tolerances, and compares its CSV output using the
-original tolerances. Amount/concentration output conversion follows the same
-rules as the DynMSR backend. The active HetaSimulator.jl version is recorded in
-the report; it is not pinned by this repository. It uses Julia's `Plots`
-package to retain one PNG per simulated variable, with reference and
-HetaSimulator.jl output overlaid.
+`events_save=(false, false)`, uses the indexed output grid as `saveat`, and
+runs with one tenth of the case tolerances and `dtmax = 0.01`. It compares its
+CSV output using the original tolerances. Amount/concentration output conversion
+follows the same rules as the DynMSR backend. The active HetaSimulator.jl
+version is recorded in the report; it is not pinned by this repository. It uses
+Julia's `Plots` package to retain one PNG per simulated variable, with reference
+and HetaSimulator.jl output overlaid.
 
 ```sh
 npx fcts sbml-hetasimulator-simulation --source=cases/index --input-field=sbmlL3V2Path \
