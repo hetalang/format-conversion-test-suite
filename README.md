@@ -122,7 +122,11 @@ CSV output using the original tolerances. Amount/concentration output conversion
 follows the same rules as the DynMSR backend. The active HetaSimulator.jl
 version is recorded in the report; it is not pinned by this repository. It uses
 Julia's `Plots` package to retain one PNG per simulated variable, with reference
-and HetaSimulator.jl output overlaid.
+and HetaSimulator.jl output overlaid. One Julia process loads the required
+packages once and simulates selected cases sequentially; `--concurrency` only
+affects the Node.js preparation of case input files. Julia prints live
+per-case progress as `Simulating case <id> (<current>/<total>)... OK.` and renders
+PNG plots off-screen without opening plot windows.
 
 ```sh
 npx fcts sbml-hetasimulator-simulation --source=cases/index --input-field=sbmlL3V2Path \
