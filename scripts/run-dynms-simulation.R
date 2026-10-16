@@ -1,16 +1,15 @@
 args <- commandArgs(trailingOnly = TRUE)
 
-if (length(args) != 7L) {
-  stop("Expected arguments: <project-directory> <source-file> <output-csv-path> <simulation-json-path> <log-path> <reference-csv-path> <plot-directory>", call. = FALSE)
+if (length(args) != 6L) {
+  stop("Expected arguments: <project-directory> <source-file> <output-csv-path> <simulation-json-path> <reference-csv-path> <plot-directory>", call. = FALSE)
 }
 
 project_directory <- args[[1]]
 source_file <- args[[2]]
 output_path <- args[[3]]
 simulation_path <- args[[4]]
-log_path <- args[[5]]
-reference_path <- args[[6]]
-plot_directory <- args[[7]]
+reference_path <- args[[5]]
+plot_directory <- args[[6]]
 
 if (!requireNamespace("jsonlite", quietly = TRUE)) {
   stop("Package `jsonlite` is required to read the simulation configuration.", call. = FALSE)
@@ -27,7 +26,13 @@ if (is.null(time_course)) {
   stop("The selected case does not define a time course.", call. = FALSE)
 }
 
-platform <- heta_load(dir = project_directory, source = source_file, type = "heta", log_path = log_path)
+platform <- heta_load(
+  dir = project_directory,
+  output_dir = project_directory,
+  source = source_file,
+  type = "heta",
+  log_mode = "always"
+)
 if (length(platform$models) != 1L) {
   stop("DynMS simulation currently requires exactly one model.", call. = FALSE)
 }

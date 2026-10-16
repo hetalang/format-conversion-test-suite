@@ -44,6 +44,10 @@ function compare(reference, actual, settings) {
 async function readDynmsEnvironment(repositoryRoot) {
   const expression = [
     'if (!requireNamespace("DynMSR", quietly = TRUE)) stop("Package DynMSR is not installed.")',
+    'if (!requireNamespace("jsonlite", quietly = TRUE)) stop("Package jsonlite is not installed.")',
+    'if (!requireNamespace("mrgsolve", quietly = TRUE)) stop("Package mrgsolve is not installed.")',
+    'required <- list(heta_load = c("dir", "output_dir", "source", "type", "log_mode"), build_mrgsolve = c("model", "observables", "..."))',
+    'for (name in names(required)) { if (!name %in% getNamespaceExports("DynMSR")) stop(paste0("DynMSR interface is missing ", name)); missing <- setdiff(required[[name]], names(formals(getExportedValue("DynMSR", name)))); if (length(missing)) stop(paste0("DynMSR interface ", name, " is missing argument(s): ", paste(missing, collapse = ", "))) }',
     'description <- utils::packageDescription("DynMSR")',
     'schemaPath <- system.file("schema", "dynms.schema.json", package = "DynMSR")',
     'if (!nzchar(schemaPath)) stop("DynMSR does not provide a DynMS schema.")',
@@ -81,7 +85,7 @@ async function runCase(entry, indexDirectory, target, root, selectedInputField, 
   await Promise.all([fs.writeFile(heta, common.createBuildSource(source, directory, selectedInputField)), fs.writeFile(settings, `${JSON.stringify(simulation, null, 2)}\n`)]);
   result.buildSourcePath = relative(target, heta); result.simulationInputPath = relative(target, settings);
   const referencePath = path.resolve(indexDirectory, entry.simulation.referenceResultsPath);
-  const simulated = await common.runProcess('Rscript', ['--vanilla', path.join(root, 'scripts', 'run-dynms-simulation.R'), directory, 'input.heta', output, settings, log, referencePath, plotDirectory], root);
+  const simulated = await common.runProcess('Rscript', ['--vanilla', path.join(root, 'scripts', 'run-dynms-simulation.R'), directory, 'input.heta', output, settings, referencePath, plotDirectory], root);
   if (await common.fileExists(log)) result.logPath = relative(target, log);
   if (simulated.exitCode !== 0 || !(await common.fileExists(output))) { result.error = { phase: 'heta-load-simulation', message: simulated.error || 'DynMSR heta_load simulation did not produce output', exitCode: simulated.exitCode, stdout: simulated.stdout, ...(simulated.stderr ? { stderr: simulated.stderr } : {}) }; return result; }
   result.outputs = { simulation: relative(target, output) };
@@ -102,7 +106,7 @@ async function runCase(entry, indexDirectory, target, root, selectedInputField, 
   return result;
 }
 
-async function runSbmlDynmsSimulation(options, root) {
+async function runSbmlDynmsrSimulation(options, root) {
   if (!options.source || !options.target) throw new Error('--source and --target are required');
   const inputField = options['input-field'] || defaultInputField;
   if (!supportedInputFields.has(inputField)) throw new Error(`Unsupported --input-field: ${inputField}`);
@@ -121,9 +125,9 @@ async function runSbmlDynmsSimulation(options, root) {
     catch (error) { return common.markNotEvaluated({ caseId: entry.caseId, status: 'failed', error: { message: error.message } }, tags); }
   });
   const succeeded = casesResult.filter((entry) => entry.status === 'success').length; const failed = casesResult.filter((entry) => entry.status === 'failed').length; const assessed = succeeded + failed;
-  const report = { description: 'This report records SBML conversion through heta-compiler, DynMSR/mrgsolve simulation, and comparison with SBML Semantic Test Suite reference results.', generator: { type: 'sbml-dynms-simulation', packageName: packageInfo.name, packageVersion: packageInfo.version }, status: failed ? 'completed-with-errors' : 'success', startedAt, completedAt: new Date().toISOString(), command: { source: relative(root, indexPath), target: relative(root, target), inputField, concurrency, ...(skip ? { skip } : {}), ...(limit === undefined ? {} : { limit }), ...(skippedComponentTags.length ? { skipComponentTags: skippedComponentTags } : {}), ...(skippedTestTags.length ? { skipTestTags: skippedTestTags } : {}) }, environment: { hetaVersion: hetaVersion.stdout.trim(), ...dynmsEnvironment, testSuite: index.testSuite, simulationBackend: 'DynMSR/mrgsolve' }, cases: casesResult };
+  const report = { description: 'This report records SBML conversion through heta-compiler, DynMSR/mrgsolve simulation, and comparison with SBML Semantic Test Suite reference results.', generator: { type: 'sbml-dynmsr-simulation', packageName: packageInfo.name, packageVersion: packageInfo.version }, status: failed ? 'completed-with-errors' : 'success', startedAt, completedAt: new Date().toISOString(), command: { source: relative(root, indexPath), target: relative(root, target), inputField, concurrency, ...(skip ? { skip } : {}), ...(limit === undefined ? {} : { limit }), ...(skippedComponentTags.length ? { skipComponentTags: skippedComponentTags } : {}), ...(skippedTestTags.length ? { skipTestTags: skippedTestTags } : {}) }, environment: { hetaVersion: hetaVersion.stdout.trim(), ...dynmsEnvironment, testSuite: index.testSuite, simulationBackend: 'DynMSR/mrgsolve' }, cases: casesResult };
   await fs.writeFile(path.join(target, 'report.json'), `${JSON.stringify(report, null, 2)}\n`);
   const ratio = assessed ? succeeded / assessed : 0; await fs.writeFile(path.join(target, 'badge.json'), `${JSON.stringify({ schemaVersion: 1, label: report.generator.type, message: `${succeeded}/${assessed}`, color: assessed && ratio === 1 ? 'brightgreen' : ratio > 0.8 ? 'yellow' : 'red', ...(failed ? { isError: true } : {}), cacheSeconds: 300 }, null, 2)}\n`);
   console.log(`Report written to ${path.join(target, 'report.json')}`); return report;
 }
-module.exports = { runSbmlDynmsSimulation };
+module.exports = { runSbmlDynmsrSimulation };

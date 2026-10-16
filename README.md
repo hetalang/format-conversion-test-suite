@@ -102,15 +102,19 @@ versa. The generated `simulation.csv` uses the reference's variable names and
 value types:
 
 ```sh
-npx fcts sbml-dynms-simulation --source=cases/index --input-field=sbmlL3V2Path \
+npx fcts sbml-dynmsr-simulation --source=cases/index --input-field=sbmlL3V2Path \
   --target=results/simulation --concurrency=1 --limit=10
 ```
 
 Before it begins, the command checks that DynMSR is installed in the active R
-library and records the installed DynMSR and DynMS format versions. The command
+library, verifies the DynMSR interface and required R packages, and records the
+installed DynMSR and DynMS format versions. An interface or dependency error
+stops the command before it recreates the report target. The command
 supports `sbmlL2V5Path` (the default), `sbmlL3V1Path`, and `sbmlL3V2Path`.
 Each simulated variable also receives a PNG plot that overlays the reference
 and DynMSR/mrgsolve result; plots are retained even when comparison fails.
+Build, format, and simulation failures are recorded per case; the command
+continues through the selected cases and writes the report.
 
 ## Simulate with HetaSimulator.jl
 
