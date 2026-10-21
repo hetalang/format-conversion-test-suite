@@ -169,11 +169,11 @@ function runProcess(command, argumentsList, cwd) {
   });
 }
 
-function createBuildSource(sourcePath, distDirectory, inputField) {
+function createBuildSource(sourcePath, distDirectory, inputField, { useCSwitcher = false } = {}) {
   const includePath = path.relative(distDirectory, sourcePath).split(path.sep).join('/');
   const lines = [...sbmlDefaultsByInputField[inputField], ''];
 
-  lines.push(`#include { source: ${includePath}, type: sbml };`, '');
+  lines.push(`#include { source: ${includePath}, type: sbml${useCSwitcher ? ', useCSwitcher: true' : ''} };`, '');
   return lines.join('\n');
 }
 

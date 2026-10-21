@@ -51,12 +51,16 @@ function compare(reference, actual, settings) {
 }
 
 async function readEnvironment(root) {
-  const version = await common.runProcess('julia', ['-e', 'using HetaSimulator; print(Base.pkgversion(HetaSimulator))'], root);
-  if (version.exitCode !== 0 || !version.stdout.trim()) throw new Error(version.error || version.stderr || 'Unable to determine the installed HetaSimulator.jl version');
-  return { hetaSimulatorVersion: version.stdout.trim() };
+  const [hetaVersion, simulatorVersion] = await Promise.all([
+    common.runProcess('julia', ['-e', 'using HetaSimulator; print(heta_version())'], root),
+    common.runProcess('julia', ['-e', 'using HetaSimulator; print(Base.pkgversion(HetaSimulator))'], root),
+  ]);
+  if (hetaVersion.exitCode !== 0 || !hetaVersion.stdout.trim()) throw new Error(hetaVersion.error || hetaVersion.stderr || 'Unable to determine the HetaSimulator.jl heta-compiler version');
+  if (simulatorVersion.exitCode !== 0 || !simulatorVersion.stdout.trim()) throw new Error(simulatorVersion.error || simulatorVersion.stderr || 'Unable to determine the installed HetaSimulator.jl version');
+  return { hetaVersion: hetaVersion.stdout.trim(), hetaSimulatorVersion: simulatorVersion.stdout.trim() };
 }
 
-async function prepareCase(entry, indexDirectory, target, inputField, tags) {
+async function prepareCase(entry, indexDirectory, target, inputField, tags, useCSwitcher) {
   const result = { caseId: entry.caseId, synopsis: entry.synopsis || '', sourcePath: entry[inputField], status: 'failed' };
   if (!entry.simulation?.timeCourse) { result.error = { message: 'Case has no time-course simulation settings' }; return { result }; }
   const source = path.resolve(indexDirectory, entry[inputField]);
@@ -66,7 +70,7 @@ async function prepareCase(entry, indexDirectory, target, inputField, tags) {
   if (!speciesOutputs) { result.error = { message: `Case index has no species output metadata for ${inputField}; rerun npm run index:sbml` }; return { result }; }
   await fs.mkdir(directory, { recursive: true });
   const settings = { ...entry.simulation, speciesOutputs }; delete settings.speciesOutputsByInputField;
-  await Promise.all([fs.writeFile(heta, common.createBuildSource(source, directory, inputField)), fs.writeFile(settingsPath, `${JSON.stringify(settings, null, 2)}\n`)]);
+  await Promise.all([fs.writeFile(heta, common.createBuildSource(source, directory, inputField, { useCSwitcher })), fs.writeFile(settingsPath, `${JSON.stringify(settings, null, 2)}\n`)]);
   result.buildSourcePath = relative(target, heta); result.simulationInputPath = relative(target, settingsPath);
   const referencePath = path.resolve(indexDirectory, settings.referenceResultsPath);
   return { result, settings, outputPath, referencePath, job: { caseId: entry.caseId, projectDirectory: directory, sourceFile: 'input.heta', outputPath, settingsPath, referencePath, plotDirectory: directory, plotPrefix: 'plot' } };
@@ -134,6 +138,8 @@ async function finishCase(prepared, batchResult, target) {
 async function runSbmlHetaSimulatorSimulation(options, root) {
   if (!options.source || !options.target) throw new Error('--source and --target are required');
   const inputField = options['input-field'] || defaultInputField; if (!supportedInputFields.has(inputField)) throw new Error(`Unsupported --input-field: ${inputField}`);
+  if (options.useCSwitcher !== undefined && options.useCSwitcher !== 'true' && options.useCSwitcher !== 'false') throw new Error('--useCSwitcher must be true or false');
+  const useCSwitcher = options.useCSwitcher === 'true';
   const concurrency = common.parsePositiveInteger(options.concurrency, '--concurrency', 1); const limit = common.parsePositiveInteger(options.limit, '--limit', undefined); const skip = common.parseNonNegativeInteger(options.skip, '--skip', 0); const skippedComponentTags = common.parseCommaSeparatedValues(options['skip-component-tags'], '--skip-component-tags'); const skippedTestTags = common.parseCommaSeparatedValues(options['skip-test-tags'], '--skip-test-tags');
   const [indexPath, hetaSimulatorEnvironment] = await Promise.all([common.resolveIndexPath(root, options.source), readEnvironment(root)]); const target = common.resolveInsideRepository(root, options.target, '--target'); const index = JSON.parse(await fs.readFile(indexPath, 'utf8'));
   if (!Array.isArray(index.cases)) throw new Error(`Invalid case index: ${indexPath}`);
@@ -142,13 +148,13 @@ async function runSbmlHetaSimulatorSimulation(options, root) {
   const startedAt = new Date().toISOString();
   const preparedCases = await common.runWithConcurrency(cases, concurrency, async (entry) => {
     const tags = { componentTags: common.findMatchingTags(entry, 'componentTags', skippedComponentTags), testTags: common.findMatchingTags(entry, 'testTags', skippedTestTags) };
-    try { return { tags, prepared: await prepareCase(entry, path.dirname(indexPath), target, inputField, tags) }; }
+    try { return { tags, prepared: await prepareCase(entry, path.dirname(indexPath), target, inputField, tags, useCSwitcher) }; }
     catch (error) { return { tags, prepared: { result: { caseId: entry.caseId, status: 'failed', error: { message: error.message } } } }; }
   });
   const batchResult = await runBatch(preparedCases.filter(({ prepared }) => prepared.job).map(({ prepared }) => prepared.job), target, root);
   const casesResult = await Promise.all(preparedCases.map(async ({ tags, prepared }) => common.markNotEvaluated(await finishCase(prepared, batchResult, target), tags)));
   const succeeded = casesResult.filter((entry) => entry.status === 'success').length; const failed = casesResult.filter((entry) => entry.status === 'failed').length; const assessed = succeeded + failed;
-  const report = { description: 'This report records SBML conversion through heta-compiler, HetaSimulator.jl simulation, and comparison with SBML Semantic Test Suite reference results.', generator: { type: 'sbml-hetasimulator-simulation', packageName: packageInfo.name, packageVersion: packageInfo.version }, status: failed ? 'completed-with-errors' : 'success', startedAt, completedAt: new Date().toISOString(), command: { source: relative(root, indexPath), target: relative(root, target), inputField, concurrency, ...(skip ? { skip } : {}), ...(limit === undefined ? {} : { limit }), ...(skippedComponentTags.length ? { skipComponentTags: skippedComponentTags } : {}), ...(skippedTestTags.length ? { skipTestTags: skippedTestTags } : {}) }, environment: { ...hetaSimulatorEnvironment, testSuite: index.testSuite, simulationBackend: 'HetaSimulator.jl' }, cases: casesResult };
+  const report = { description: 'This report records SBML conversion through heta-compiler, HetaSimulator.jl simulation, and comparison with SBML Semantic Test Suite reference results.', generator: { type: 'sbml-hetasimulator-simulation', packageName: packageInfo.name, packageVersion: packageInfo.version }, status: failed ? 'completed-with-errors' : 'success', startedAt, completedAt: new Date().toISOString(), command: { source: relative(root, indexPath), target: relative(root, target), inputField, concurrency, useCSwitcher, ...(skip ? { skip } : {}), ...(limit === undefined ? {} : { limit }), ...(skippedComponentTags.length ? { skipComponentTags: skippedComponentTags } : {}), ...(skippedTestTags.length ? { skipTestTags: skippedTestTags } : {}) }, environment: { ...hetaSimulatorEnvironment, testSuite: index.testSuite, simulationBackend: 'HetaSimulator.jl' }, cases: casesResult };
   await fs.writeFile(path.join(target, 'report.json'), `${JSON.stringify(report, null, 2)}\n`); const ratio = assessed ? succeeded / assessed : 0; await fs.writeFile(path.join(target, 'badge.json'), `${JSON.stringify({ schemaVersion: 1, label: report.generator.type, message: `${succeeded}/${assessed}`, color: assessed && ratio === 1 ? 'brightgreen' : ratio > 0.8 ? 'yellow' : 'red', ...(failed ? { isError: true } : {}), cacheSeconds: 300 }, null, 2)}\n`);
   console.log(`Report written to ${path.join(target, 'report.json')}`); return report;
 }

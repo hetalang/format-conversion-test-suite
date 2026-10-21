@@ -123,8 +123,9 @@ with `HetaSimulator.load_platform()`. It creates a scenario with
 `events_save=(false, false)`, uses the indexed output grid as `saveat`, and
 runs with one tenth of the case tolerances and `dtmax = 0.01`. It compares its
 CSV output using the original tolerances. Amount/concentration output conversion
-follows the same rules as the DynMSR backend. The active HetaSimulator.jl
-version is recorded in the report; it is not pinned by this repository. It uses
+follows the same rules as the DynMSR backend. The compiler version returned by
+`HetaSimulator.heta_version()` is recorded as `environment.hetaVersion`, alongside
+the active `environment.hetaSimulatorVersion`. It uses
 Julia's `Plots` package to retain one PNG per simulated variable, with reference
 and HetaSimulator.jl output overlaid. One Julia process loads the required
 packages once and simulates selected cases sequentially; `--concurrency` only
@@ -138,6 +139,10 @@ compared as IEEE non-finite values.
 npx fcts sbml-hetasimulator-simulation --source=cases/index --input-field=sbmlL3V2Path \
   --target=results/hetasimulator-simulation --concurrency=1 --limit=10
 ```
+
+Add `--useCSwitcher` to this command to set `useCSwitcher: true` in each
+generated SBML include. The option is off by default and its value is recorded
+in `report.json` under `command.useCSwitcher`.
 
 The command supports `sbmlL2V5Path` (the default), `sbmlL3V1Path`, and
 `sbmlL3V2Path`, plus the standard component and test tag exclusion options.
