@@ -49,12 +49,7 @@ async function readDynmsEnvironment(repositoryRoot) {
     'required <- list(heta_load = c("dir", "output_dir", "source", "type", "log_mode"), build_mrgsolve = c("model", "observables", "..."))',
     'for (name in names(required)) { if (!name %in% getNamespaceExports("DynMSR")) stop(paste0("DynMSR interface is missing ", name)); missing <- setdiff(required[[name]], names(formals(getExportedValue("DynMSR", name)))); if (length(missing)) stop(paste0("DynMSR interface ", name, " is missing argument(s): ", paste(missing, collapse = ", "))) }',
     'description <- utils::packageDescription("DynMSR")',
-    'schemaPath <- system.file("schema", "dynms.schema.json", package = "DynMSR")',
-    'if (!nzchar(schemaPath)) stop("DynMSR does not provide a DynMS schema.")',
-    'schema <- jsonlite::fromJSON(schemaPath, simplifyVector = FALSE)',
-    'version <- schema$properties$dynms$const',
-    'if (!is.character(version) || length(version) != 1L || !nzchar(version)) stop("DynMSR schema does not declare a DynMS version.")',
-    'cat(jsonlite::toJSON(list(dynmsrVersion = description$Version, dynmsVersion = version), auto_unbox = TRUE))',
+    'cat(jsonlite::toJSON(list(dynmsrVersion = description$Version), auto_unbox = TRUE))',
   ].join('; ');
   const result = await common.runProcess('Rscript', ['--vanilla', '-e', expression], repositoryRoot);
   if (result.exitCode !== 0) {
@@ -62,7 +57,7 @@ async function readDynmsEnvironment(repositoryRoot) {
   }
   try {
     const environment = JSON.parse(result.stdout);
-    if (typeof environment.dynmsrVersion !== 'string' || typeof environment.dynmsVersion !== 'string') throw new Error('invalid version data');
+    if (typeof environment.dynmsrVersion !== 'string') throw new Error('invalid version data');
     return environment;
   } catch (error) {
     throw new Error(`Unable to read DynMSR version information: ${error.message}`);

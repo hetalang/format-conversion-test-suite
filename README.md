@@ -108,7 +108,7 @@ npx fcts sbml-dynmsr-simulation --source=cases/index --input-field=sbmlL3V2Path 
 
 Before it begins, the command checks that DynMSR is installed in the active R
 library, verifies the DynMSR interface and required R packages, and records the
-installed DynMSR and DynMS format versions. An interface or dependency error
+installed DynMSR version. An interface or dependency error
 stops the command before it recreates the report target. The command
 supports `sbmlL2V5Path` (the default), `sbmlL3V1Path`, and `sbmlL3V2Path`.
 Each simulated variable also receives a PNG plot that overlays the reference
